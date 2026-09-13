@@ -423,11 +423,11 @@ class Database {
     return this.data.messages;
   }
 
-  addMessage(userId, sender, text) {
+  addMessage(userId, sender, text, overrideName = '', overrideMobile = '') {
     if (!this.data.messages) this.data.messages = [];
     const user = this.getUserById(userId);
-    const userName = user ? user.fullName : 'User';
-    const userMobile = user ? user.mobile : '';
+    const userName = user ? user.fullName : (overrideName || 'Website Visitor');
+    const userMobile = user ? user.mobile : (overrideMobile || 'Guest');
 
     const newMsg = {
       id: 'msg_' + Date.now() + '_' + Math.floor(Math.random() * 1000),

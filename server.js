@@ -580,6 +580,25 @@ app.post('/api/user/chat/send', requireUserAuth, (req, res) => {
   res.json({ success: true, message: 'Message sent', chatMessage: msg });
 });
 
+// Public / Website Visitor Live Chat API
+app.get('/api/public/chat/messages', (req, res) => {
+  const visitorId = req.query.visitorId;
+  if (!visitorId) return res.json({ success: true, messages: [] });
+  const messages = db.getUserMessages(visitorId);
+  db.markMessagesReadByUser(visitorId);
+  res.json({ success: true, messages });
+});
+
+app.post('/api/public/chat/send', (req, res) => {
+  const { visitorId, text, name, mobile } = req.body;
+  if (!visitorId || !text || !text.trim()) {
+    return res.status(400).json({ success: false, message: 'Visitor ID and message text are required' });
+  }
+
+  const msg = db.addMessage(visitorId, 'user', text, name || 'Website Visitor', mobile || '');
+  res.json({ success: true, message: 'Message sent', chatMessage: msg });
+});
+
 // -------------------------------------------------------------
 // ADMIN API
 // -------------------------------------------------------------
