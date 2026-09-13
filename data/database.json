@@ -2335,6 +2335,17 @@
       "createdAt": "2026-09-10T11:50:26.558Z",
       "readByAdmin": true,
       "readByUser": false
+    },
+    {
+      "id": "msg_1789324051651_166",
+      "userId": "vst_test_1789324051600",
+      "userName": "Rohit Sharma",
+      "userMobile": "9876543210",
+      "sender": "user",
+      "text": "Namaste! Website par payment kaise karna hai?",
+      "createdAt": "2026-09-13T18:27:31.651Z",
+      "readByAdmin": false,
+      "readByUser": true
     }
   ],
   "watchVideos": [
