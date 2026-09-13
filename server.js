@@ -105,6 +105,10 @@ app.get('/api/public/settings', (req, res) => {
       popupVideoUrl: settings.popupVideoUrl || 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
       popupAdTimer: settings.popupAdTimer !== undefined ? settings.popupAdTimer : 30,
       popupAdEnabled: settings.popupAdEnabled !== undefined ? settings.popupAdEnabled : true,
+      enableMapService: settings.enableMapService !== undefined ? settings.enableMapService : true,
+      enableYoutubeService: settings.enableYoutubeService !== undefined ? settings.enableYoutubeService : true,
+      enableVideoWatchService: settings.enableVideoWatchService !== undefined ? settings.enableVideoWatchService : true,
+      videoLikeCommentBonusCoins: settings.videoLikeCommentBonusCoins !== undefined ? settings.videoLikeCommentBonusCoins : 2,
       plans: settings.plans
     }
   });
@@ -113,11 +117,78 @@ app.get('/api/public/settings', (req, res) => {
 // -------------------------------------------------------------
 // AUTH API
 // -------------------------------------------------------------
-app.post('/api/auth/register', (req, res) => {
-  const { fullName, mobile, city, password, utr, upiId, planId, referralCode } = req.body;
+app.post('/api/auth/validate-coupon', (req, res) => {
+  const { code, planId } = req.body;
+  if (!code || !code.trim()) {
+    return res.status(400).json({ success: false, message: 'Kripya coupon code enter karein.' });
+  }
 
-  if (!fullName || !mobile || !city || !password || !utr || !upiId || !planId) {
-    return res.status(400).json({ success: false, message: 'All fields are mandatory. Please fill all fields.' });
+  const coupon = db.getCouponByCode(code);
+  if (!coupon || !coupon.active) {
+    return res.status(400).json({ success: false, message: 'Yeh Coupon Code invalid ya expire ho chuka hai.' });
+  }
+
+  if (coupon.maxUses && coupon.usedCount >= coupon.maxUses) {
+    return res.status(400).json({ success: false, message: 'Yeh coupon code ki limit khatam ho chuki hai.' });
+  }
+
+  const settings = db.getSettings();
+  const plan = settings.plans.find(p => p.id === String(planId)) || settings.plans[0];
+  let finalPrice = plan.price;
+  let discountAmount = 0;
+
+  if (coupon.discountType === 'free') {
+    discountAmount = plan.price;
+    finalPrice = 0;
+  } else if (coupon.discountType === 'flat') {
+    discountAmount = Math.min(plan.price, Number(coupon.discountValue) || 0);
+    finalPrice = Math.max(0, plan.price - discountAmount);
+  } else if (coupon.discountType === 'percent') {
+    discountAmount = Math.round((plan.price * (Number(coupon.discountValue) || 0)) / 100);
+    finalPrice = Math.max(0, plan.price - discountAmount);
+  }
+
+  return res.json({
+    success: true,
+    message: coupon.discountType === 'free' 
+      ? '🎉 Badhai ho! 100% Free Coupon Apply Ho Gaya! Koi payment nahi karni hai.' 
+      : `🎉 Coupon code apply ho gaya! ₹${discountAmount} ki chhut mili.`,
+    coupon: {
+      code: coupon.code,
+      discountType: coupon.discountType,
+      discountValue: coupon.discountValue,
+      discountAmount,
+      originalPrice: plan.price,
+      finalPrice,
+      isFree: finalPrice === 0
+    }
+  });
+});
+
+app.post('/api/auth/register', (req, res) => {
+  const { fullName, mobile, city, password, utr, upiId, planId, referralCode, couponCode } = req.body;
+
+  if (!fullName || !mobile || !city || !password || !planId) {
+    return res.status(400).json({ success: false, message: 'All mandatory fields must be filled.' });
+  }
+
+  // Validate coupon if provided
+  let validCoupon = null;
+  let isFreeRegistration = false;
+
+  if (couponCode && couponCode.trim()) {
+    const coupon = db.getCouponByCode(couponCode.trim());
+    if (coupon && coupon.active && (!coupon.maxUses || coupon.usedCount < coupon.maxUses)) {
+      validCoupon = coupon;
+      if (coupon.discountType === 'free') {
+        isFreeRegistration = true;
+      }
+    }
+  }
+
+  // If not 100% free coupon, UTR is required
+  if (!isFreeRegistration && !utr) {
+    return res.status(400).json({ success: false, message: 'Please enter 12-digit UTR number or apply a valid 100% Free coupon.' });
   }
 
   // Check if mobile already exists
@@ -131,18 +202,29 @@ app.post('/api/auth/register', (req, res) => {
     mobile: mobile.trim(),
     city: city.trim(),
     password: password.trim(),
-    utr: utr.trim(),
-    upiId: upiId.trim(),
+    utr: utr ? utr.trim() : (validCoupon ? `COUPON_${validCoupon.code}` : ''),
+    upiId: upiId ? upiId.trim() : '',
     planId: planId,
-    referredByCode: referralCode ? referralCode.trim() : ''
+    referredByCode: referralCode ? referralCode.trim() : '',
+    autoApprove: isFreeRegistration,
+    couponApplied: validCoupon ? validCoupon.code : null
   });
 
-  // Automatically start user session (pending state)
+  if (validCoupon) {
+    db.useCoupon(validCoupon.code);
+  }
+
+  // Automatically start user session
   req.session.userId = newUser.id;
+
+  const successMessage = isFreeRegistration
+    ? '🎉 Badhai ho! Free Coupon se aapka account INSTANT ACTIVATE ho gaya hai! Earning shuru karein.'
+    : 'Registration successful! Your account is submitted for Admin verification.';
 
   res.json({
     success: true,
-    message: 'Registration successful! Your account is submitted for Admin verification.',
+    message: successMessage,
+    isFree: isFreeRegistration,
     user: {
       id: newUser.id,
       fullName: newUser.fullName,
@@ -462,12 +544,12 @@ app.get('/api/user/watch-tasks/today', requireUserAuth, (req, res) => {
 });
 
 app.post('/api/user/watch-tasks/claim', requireUserAuth, (req, res) => {
-  const { taskId, taskIndex, watchTimeSeconds } = req.body;
+  const { taskId, taskIndex, watchTimeSeconds, likedAndCommented } = req.body;
   if (!taskId || !taskIndex || watchTimeSeconds === undefined) {
     return res.status(400).json({ success: false, message: 'taskId, taskIndex, and watchTimeSeconds are required' });
   }
 
-  const result = db.claimWatchVideoReward(req.user.id, taskId, taskIndex, watchTimeSeconds);
+  const result = db.claimWatchVideoReward(req.user.id, taskId, taskIndex, watchTimeSeconds, Boolean(likedAndCommented));
   if (result.error) {
     return res.status(400).json({ success: false, message: result.error, alreadyCompleted: result.alreadyCompleted });
   }
@@ -742,6 +824,38 @@ app.post('/api/admin/watch-videos/toggle', requireAdminAuth, (req, res) => {
   res.json({ success: true, message: `Video ${video.active ? 'Activated' : 'Deactivated'}`, video });
 });
 
+// Coupon Management API
+app.get('/api/admin/coupons', requireAdminAuth, (req, res) => {
+  const coupons = db.getCoupons();
+  res.json({ success: true, coupons });
+});
+
+app.post('/api/admin/coupons/create', requireAdminAuth, (req, res) => {
+  const { code, discountType, discountValue, maxUses } = req.body;
+  if (!code || !code.trim()) {
+    return res.status(400).json({ success: false, message: 'Coupon code is required' });
+  }
+  const result = db.createCoupon({ code, discountType, discountValue, maxUses });
+  if (result.error) {
+    return res.status(400).json({ success: false, message: result.error });
+  }
+  res.json({ success: true, message: `Coupon "${result.code}" successfully ban gaya!`, coupon: result });
+});
+
+app.post('/api/admin/coupons/toggle', requireAdminAuth, (req, res) => {
+  const { couponId } = req.body;
+  const coupon = db.toggleCoupon(couponId);
+  if (!coupon) return res.status(404).json({ success: false, message: 'Coupon not found' });
+  res.json({ success: true, message: `Coupon ${coupon.code} is now ${coupon.active ? 'Active' : 'Inactive'}`, coupon });
+});
+
+app.post('/api/admin/coupons/delete', requireAdminAuth, (req, res) => {
+  const { couponId } = req.body;
+  const ok = db.deleteCoupon(couponId);
+  if (!ok) return res.status(404).json({ success: false, message: 'Coupon not found' });
+  res.json({ success: true, message: 'Coupon deleted successfully' });
+});
+
 // Settings & QR Code Upload
 app.get('/api/admin/settings', requireAdminAuth, (req, res) => {
   const settings = db.getSettings();
@@ -749,7 +863,12 @@ app.get('/api/admin/settings', requireAdminAuth, (req, res) => {
 });
 
 app.post('/api/admin/settings/update', requireAdminAuth, (req, res) => {
-  const { upiId, upiName, adminPassword, minWithdrawal, dailyTaskReward, dailyYoutubeReward, popupVideoUrl, popupAdTimer, popupAdEnabled } = req.body;
+  const { 
+    upiId, upiName, adminPassword, minWithdrawal, dailyTaskReward, dailyYoutubeReward, 
+    popupVideoUrl, popupAdTimer, popupAdEnabled,
+    enableMapService, enableYoutubeService, enableVideoWatchService, videoLikeCommentBonusCoins
+  } = req.body;
+
   const updates = {};
   if (upiId) updates.upiId = upiId.trim();
   if (upiName) updates.upiName = upiName.trim();
@@ -760,6 +879,11 @@ app.post('/api/admin/settings/update', requireAdminAuth, (req, res) => {
   if (popupVideoUrl !== undefined) updates.popupVideoUrl = popupVideoUrl.trim();
   if (popupAdTimer !== undefined && popupAdTimer !== '') updates.popupAdTimer = Math.max(5, Number(popupAdTimer));
   if (popupAdEnabled !== undefined) updates.popupAdEnabled = Boolean(popupAdEnabled);
+
+  if (enableMapService !== undefined) updates.enableMapService = Boolean(enableMapService);
+  if (enableYoutubeService !== undefined) updates.enableYoutubeService = Boolean(enableYoutubeService);
+  if (enableVideoWatchService !== undefined) updates.enableVideoWatchService = Boolean(enableVideoWatchService);
+  if (videoLikeCommentBonusCoins !== undefined && videoLikeCommentBonusCoins !== '') updates.videoLikeCommentBonusCoins = Number(videoLikeCommentBonusCoins);
 
   const updated = db.updateSettings(updates);
   res.json({ success: true, message: 'Settings updated successfully', settings: updated });

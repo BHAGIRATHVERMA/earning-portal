@@ -88,6 +88,10 @@ const defaultData = {
   ],
   watchTasks: [], // { id, userId, userName, date, items: [{ taskIndex, videoId, title, videoUrl, durationSeconds: 240, reward: 10, watchSeconds: 0, completed: false, claimedAt: null }] }
   withdrawals: [],
+  coupons: [
+    { id: 'cpn_1', code: 'FREE100', discountType: 'free', discountValue: 100, maxUses: 1000, usedCount: 0, active: true, createdAt: new Date().toISOString() },
+    { id: 'cpn_2', code: 'OFFER50', discountType: 'flat', discountValue: 50, maxUses: 1000, usedCount: 0, active: true, createdAt: new Date().toISOString() }
+  ],
   settings: {
     adminId: 'ADMIN',
     adminPassword: 'Password',
@@ -99,6 +103,10 @@ const defaultData = {
     dailyYoutubeReward: 50,
     watchVideoDurationSeconds: 240, // 4 minutes
     watchVideoRewardCoins: 10, // 10 coins per video
+    videoLikeCommentBonusCoins: 2, // 2 extra coins for like & comment
+    enableMapService: true, // Master switch for Google Map Reviews
+    enableYoutubeService: true, // Master switch for YouTube Subscribe
+    enableVideoWatchService: true, // Master switch for Video Watch & Earn
     popupVideoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     popupAdTimer: 30,
     popupAdEnabled: true,
@@ -131,6 +139,16 @@ class Database {
             this.data[key] = defaultData[key];
           }
         }
+        // ensure new settings keys exist
+        if (this.data.settings) {
+          if (this.data.settings.enableMapService === undefined) this.data.settings.enableMapService = true;
+          if (this.data.settings.enableYoutubeService === undefined) this.data.settings.enableYoutubeService = true;
+          if (this.data.settings.enableVideoWatchService === undefined) this.data.settings.enableVideoWatchService = true;
+          if (this.data.settings.videoLikeCommentBonusCoins === undefined) this.data.settings.videoLikeCommentBonusCoins = 2;
+        }
+        if (!this.data.coupons) {
+          this.data.coupons = JSON.parse(JSON.stringify(defaultData.coupons));
+        }
       } catch (err) {
         console.error('Error reading database, creating fresh:', err);
         this.data = JSON.parse(JSON.stringify(defaultData));
@@ -156,6 +174,71 @@ class Database {
     this.data.settings = { ...this.data.settings, ...newSettings };
     this.save();
     return this.data.settings;
+  }
+
+  // Coupons
+  getCoupons() {
+    if (!this.data.coupons) this.data.coupons = [];
+    return this.data.coupons;
+  }
+
+  getCouponByCode(code) {
+    if (!this.data.coupons || !code) return null;
+    const clean = code.trim().toUpperCase();
+    return this.data.coupons.find(c => c.code.toUpperCase() === clean) || null;
+  }
+
+  createCoupon({ code, discountType = 'free', discountValue = 100, maxUses = 1000 }) {
+    if (!this.data.coupons) this.data.coupons = [];
+    const cleanCode = (code || '').trim().toUpperCase();
+    if (!cleanCode) return { error: 'Coupon code cannot be empty' };
+
+    const existing = this.getCouponByCode(cleanCode);
+    if (existing) return { error: 'Coupon code already exists' };
+
+    const newCoupon = {
+      id: 'cpn_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+      code: cleanCode,
+      discountType: discountType, // 'free' | 'flat' | 'percent'
+      discountValue: Number(discountValue) || (discountType === 'free' ? 100 : 0),
+      maxUses: Number(maxUses) || 1000,
+      usedCount: 0,
+      active: true,
+      createdAt: new Date().toISOString()
+    };
+    this.data.coupons.unshift(newCoupon);
+    this.save();
+    return newCoupon;
+  }
+
+  toggleCoupon(id) {
+    if (!this.data.coupons) return null;
+    const coupon = this.data.coupons.find(c => c.id === id);
+    if (coupon) {
+      coupon.active = !coupon.active;
+      this.save();
+      return coupon;
+    }
+    return null;
+  }
+
+  deleteCoupon(id) {
+    if (!this.data.coupons) return false;
+    const idx = this.data.coupons.findIndex(c => c.id === id);
+    if (idx !== -1) {
+      this.data.coupons.splice(idx, 1);
+      this.save();
+      return true;
+    }
+    return false;
+  }
+
+  useCoupon(code) {
+    const coupon = this.getCouponByCode(code);
+    if (coupon) {
+      coupon.usedCount = (coupon.usedCount || 0) + 1;
+      this.save();
+    }
   }
 
   // Users
@@ -194,19 +277,28 @@ class Database {
 
     const refCode = this.generateReferralCode(userData.fullName, userData.mobile);
 
+    const isAutoApprove = Boolean(userData.autoApprove);
+    const now = new Date();
+    let planExpiry = null;
+    if (isAutoApprove) {
+      const expiry = new Date();
+      expiry.setDate(expiry.getDate() + (plan.validityDays || 3));
+      planExpiry = expiry.toISOString();
+    }
+
     const newUser = {
       id: 'usr_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
       fullName: userData.fullName,
       mobile: userData.mobile,
       city: userData.city,
       password: userData.password,
-      utr: userData.utr,
-      upiId: userData.upiId,
+      utr: userData.utr || (isAutoApprove ? 'COUPON_FREE' : ''),
+      upiId: userData.upiId || 'Not Applicable',
       planId: plan.id,
       planPrice: plan.price,
       planName: plan.name,
       planValidityDays: plan.validityDays,
-      status: 'pending', // 'pending' | 'approved' | 'rejected'
+      status: isAutoApprove ? 'approved' : 'pending', // 'pending' | 'approved' | 'rejected'
       rejectionReason: '',
       walletCoins: 0,
       referralCode: refCode,
@@ -215,9 +307,10 @@ class Database {
       referralRewardClaimed: false,
       referralsCount: 0,
       referralEarnings: 0,
-      createdAt: new Date().toISOString(),
-      approvedAt: null,
-      planExpiresAt: null
+      couponApplied: userData.couponApplied || null,
+      createdAt: now.toISOString(),
+      approvedAt: isAutoApprove ? now.toISOString() : null,
+      planExpiresAt: planExpiry
     };
     this.data.users.unshift(newUser);
     this.save();
@@ -928,7 +1021,7 @@ class Database {
     return task;
   }
 
-  claimWatchVideoReward(userId, taskId, taskIndex, watchTimeSeconds) {
+  claimWatchVideoReward(userId, taskId, taskIndex, watchTimeSeconds, likedAndCommented = false) {
     if (!this.data.watchTasks) return { error: 'Watch tasks data not initialized' };
     const task = this.data.watchTasks.find(t => t.id === taskId && t.userId === userId);
     if (!task) return { error: 'Watch task session not found' };
@@ -948,19 +1041,33 @@ class Database {
 
     item.completed = true;
     item.claimedAt = new Date().toISOString();
-    const rewardCoins = item.reward || 10;
-    task.totalRewardEarned = (task.totalRewardEarned || 0) + rewardCoins;
+    
+    const baseReward = item.reward || 10;
+    let bonusCoins = 0;
+    if (likedAndCommented) {
+      bonusCoins = this.data.settings.videoLikeCommentBonusCoins !== undefined ? Number(this.data.settings.videoLikeCommentBonusCoins) : 2;
+      item.likedAndCommented = true;
+      item.bonusCoins = bonusCoins;
+    }
+    
+    const totalCoins = baseReward + bonusCoins;
+    item.totalReward = totalCoins;
+    task.totalRewardEarned = (task.totalRewardEarned || 0) + totalCoins;
 
     // Immediately credit coins to user's wallet
-    this.updateUserCoins(userId, rewardCoins);
+    this.updateUserCoins(userId, totalCoins);
     this.save();
 
     const user = this.getUserById(userId);
 
+    const bonusMsg = bonusCoins > 0 ? ` (+${bonusCoins} Like & Comment Bonus)` : '';
+
     return {
       success: true,
-      message: `Badhai ho! Video pura dekhne par ₹${rewardCoins} Coins aapke wallet me add ho gaye!`,
-      rewardCoins: rewardCoins,
+      message: `Badhai ho! Video dekhne par ₹${totalCoins} Coins${bonusMsg} aapke wallet me add ho gaye!`,
+      rewardCoins: totalCoins,
+      baseReward: baseReward,
+      bonusCoins: bonusCoins,
       item: item,
       task: task,
       walletCoins: user ? user.walletCoins : 0
