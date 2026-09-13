@@ -1053,6 +1053,79 @@ http://localhost:3000/register.html</textarea>
     </div>
   </footer>
 
+  <!-- Floating Live Chat Support Widget for Homepage Visitors -->
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    
+    <!-- Chat Popup Window -->
+    <div id="homeChatBox" class="hidden mb-3 w-[340px] sm:w-[380px] h-[480px] bg-white rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden animate-scaleIn">
+      
+      <!-- Top Chat Header -->
+      <div class="p-4 bg-gradient-to-r from-indigo-700 via-indigo-600 to-purple-600 text-white flex items-center justify-between shadow-md">
+        <div class="flex items-center gap-2.5">
+          <div class="relative">
+            <div class="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center text-white text-lg font-bold backdrop-blur-sm border border-white/30">
+              <i class="fa-solid fa-headset"></i>
+            </div>
+            <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-indigo-700 rounded-full"></span>
+          </div>
+          <div>
+            <h3 class="text-sm font-black leading-tight flex items-center gap-1.5">
+              <span>Admin Live Support</span>
+              <span class="text-[9px] bg-emerald-500 text-white font-extrabold px-1.5 py-0.2 rounded-full uppercase">Online</span>
+            </h3>
+            <p class="text-[11px] text-indigo-100">Hamare sath direct chat karein</p>
+          </div>
+        </div>
+
+        <button onclick="toggleHomeChat()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Messages Body -->
+      <div id="homeChatMessages" class="flex-grow p-4 overflow-y-auto space-y-3 bg-slate-50 text-xs">
+        <!-- Default Welcome Bubble -->
+        <div class="flex items-start gap-2">
+          <div class="w-7 h-7 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">
+            A
+          </div>
+          <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 shadow-sm text-slate-800 space-y-1 max-w-[80%]">
+            <div class="font-extrabold text-[11px] text-indigo-600">Official Support</div>
+            <p>Namaste! Aapka <b>MapReview Pay</b> me swagat hai. 🙏</p>
+            <p class="text-slate-600">Earning, Plans ya Verification se juda koi bhi sawal ho toh yahan message bhejein, Admin turant reply karega!</p>
+            <div class="text-[9px] text-slate-400 text-right">Just now</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Contact Details (Optional accordion) -->
+      <div id="visitorContactBox" class="px-4 py-2 bg-indigo-50/60 border-t border-indigo-100 flex items-center gap-2">
+        <input type="text" id="visitorNameInput" placeholder="Aapka Naam (Optional)" class="w-1/2 px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs bg-white outline-none focus:ring-1 focus:ring-indigo-500">
+        <input type="tel" id="visitorMobileInput" placeholder="Mobile No (Optional)" maxlength="10" class="w-1/2 px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs bg-white outline-none focus:ring-1 focus:ring-indigo-500">
+      </div>
+
+      <!-- Chat Input Bar -->
+      <form id="homeChatForm" onsubmit="sendHomeChatMessage(event)" class="p-3 bg-white border-t border-slate-200 flex items-center gap-2">
+        <input type="text" id="homeChatInput" required placeholder="Type your message here..." class="flex-grow px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-xs bg-slate-50">
+        <button type="submit" id="homeChatSendBtn" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold flex items-center justify-center shadow transition-all">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+
+    </div>
+
+    <!-- Floating Live Chat Action Button -->
+    <button onclick="toggleHomeChat()" id="homeChatToggleBtn" class="px-5 py-3.5 rounded-full bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-extrabold text-sm shadow-2xl flex items-center gap-3 transition-all transform hover:scale-105 group border-2 border-white/30">
+      <div class="relative">
+        <i class="fa-solid fa-comments text-lg animate-pulse"></i>
+        <span id="homeChatUnreadBadge" class="hidden absolute -top-2 -right-2.5 w-4 h-4 bg-rose-500 text-white text-[9px] font-black rounded-full flex items-center justify-center border-2 border-white">!</span>
+      </div>
+      <span>Admin Live Chat</span>
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-indigo-900 animate-ping"></span>
+    </button>
+
+  </div>
+
   <!-- Continuous High-Frequency Live Social Notifications Script (50+ Real Indian Transactions) -->
   <script>
     const richTransactions = [
@@ -1174,6 +1247,149 @@ http://localhost:3000/register.html</textarea>
       triggerNextLiveToast();
       setInterval(triggerNextLiveToast, 3500);
     }, 1200);
+
+    // -------------------------------------------------------------
+    // HOMEPAGE VISITOR LIVE CHAT CONTROLLER
+    // -------------------------------------------------------------
+    let visitorChatId = localStorage.getItem('mrp_visitor_id');
+    if (!visitorChatId) {
+      visitorChatId = 'vst_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+      localStorage.setItem('mrp_visitor_id', visitorChatId);
+    }
+
+    let isHomeChatOpen = false;
+    let homeChatPollInterval = null;
+
+    function toggleHomeChat() {
+      isHomeChatOpen = !isHomeChatOpen;
+      const chatBox = document.getElementById('homeChatBox');
+      const badge = document.getElementById('homeChatUnreadBadge');
+      
+      if (isHomeChatOpen) {
+        chatBox.classList.remove('hidden');
+        if (badge) badge.classList.add('hidden');
+        loadHomeChatMessages();
+        if (!homeChatPollInterval) {
+          homeChatPollInterval = setInterval(loadHomeChatMessages, 3500);
+        }
+      } else {
+        chatBox.classList.add('hidden');
+        if (homeChatPollInterval) {
+          clearInterval(homeChatPollInterval);
+          homeChatPollInterval = null;
+        }
+      }
+    }
+
+    async function loadHomeChatMessages() {
+      try {
+        const res = await fetch(`/api/public/chat/messages?visitorId=${encodeURIComponent(visitorChatId)}`);
+        const data = await res.json();
+        if (data.success) {
+          renderHomeChatMessages(data.messages || []);
+        }
+      } catch (err) {
+        console.error('Home chat error:', err);
+      }
+    }
+
+    function renderHomeChatMessages(messages) {
+      const container = document.getElementById('homeChatMessages');
+      if (!container) return;
+
+      const welcomeHtml = `
+        <div class="flex items-start gap-2">
+          <div class="w-7 h-7 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">
+            A
+          </div>
+          <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 shadow-sm text-slate-800 space-y-1 max-w-[80%]">
+            <div class="font-extrabold text-[11px] text-indigo-600">Official Support</div>
+            <p>Namaste! Aapka <b>MapReview Pay</b> me swagat hai. 🙏</p>
+            <p class="text-slate-600">Earning, Plans ya Verification se juda koi bhi sawal ho toh yahan message bhejein, Admin turant reply karega!</p>
+            <div class="text-[9px] text-slate-400 text-right">Online Now</div>
+          </div>
+        </div>
+      `;
+
+      let msgsHtml = welcomeHtml;
+
+      messages.forEach(m => {
+        const isMe = m.sender === 'user';
+        const time = new Date(m.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        if (isMe) {
+          msgsHtml += `
+            <div class="flex justify-end">
+              <div class="bg-indigo-600 text-white p-3 rounded-2xl rounded-tr-none shadow-sm max-w-[80%] space-y-1">
+                <p class="text-xs font-medium leading-relaxed">${escapeHtml(m.text)}</p>
+                <div class="text-[9px] text-indigo-200 text-right">${time} ✓</div>
+              </div>
+            </div>
+          `;
+        } else {
+          msgsHtml += `
+            <div class="flex items-start gap-2">
+              <div class="w-7 h-7 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 shadow">
+                A
+              </div>
+              <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 shadow-sm text-slate-800 space-y-1 max-w-[80%]">
+                <div class="font-extrabold text-[11px] text-purple-600">Administrator Support</div>
+                <p class="text-xs font-medium leading-relaxed">${escapeHtml(m.text)}</p>
+                <div class="text-[9px] text-slate-400 text-right">${time}</div>
+              </div>
+            </div>
+          `;
+        }
+      });
+
+      container.innerHTML = msgsHtml;
+      container.scrollTop = container.scrollHeight;
+    }
+
+    async function sendHomeChatMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('homeChatInput');
+      const nameInput = document.getElementById('visitorNameInput');
+      const mobileInput = document.getElementById('visitorMobileInput');
+      const btn = document.getElementById('homeChatSendBtn');
+
+      const text = input.value.trim();
+      if (!text) return;
+
+      const name = nameInput ? nameInput.value.trim() : '';
+      const mobile = mobileInput ? mobileInput.value.trim() : '';
+
+      btn.disabled = true;
+      input.value = '';
+
+      try {
+        const res = await fetch('/api/public/chat/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            visitorId: visitorChatId,
+            text,
+            name,
+            mobile
+          })
+        });
+        const data = await res.json();
+        btn.disabled = false;
+        if (data.success) {
+          loadHomeChatMessages();
+        }
+      } catch (err) {
+        btn.disabled = false;
+        console.error('Failed to send message:', err);
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      const div = document.createElement('div');
+      div.innerText = str;
+      return div.innerHTML;
+    }
   </script>
 
 </body>
