@@ -141,17 +141,35 @@
         </div>
       </div>
 
+      <!-- Coupon Code Section -->
+      <div class="bg-amber-50/60 border-2 border-amber-200 rounded-3xl p-5 sm:p-6">
+        <label class="block text-xs font-bold text-amber-900 uppercase tracking-wider mb-2 flex items-center justify-between">
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-ticket text-amber-600"></i> Have a Promo / Coupon Code? (Discount ya Free Join)</span>
+          <span class="text-[11px] bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded-full">Special Offer</span>
+        </label>
+        <div class="flex gap-2">
+          <div class="relative flex-1">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-500"><i class="fa-solid fa-tag"></i></span>
+            <input type="text" id="couponCodeInput" placeholder="e.g. FREE100 ya OFFER50" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-amber-300 bg-white font-mono font-bold uppercase text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+          </div>
+          <button type="button" onclick="applyCoupon()" id="applyCouponBtn" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm rounded-xl transition-all shadow-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-badge-percent"></i> Apply
+          </button>
+        </div>
+        <div id="couponStatusMsg" class="mt-2 hidden text-xs font-bold"></div>
+      </div>
+
       <!-- Section 3: QR Code & Payment Confirmation -->
-      <div class="bg-indigo-50/70 border-2 border-indigo-100 rounded-3xl p-6 sm:p-8">
+      <div id="paymentSection" class="bg-indigo-50/70 border-2 border-indigo-100 rounded-3xl p-6 sm:p-8 transition-all">
         <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2 mb-4 border-b border-indigo-100 pb-2">
           <span class="w-7 h-7 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-black">3</span>
-          Scan QR &amp; Pay to Activate Plan
+          <span id="paymentSectionTitle">Scan QR &amp; Pay to Activate Plan</span>
         </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           
           <!-- QR Code Box -->
-          <div class="flex flex-col items-center bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
+          <div id="qrBoxWrapper" class="flex flex-col items-center bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
             <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
               Official Payment QR Code
             </div>
@@ -162,17 +180,27 @@
 
             <div class="text-sm font-black text-indigo-700 mb-1">
               Payable Amount: <span id="displayPayAmount" class="text-xl text-slate-900">₹69</span>
+              <span id="originalPriceStriked" class="hidden text-xs text-slate-400 line-through ml-1"></span>
             </div>
             <div class="text-xs text-slate-400">
               Google Pay / PhonePe / Paytm / BHIM
             </div>
           </div>
 
+          <!-- Free Coupon Activated Message (Hidden by default) -->
+          <div id="freeActivatedBanner" class="hidden flex-col items-center justify-center bg-emerald-50 border-2 border-emerald-300 p-6 rounded-2xl text-center shadow-sm">
+            <div class="w-16 h-16 rounded-full bg-emerald-500 text-white flex items-center justify-center text-2xl mb-3 shadow-lg shadow-emerald-200">
+              <i class="fa-solid fa-gift"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-emerald-800">100% Free Coupon Applied!</h3>
+            <p class="text-xs text-emerald-700 mt-1">Aapko koi payment karne ki zaroorat nahi hai. Form submit karte hi aapka account <span class="font-black">Instant Activate</span> ho jayega!</p>
+          </div>
+
           <!-- UPI Info & Form Inputs -->
           <div class="space-y-4">
             
             <!-- Admin UPI ID Box -->
-            <div class="bg-white p-4 rounded-xl border border-slate-200">
+            <div id="adminUpiWrapper" class="bg-white p-4 rounded-xl border border-slate-200">
               <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Admin Official UPI ID</label>
               <div class="flex items-center justify-between gap-2">
                 <span id="displayUpiId" class="text-base font-extrabold text-indigo-600 font-mono">payment.official@upi</span>
@@ -183,9 +211,9 @@
             </div>
 
             <!-- UTR Input -->
-            <div>
+            <div id="utrWrapper">
               <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                Payment UTR / Ref No (12 Digits) *
+                Payment UTR / Ref No (12 Digits) <span id="utrRequiredStar" class="text-rose-500">*</span>
               </label>
               <div class="relative">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-receipt"></i></span>
@@ -228,7 +256,7 @@
       <div class="pt-4">
         <button type="submit" id="submitBtn" class="w-full py-4 px-6 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-base shadow-lg shadow-indigo-200 transition-all flex items-center justify-center gap-2">
           <i class="fa-solid fa-check-circle"></i>
-          <span>Submit Details &amp; Activate Account</span>
+          <span id="submitBtnText">Submit Details &amp; Activate Account</span>
         </button>
       </div>
 
@@ -242,6 +270,7 @@
 
   <script>
     let siteSettings = {};
+    let appliedCoupon = null;
 
     // Check URL params for pre-selected plan or referral code
     const urlParams = new URLSearchParams(window.location.search);
@@ -256,6 +285,15 @@
       const refInput = document.getElementById('referralCode');
       if (refInput) {
         refInput.value = preRef.trim().toUpperCase();
+      }
+    }
+
+    const preCoupon = urlParams.get('coupon');
+    if (preCoupon) {
+      const cInput = document.getElementById('couponCodeInput');
+      if (cInput) {
+        cInput.value = preCoupon.trim().toUpperCase();
+        setTimeout(applyCoupon, 500);
       }
     }
 
@@ -276,9 +314,125 @@
       updatePaymentAmount();
     }
 
-    function updatePaymentAmount() {
+    async function applyCoupon() {
+      const code = document.getElementById('couponCodeInput').value.trim();
+      const planId = document.querySelector('input[name="planId"]:checked')?.value || '69';
+      const statusMsg = document.getElementById('couponStatusMsg');
+      const applyBtn = document.getElementById('applyCouponBtn');
+
+      if (!code) {
+        statusMsg.className = 'mt-2 text-xs font-bold text-rose-600 block';
+        statusMsg.innerText = 'Kripya coupon code enter karein.';
+        return;
+      }
+
+      applyBtn.disabled = true;
+      applyBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+
+      try {
+        const res = await fetch('/api/auth/validate-coupon', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code, planId })
+        });
+        const data = await res.json();
+        applyBtn.disabled = false;
+        applyBtn.innerHTML = '<i class="fa-solid fa-badge-percent"></i> Apply';
+
+        if (data.success) {
+          appliedCoupon = data.coupon;
+          statusMsg.className = 'mt-2 text-xs font-bold text-emerald-600 block bg-emerald-50 p-2.5 rounded-xl border border-emerald-200';
+          statusMsg.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> ${data.message}`;
+          renderCouponState();
+        } else {
+          appliedCoupon = null;
+          statusMsg.className = 'mt-2 text-xs font-bold text-rose-600 block bg-rose-50 p-2.5 rounded-xl border border-rose-200';
+          statusMsg.innerHTML = `<i class="fa-solid fa-circle-xmark mr-1"></i> ${data.message}`;
+          renderCouponState();
+        }
+      } catch (err) {
+        applyBtn.disabled = false;
+        applyBtn.innerHTML = '<i class="fa-solid fa-badge-percent"></i> Apply';
+        statusMsg.className = 'mt-2 text-xs font-bold text-rose-600 block';
+        statusMsg.innerText = 'Coupon verify nahi ho saka. Server error.';
+      }
+    }
+
+    function renderCouponState() {
       const selectedPlan = document.querySelector('input[name="planId"]:checked')?.value || '69';
-      document.getElementById('displayPayAmount').innerText = '₹' + selectedPlan;
+      const origPrice = Number(selectedPlan);
+      const displayPay = document.getElementById('displayPayAmount');
+      const striked = document.getElementById('originalPriceStriked');
+      const qrBoxWrapper = document.getElementById('qrBoxWrapper');
+      const freeBanner = document.getElementById('freeActivatedBanner');
+      const utrInput = document.getElementById('utr');
+      const utrWrapper = document.getElementById('utrWrapper');
+      const utrStar = document.getElementById('utrRequiredStar');
+      const submitText = document.getElementById('submitBtnText');
+      const submitBtn = document.getElementById('submitBtn');
+
+      if (appliedCoupon && appliedCoupon.isFree) {
+        // 100% Free
+        displayPay.innerText = '₹0 (FREE)';
+        striked.innerText = '₹' + origPrice;
+        striked.classList.remove('hidden');
+        
+        qrBoxWrapper.classList.add('hidden');
+        freeBanner.classList.remove('hidden');
+        freeBanner.classList.add('flex');
+
+        utrInput.required = false;
+        utrWrapper.classList.add('opacity-50');
+        utrStar.classList.add('hidden');
+        utrInput.placeholder = 'Coupon applied - UTR not needed';
+        utrInput.value = 'COUPON_FREE_' + appliedCoupon.code;
+
+        submitBtn.className = 'w-full py-4 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-base shadow-lg shadow-emerald-200 transition-all flex items-center justify-center gap-2';
+        submitText.innerText = '🎉 Instant Free Registration & Start Earning';
+      } else if (appliedCoupon && !appliedCoupon.isFree) {
+        // Discount
+        displayPay.innerText = '₹' + appliedCoupon.finalPrice;
+        striked.innerText = '₹' + origPrice;
+        striked.classList.remove('hidden');
+
+        qrBoxWrapper.classList.remove('hidden');
+        freeBanner.classList.add('hidden');
+        freeBanner.classList.remove('flex');
+
+        utrInput.required = true;
+        utrWrapper.classList.remove('opacity-50');
+        utrStar.classList.remove('hidden');
+        if (utrInput.value.startsWith('COUPON_FREE')) utrInput.value = '';
+        utrInput.placeholder = 'Enter 12-digit UTR from payment receipt';
+
+        submitBtn.className = 'w-full py-4 px-6 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-base shadow-lg shadow-indigo-200 transition-all flex items-center justify-center gap-2';
+        submitText.innerText = 'Submit Details & Activate Account';
+      } else {
+        // Regular
+        displayPay.innerText = '₹' + origPrice;
+        striked.classList.add('hidden');
+
+        qrBoxWrapper.classList.remove('hidden');
+        freeBanner.classList.add('hidden');
+        freeBanner.classList.remove('flex');
+
+        utrInput.required = true;
+        utrWrapper.classList.remove('opacity-50');
+        utrStar.classList.remove('hidden');
+        if (utrInput.value.startsWith('COUPON_FREE')) utrInput.value = '';
+        utrInput.placeholder = 'Enter 12-digit UTR from payment receipt';
+
+        submitBtn.className = 'w-full py-4 px-6 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-base shadow-lg shadow-indigo-200 transition-all flex items-center justify-center gap-2';
+        submitText.innerText = 'Submit Details & Activate Account';
+      }
+    }
+
+    function updatePaymentAmount() {
+      if (appliedCoupon) {
+        applyCoupon();
+      } else {
+        renderCouponState();
+      }
     }
 
     function copyUpi() {
@@ -301,9 +455,12 @@
       const utr = document.getElementById('utr').value.trim();
       const upiId = document.getElementById('upiId').value.trim();
       const referralCode = document.getElementById('referralCode')?.value.trim() || '';
+      const couponCode = document.getElementById('couponCodeInput')?.value.trim() || '';
       const planId = document.querySelector('input[name="planId"]:checked')?.value;
 
-      if (!fullName || !mobile || !city || !password || !utr || !upiId || !planId) {
+      const isFree = appliedCoupon && appliedCoupon.isFree;
+
+      if (!fullName || !mobile || !city || !password || (!isFree && !utr) || !upiId || !planId) {
         Swal.fire({
           icon: 'warning',
           title: 'Adhoori Jankari',
@@ -314,13 +471,13 @@
 
       const btn = document.getElementById('submitBtn');
       btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Submitting...';
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Processing...';
 
       try {
         const res = await fetch('/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ fullName, mobile, city, password, utr, upiId, planId, referralCode })
+          body: JSON.stringify({ fullName, mobile, city, password, utr, upiId, planId, referralCode, couponCode })
         });
 
         const data = await res.json();
@@ -328,15 +485,27 @@
         btn.innerHTML = '<i class="fa-solid fa-check-circle mr-2"></i> Submit Details &amp; Activate Account';
 
         if (data.success) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Registration Successful!',
-            text: 'Aapka account submit ho gaya hai. Admin payment UTR verify karke account activate karega.',
-            confirmButtonColor: '#4f46e5',
-            confirmButtonText: 'Go to Dashboard'
-          }).then(() => {
-            window.location.href = '/dashboard.html';
-          });
+          if (data.isFree) {
+            Swal.fire({
+              icon: 'success',
+              title: '🎉 Instant Free Activation!',
+              text: 'Free Coupon lagane par aapka account turant Activate ho gaya hai! Dashboard me jakar abhi kamai shuru karein.',
+              confirmButtonColor: '#10b981',
+              confirmButtonText: 'Go to Dashboard & Start Earning'
+            }).then(() => {
+              window.location.href = '/dashboard.html';
+            });
+          } else {
+            Swal.fire({
+              icon: 'success',
+              title: 'Registration Successful!',
+              text: 'Aapka account submit ho gaya hai. Admin payment UTR verify karke account activate karega.',
+              confirmButtonColor: '#4f46e5',
+              confirmButtonText: 'Go to Dashboard'
+            }).then(() => {
+              window.location.href = '/dashboard.html';
+            });
+          }
         } else {
           Swal.fire({
             icon: 'error',

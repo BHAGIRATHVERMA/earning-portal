@@ -1,5 +1,9 @@
 let currentUser = null;
 let currentTask = null;
+let currentYoutubeTask = null;
+let currentWatchTask = null;
+let currentActiveWatchTask = null;
+let portalSettings = {};
 let chatPollingInterval = null;
 let isChatOpen = false;
 
@@ -15,6 +19,7 @@ async function initDashboard() {
 
     currentUser = sessionData.user;
     updateUserHeader(currentUser);
+    await loadPortalSettings();
     await loadTodayTasks();
     await loadWithdrawalHistory();
     await loadReferralDetails();
@@ -30,6 +35,18 @@ async function initDashboard() {
     }).then(() => {
       window.location.href = '/login.html';
     });
+  }
+}
+
+async function loadPortalSettings() {
+  try {
+    const res = await fetch('/api/public/settings');
+    const data = await res.json();
+    if (data.success) {
+      portalSettings = data.data;
+    }
+  } catch (e) {
+    console.error('Failed to load portal settings:', e);
   }
 }
 
@@ -854,6 +871,8 @@ function openWatchPlayerModal(taskId, taskIndex, encodedUrl, encodedTitle, durat
   const secondsDisplay = document.getElementById('watchSecondsCountDisplay');
   const progressBar = document.getElementById('watchProgressBar');
   const claimContainer = document.getElementById('watchClaimBtnContainer');
+  const directYtLink = document.getElementById('playerDirectYoutubeLink');
+  const checkLikeComment = document.getElementById('checkboxLikeComment');
 
   if (!modal || !playerContainer) return;
 
@@ -863,13 +882,16 @@ function openWatchPlayerModal(taskId, taskIndex, encodedUrl, encodedTitle, durat
   `;
 
   if (titleEl) titleEl.innerText = title;
+  if (directYtLink) directYtLink.href = videoUrl;
+  if (checkLikeComment) checkLikeComment.checked = false;
 
   currentActiveWatchTask = {
     taskId,
     taskIndex,
     durationSeconds: Number(durationSeconds) || 240,
     elapsedSeconds: 0,
-    reward: Number(reward) || 10
+    reward: Number(reward) || 10,
+    isCompleted: false
   };
 
   // Reset progress and display
@@ -882,7 +904,7 @@ function openWatchPlayerModal(taskId, taskIndex, encodedUrl, encodedTitle, durat
     claimContainer.innerHTML = `
       <button id="claimWatchRewardBtn" disabled class="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-800 border border-slate-700 text-slate-500 font-bold text-xs flex items-center justify-center gap-2 cursor-not-allowed transition-all opacity-80">
         <i class="fa-solid fa-lock text-rose-400"></i>
-        <span>Watching... (Complete 4 Mins to Claim ₹${reward})</span>
+        <span>Watching... (Complete 4 Mins to Claim Reward)</span>
       </button>
     `;
   }
@@ -908,9 +930,16 @@ function openWatchPlayerModal(taskId, taskIndex, encodedUrl, encodedTitle, durat
     // When 4 minutes (or target duration) are completed
     if (remaining <= 0) {
       clearInterval(watchTimerInterval);
+      currentActiveWatchTask.isCompleted = true;
       unlockWatchRewardClaim();
     }
   }, 1000);
+}
+
+function handleLikeCommentCheckboxChange() {
+  if (currentActiveWatchTask && currentActiveWatchTask.isCompleted) {
+    unlockWatchRewardClaim();
+  }
 }
 
 function updateTimerDisplay(remainingSec) {
@@ -926,15 +955,21 @@ function unlockWatchRewardClaim() {
   const claimContainer = document.getElementById('watchClaimBtnContainer');
   const timerDisplay = document.getElementById('watchRemainingDisplay');
   const timerIcon = document.getElementById('timerIcon');
+  const checkLikeComment = document.getElementById('checkboxLikeComment');
 
   if (timerDisplay) timerDisplay.innerHTML = '<span class="text-emerald-400">00:00 ✓ COMPLETED</span>';
   if (timerIcon) timerIcon.className = 'fa-solid fa-circle-check text-emerald-400';
 
   if (claimContainer && currentActiveWatchTask) {
+    const isLiked = checkLikeComment && checkLikeComment.checked;
+    const bonus = isLiked ? (portalSettings.videoLikeCommentBonusCoins || 2) : 0;
+    const totalClaimReward = currentActiveWatchTask.reward + bonus;
+    const bonusLabel = isLiked ? ` (+₹${bonus} Like/Comment Bonus)` : '';
+
     claimContainer.innerHTML = `
       <button onclick="claimCurrentVideoReward()" class="w-full sm:w-auto px-8 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-slate-950 font-black text-sm shadow-xl shadow-emerald-500/30 flex items-center justify-center gap-2 animate-bounce cursor-pointer">
         <i class="fa-solid fa-gift text-base"></i>
-        <span>🎉 Claim ₹${currentActiveWatchTask.reward} Coins Now!</span>
+        <span>🎉 Claim ₹${totalClaimReward} Coins Now!${bonusLabel}</span>
       </button>
     `;
   }
@@ -944,6 +979,8 @@ async function claimCurrentVideoReward() {
   if (!currentActiveWatchTask) return;
 
   const { taskId, taskIndex, elapsedSeconds } = currentActiveWatchTask;
+  const checkLikeComment = document.getElementById('checkboxLikeComment');
+  const likedAndCommented = checkLikeComment ? checkLikeComment.checked : false;
 
   try {
     const res = await fetch('/api/user/watch-tasks/claim', {
@@ -952,7 +989,8 @@ async function claimCurrentVideoReward() {
       body: JSON.stringify({
         taskId,
         taskIndex,
-        watchTimeSeconds: elapsedSeconds
+        watchTimeSeconds: elapsedSeconds,
+        likedAndCommented
       })
     });
 
@@ -965,10 +1003,12 @@ async function claimCurrentVideoReward() {
       closeWatchPlayerModal();
       await loadTodayWatchTasks();
 
+      const bonusNote = data.bonusCoins > 0 ? ` (Isme +${data.bonusCoins} Like & Comment bonus shamil hai)` : '';
+
       Swal.fire({
         icon: 'success',
         title: `🎉 ₹${data.rewardCoins} Coins Credited!`,
-        text: 'Aapne video pura 4 minute dekha hai. Instant ₹10 Coins aapke wallet me add ho gaye hain!',
+        text: `Aapne video pura 4 minute dekha hai. Instant ₹${data.rewardCoins} Coins aapke wallet me add ho gaye hain!${bonusNote}`,
         confirmButtonColor: '#10b981',
         confirmButtonText: 'Great! Agla Video Dekhein'
       });

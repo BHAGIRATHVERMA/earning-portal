@@ -6,6 +6,7 @@ let allWithdrawals = [];
 let allLinks = [];
 let allYoutubeLinks = [];
 let allWatchVideos = [];
+let allCoupons = [];
 let allChatThreads = [];
 let currentSelectedChatUserId = null;
 let currentInspectTaskId = null;
@@ -29,6 +30,7 @@ async function initAdmin() {
     await loadAdminLinks();
     await loadAdminYoutubeLinks();
     await loadAdminWatchVideos();
+    await loadAdminCoupons();
     await loadAdminChatThreads();
     await loadAdminSettings();
     startAdminChatPolling();
@@ -39,7 +41,7 @@ async function initAdmin() {
 }
 
 function switchAdminTab(tabName) {
-  const tabs = ['users', 'tasks', 'yttasks', 'withdrawals', 'links', 'ytlinks', 'watchvideos', 'chat', 'settings'];
+  const tabs = ['users', 'tasks', 'yttasks', 'withdrawals', 'links', 'ytlinks', 'watchvideos', 'coupons', 'chat', 'settings'];
   tabs.forEach(t => {
     const btn = document.getElementById(`tabBtn_${t}`);
     const content = document.getElementById(`tabContent_${t}`);
@@ -1353,6 +1355,18 @@ async function loadAdminSettings() {
       if (document.getElementById('settingDailyYoutubeReward')) {
         document.getElementById('settingDailyYoutubeReward').value = s.dailyYoutubeReward || 50;
       }
+      if (document.getElementById('settingEnableMapService')) {
+        document.getElementById('settingEnableMapService').checked = s.enableMapService !== false;
+      }
+      if (document.getElementById('settingEnableYoutubeService')) {
+        document.getElementById('settingEnableYoutubeService').checked = s.enableYoutubeService !== false;
+      }
+      if (document.getElementById('settingEnableVideoWatchService')) {
+        document.getElementById('settingEnableVideoWatchService').checked = s.enableVideoWatchService !== false;
+      }
+      if (document.getElementById('settingVideoLikeCommentBonus')) {
+        document.getElementById('settingVideoLikeCommentBonus').value = s.videoLikeCommentBonusCoins !== undefined ? s.videoLikeCommentBonusCoins : 2;
+      }
       if (document.getElementById('settingPopupVideoUrl')) {
         document.getElementById('settingPopupVideoUrl').value = s.popupVideoUrl || '';
       }
@@ -1422,6 +1436,10 @@ async function handleSettingsUpdate(e) {
   const minWithdrawal = document.getElementById('settingMinWithdrawal').value;
   const dailyTaskReward = document.getElementById('settingDailyReward').value;
   const dailyYoutubeReward = document.getElementById('settingDailyYoutubeReward') ? document.getElementById('settingDailyYoutubeReward').value : 50;
+  const enableMapService = document.getElementById('settingEnableMapService') ? document.getElementById('settingEnableMapService').checked : true;
+  const enableYoutubeService = document.getElementById('settingEnableYoutubeService') ? document.getElementById('settingEnableYoutubeService').checked : true;
+  const enableVideoWatchService = document.getElementById('settingEnableVideoWatchService') ? document.getElementById('settingEnableVideoWatchService').checked : true;
+  const videoLikeCommentBonusCoins = document.getElementById('settingVideoLikeCommentBonus') ? document.getElementById('settingVideoLikeCommentBonus').value : 2;
   const popupVideoUrl = document.getElementById('settingPopupVideoUrl') ? document.getElementById('settingPopupVideoUrl').value.trim() : '';
   const popupAdTimer = document.getElementById('settingPopupAdTimer') ? document.getElementById('settingPopupAdTimer').value : 30;
   const popupAdEnabled = document.getElementById('settingPopupAdEnabled') ? document.getElementById('settingPopupAdEnabled').checked : true;
@@ -1441,6 +1459,10 @@ async function handleSettingsUpdate(e) {
         minWithdrawal,
         dailyTaskReward,
         dailyYoutubeReward,
+        enableMapService,
+        enableYoutubeService,
+        enableVideoWatchService,
+        videoLikeCommentBonusCoins,
         popupVideoUrl,
         popupAdTimer,
         popupAdEnabled,
@@ -1449,16 +1471,192 @@ async function handleSettingsUpdate(e) {
     });
     const data = await res.json();
     btn.disabled = false;
-    btn.innerHTML = '<i class="fa-solid fa-floppy-disk mr-2"></i> Save System Settings';
+    btn.innerHTML = '<i class="fa-solid fa-floppy-disk mr-2"></i> Save System Settings &amp; Controls';
 
     if (data.success) {
       document.getElementById('settingAdminPassword').value = '';
-      Swal.fire({ icon: 'success', title: 'Settings Saved', text: 'System & Video Popup configuration updated successfully.' });
+      Swal.fire({ icon: 'success', title: 'Settings Saved', text: 'System controls, service switches & Video settings updated successfully.' });
     }
   } catch (err) {
     btn.disabled = false;
-    btn.innerHTML = '<i class="fa-solid fa-floppy-disk mr-2"></i> Save System Settings';
+    btn.innerHTML = '<i class="fa-solid fa-floppy-disk mr-2"></i> Save System Settings &amp; Controls';
     Swal.fire({ icon: 'error', title: 'Error', text: 'Failed to update settings.' });
+  }
+}
+
+// -------------------------------------------------------------
+// COUPONS MANAGEMENT
+// -------------------------------------------------------------
+async function loadAdminCoupons() {
+  try {
+    const res = await fetch('/api/admin/coupons');
+    const data = await res.json();
+    if (data.success) {
+      allCoupons = data.coupons;
+      renderAdminCoupons();
+    }
+  } catch (err) {
+    console.error('Coupons load error:', err);
+  }
+}
+
+function renderAdminCoupons() {
+  const tbody = document.getElementById('couponsTableBody');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+
+  if (allCoupons.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" class="py-8 text-center text-slate-400">No coupons created yet. Click "Create New Coupon" above.</td></tr>';
+    return;
+  }
+
+  allCoupons.forEach(c => {
+    const tr = document.createElement('tr');
+    tr.className = 'hover:bg-slate-50 transition-colors';
+
+    let benefitText = '';
+    if (c.discountType === 'free') {
+      benefitText = '<span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-black text-xs">🎉 100% Free Join</span>';
+    } else if (c.discountType === 'flat') {
+      benefitText = `<span class="px-2.5 py-0.5 bg-indigo-100 text-indigo-800 rounded-full font-bold text-xs">₹${c.discountValue} Flat Discount</span>`;
+    } else {
+      benefitText = `<span class="px-2.5 py-0.5 bg-cyan-100 text-cyan-800 rounded-full font-bold text-xs">${c.discountValue}% Off</span>`;
+    }
+
+    const usageRatio = `${c.usedCount || 0} / ${c.maxUses || 1000}`;
+
+    tr.innerHTML = `
+      <td class="p-3.5 font-mono font-black text-sm text-indigo-700">
+        <div class="flex items-center gap-1.5">
+          <i class="fa-solid fa-tag text-amber-500 text-xs"></i>
+          <span>${c.code}</span>
+        </div>
+      </td>
+      <td class="p-3.5">${benefitText}</td>
+      <td class="p-3.5 font-mono font-bold text-slate-700">${usageRatio}</td>
+      <td class="p-3.5">
+        <span class="px-2 py-0.5 rounded-full font-bold text-[11px] ${c.active ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}">
+          ${c.active ? 'Active' : 'Disabled'}
+        </span>
+      </td>
+      <td class="p-3.5 text-right whitespace-nowrap">
+        <button onclick="toggleCoupon('${c.id}')" class="px-2.5 py-1 text-xs font-bold rounded-lg border ${
+          c.active ? 'border-amber-300 text-amber-700 bg-amber-50' : 'border-emerald-300 text-emerald-700 bg-emerald-50'
+        } transition-colors mr-1">
+          ${c.active ? 'Disable' : 'Enable'}
+        </button>
+        <button onclick="deleteCoupon('${c.id}')" class="px-2.5 py-1 text-xs font-bold rounded-lg border border-rose-200 text-rose-700 bg-rose-50 hover:bg-rose-100 transition-colors">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function openCreateCouponModal() {
+  document.getElementById('createCouponModal').classList.remove('hidden');
+}
+
+function closeCreateCouponModal() {
+  document.getElementById('createCouponModal').classList.add('hidden');
+  document.getElementById('createCouponForm').reset();
+  handleCouponTypeChange();
+}
+
+function handleCouponTypeChange() {
+  const type = document.getElementById('couponTypeNew').value;
+  const wrapper = document.getElementById('couponValueWrapper');
+  const label = document.getElementById('couponValueLabel');
+
+  if (type === 'free') {
+    wrapper.classList.add('hidden');
+  } else if (type === 'flat') {
+    wrapper.classList.remove('hidden');
+    label.innerText = 'Discount Amount (₹)';
+  } else if (type === 'percent') {
+    wrapper.classList.remove('hidden');
+    label.innerText = 'Discount Percentage (%)';
+  }
+}
+
+async function handleCreateCoupon(e) {
+  e.preventDefault();
+  const code = document.getElementById('couponCodeNew').value.trim();
+  const discountType = document.getElementById('couponTypeNew').value;
+  const discountValue = document.getElementById('couponValueNew').value;
+  const maxUses = document.getElementById('couponMaxUsesNew').value;
+
+  if (!code) return;
+
+  const btn = document.getElementById('createCouponBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating...';
+
+  try {
+    const res = await fetch('/api/admin/coupons/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code, discountType, discountValue, maxUses })
+    });
+    const data = await res.json();
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-plus"></i> Create &amp; Activate Coupon Code';
+
+    if (data.success) {
+      closeCreateCouponModal();
+      Swal.fire({ icon: 'success', title: 'Coupon Created!', text: data.message });
+      await loadAdminCoupons();
+    } else {
+      Swal.fire({ icon: 'error', title: 'Error', text: data.message });
+    }
+  } catch (err) {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-plus"></i> Create &amp; Activate Coupon Code';
+    Swal.fire({ icon: 'error', title: 'Error', text: 'Failed to create coupon.' });
+  }
+}
+
+async function toggleCoupon(couponId) {
+  try {
+    const res = await fetch('/api/admin/coupons/toggle', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ couponId })
+    });
+    const data = await res.json();
+    if (data.success) {
+      await loadAdminCoupons();
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function deleteCoupon(couponId) {
+  const result = await Swal.fire({
+    title: 'Delete Coupon Code?',
+    text: 'Kya aap is coupon code ko delete karna chahte hain?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#dc2626',
+    confirmButtonText: 'Delete'
+  });
+
+  if (!result.isConfirmed) return;
+
+  try {
+    const res = await fetch('/api/admin/coupons/delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ couponId })
+    });
+    const data = await res.json();
+    if (data.success) {
+      await loadAdminCoupons();
+    }
+  } catch (err) {
+    console.error(err);
   }
 }
 
