@@ -1,6 +1,58 @@
 {
   "users": [
     {
+      "id": "usr_1789323397450_64",
+      "fullName": "Live Test Free User",
+      "mobile": "8888837259",
+      "city": "Jaipur",
+      "password": "pass",
+      "utr": "COUPON_FREE100",
+      "upiId": "Not Applicable",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 0,
+      "referralCode": "LIV7259",
+      "referredBy": null,
+      "referredByCode": null,
+      "referralRewardClaimed": false,
+      "referralsCount": 0,
+      "referralEarnings": 0,
+      "couponApplied": "FREE100",
+      "createdAt": "2026-09-13T18:16:37.450Z",
+      "approvedAt": "2026-09-13T18:16:37.450Z",
+      "planExpiresAt": "2026-09-16T18:16:37.450Z"
+    },
+    {
+      "id": "usr_1789323296467_758",
+      "fullName": "Free Test User",
+      "mobile": "9999955678",
+      "city": "Indore",
+      "password": "123",
+      "utr": "COUPON_FREE",
+      "upiId": "Not Applicable",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 12,
+      "referralCode": "FRE5678",
+      "referredBy": null,
+      "referredByCode": null,
+      "referralRewardClaimed": false,
+      "referralsCount": 0,
+      "referralEarnings": 0,
+      "couponApplied": "TESTFREE_1789323296463",
+      "createdAt": "2026-09-13T18:14:56.467Z",
+      "approvedAt": "2026-09-13T18:14:56.467Z",
+      "planExpiresAt": "2026-09-16T18:14:56.467Z"
+    },
+    {
       "id": "usr_1789045196939_132",
       "fullName": "Kamlesh Kahar",
       "mobile": "9893774508",
@@ -1405,7 +1457,11 @@
     "dailyYoutubeReward": 50,
     "popupVideoUrl": "https://youtu.be/mYLjiHzf8-4",
     "popupAdTimer": 30,
-    "popupAdEnabled": true
+    "popupAdEnabled": true,
+    "enableMapService": true,
+    "enableYoutubeService": true,
+    "enableVideoWatchService": true,
+    "videoLikeCommentBonusCoins": 2
   },
   "youtubeLinks": [
     {
@@ -2411,6 +2467,119 @@
   ],
   "watchTasks": [
     {
+      "id": "wvtsk_1789323296472_556",
+      "userId": "usr_1789323296467_758",
+      "userName": "Free Test User",
+      "userMobile": "9999955678",
+      "date": "2026-09-13",
+      "totalRewardEarned": 12,
+      "items": [
+        {
+          "taskIndex": 1,
+          "videoId": "wv_6",
+          "title": "Financial Freedom & Smart Money Tips",
+          "videoUrl": "https://www.youtube.com/watch?v=2Vv-BfVoq4g",
+          "durationSeconds": 240,
+          "reward": 10,
+          "completed": true,
+          "claimedAt": "2026-09-13T18:14:56.474Z",
+          "likedAndCommented": true,
+          "bonusCoins": 2,
+          "totalReward": 12
+        },
+        {
+          "taskIndex": 2,
+          "videoId": "wv_4",
+          "title": "Smartphone Earning Tricks & UPI Cash",
+          "videoUrl": "https://www.youtube.com/watch?v=fJ9rUzIMcZQ",
+          "durationSeconds": 240,
+          "reward": 10,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 3,
+          "videoId": "wv_1",
+          "title": "Earn Money Online Masterclass (Hindi)",
+          "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "durationSeconds": 240,
+          "reward": 10,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 4,
+          "videoId": "wv_1789042747015_993",
+          "title": "सिर्फ 2 मिनट में AI Video तैयार! | Google Gemini का कमाल",
+          "videoUrl": "https://youtu.be/oUk2Uwy7h9U",
+          "durationSeconds": 240,
+          "reward": 10,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 5,
+          "videoId": "wv_3",
+          "title": "How to Work from Home & Daily Payouts",
+          "videoUrl": "https://www.youtube.com/watch?v=kJQP7kiw5Fk",
+          "durationSeconds": 240,
+          "reward": 10,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 6,
+          "videoId": "wv_2",
+          "title": "Top 10 High Paying Digital Skills 2026",
+          "videoUrl": "https://www.youtube.com/watch?v=L_LUpnjgPso",
+          "durationSeconds": 240,
+          "reward": 10,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 7,
+          "videoId": "wv_7",
+          "title": "Social Media Growth & Passive Income",
+          "videoUrl": "https://www.youtube.com/watch?v=CevxZvSJLk8",
+          "durationSeconds": 240,
+          "reward": 10,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 8,
+          "videoId": "wv_8",
+          "title": "Students Part Time Earning Strategies",
+          "videoUrl": "https://www.youtube.com/watch?v=60ItHLz5WEA",
+          "durationSeconds": 240,
+          "reward": 10,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 9,
+          "videoId": "wv_9",
+          "title": "Business Ideas with Zero Investment",
+          "videoUrl": "https://www.youtube.com/watch?v=kXYiU_JCYtU",
+          "durationSeconds": 240,
+          "reward": 10,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 10,
+          "videoId": "wv_11",
+          "title": "AI Tools to Make Money Online Faster",
+          "videoUrl": "https://www.youtube.com/watch?v=JGwWNGJdvx8",
+          "durationSeconds": 240,
+          "reward": 10,
+          "completed": false,
+          "claimedAt": null
+        }
+      ]
+    },
+    {
       "id": "wvtsk_1789045287028_632",
       "userId": "usr_1789045196939_132",
       "userName": "Kamlesh Kahar",
@@ -2739,6 +2908,38 @@
           "claimedAt": null
         }
       ]
+    }
+  ],
+  "coupons": [
+    {
+      "id": "cpn_1789323296464_220",
+      "code": "TESTFREE_1789323296463",
+      "discountType": "free",
+      "discountValue": 100,
+      "maxUses": 10,
+      "usedCount": 0,
+      "active": true,
+      "createdAt": "2026-09-13T18:14:56.464Z"
+    },
+    {
+      "id": "cpn_1",
+      "code": "FREE100",
+      "discountType": "free",
+      "discountValue": 100,
+      "maxUses": 1000,
+      "usedCount": 1,
+      "active": true,
+      "createdAt": "2026-09-13T18:14:56.447Z"
+    },
+    {
+      "id": "cpn_2",
+      "code": "OFFER50",
+      "discountType": "flat",
+      "discountValue": 50,
+      "maxUses": 1000,
+      "usedCount": 0,
+      "active": true,
+      "createdAt": "2026-09-13T18:14:56.447Z"
     }
   ]
 }
