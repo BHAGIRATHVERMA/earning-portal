@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - MapReview Pay</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col justify-between py-8 px-4">
+
+  <!-- Header -->
+  <div class="max-w-md mx-auto w-full mb-6 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 text-slate-900 font-bold brand-font text-xl">
+      <div class="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center text-white text-base shadow">
+        <i class="fa-solid fa-location-dot"></i>
+      </div>
+      <span>Map<span class="text-indigo-600">Review</span> Pay</span>
+    </a>
+    <a href="/register.html" class="text-sm font-semibold text-indigo-600 hover:text-indigo-800 bg-white px-3.5 py-1.5 rounded-xl shadow-sm border border-slate-200">
+      New User? <span class="underline">Register</span>
+    </a>
+  </div>
+
+  <!-- Login Card -->
+  <div class="max-w-md mx-auto w-full bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden mb-8">
+
+    <!-- User Login Form (Default) -->
+    <div id="userLoginFormWrapper" class="p-6 sm:p-8">
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-extrabold text-slate-900">Account Login</h2>
+        <p class="text-xs text-slate-500 mt-1">Apne registered mobile number aur password se login karein.</p>
+      </div>
+
+      <form id="userLoginForm" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Mobile Number</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-phone"></i></span>
+            <input type="tel" id="userMobile" required maxlength="10" placeholder="10-digit mobile number" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm font-medium">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Password</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-lock"></i></span>
+            <input type="password" id="userPassword" required placeholder="Enter password" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm font-medium">
+          </div>
+        </div>
+
+        <button type="submit" id="userLoginBtn" class="w-full mt-2 py-3.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-md shadow-indigo-200 transition-all flex items-center justify-center gap-2">
+          <span>Login to Dashboard</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+    </div>
+
+    <!-- Admin Login Form (Hidden by default, accessible via footer) -->
+    <div id="adminLoginFormWrapper" class="p-6 sm:p-8 hidden bg-slate-900 text-white">
+      <div class="flex items-center justify-between mb-4">
+        <button type="button" onclick="showUserLogin()" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold flex items-center gap-1">
+          <i class="fa-solid fa-arrow-left"></i> Back to User Login
+        </button>
+        <span class="px-2 py-0.5 bg-rose-500/20 text-rose-400 text-[10px] font-bold rounded-full uppercase border border-rose-500/30">Staff Only</span>
+      </div>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-white/10 text-indigo-400 flex items-center justify-center text-xl mx-auto mb-2">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <h2 class="text-2xl font-extrabold text-white">Admin Control Portal</h2>
+        <p class="text-xs text-slate-400 mt-1">Authorized personnel login only</p>
+      </div>
+
+      <form id="adminLoginForm" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Admin ID</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500"><i class="fa-solid fa-id-badge"></i></span>
+            <input type="text" id="adminId" required value="ADMIN" placeholder="e.g. ADMIN" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-700 bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm font-medium font-mono">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Admin Password</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500"><i class="fa-solid fa-key"></i></span>
+            <input type="password" id="adminPassword" required placeholder="Enter password" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-700 bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm font-medium">
+          </div>
+        </div>
+
+        <button type="submit" id="adminLoginBtn" class="w-full mt-2 py-3.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2">
+          <span>Login as Admin</span>
+          <i class="fa-solid fa-lock-open"></i>
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+  <footer class="text-center text-xs text-slate-400 py-4 flex flex-col items-center gap-2">
+    <div>&copy; 2026 MapReview Pay India. All Rights Reserved.</div>
+    <div>
+      <button id="footerAdminToggle" onclick="toggleAdminView()" class="text-slate-400 hover:text-slate-600 transition-colors flex items-center gap-1.5 text-[11px] font-medium">
+        <i class="fa-solid fa-lock text-[10px]"></i>
+        <span id="footerAdminToggleText">Admin Portal</span>
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    let isAdminView = false;
+
+    function showUserLogin() {
+      isAdminView = false;
+      document.getElementById('userLoginFormWrapper').classList.remove('hidden');
+      document.getElementById('adminLoginFormWrapper').classList.add('hidden');
+      document.getElementById('footerAdminToggleText').innerText = 'Admin Portal';
+    }
+
+    function showAdminLogin() {
+      isAdminView = true;
+      document.getElementById('userLoginFormWrapper').classList.add('hidden');
+      document.getElementById('adminLoginFormWrapper').classList.remove('hidden');
+      document.getElementById('footerAdminToggleText').innerText = 'User Login';
+    }
+
+    function toggleAdminView() {
+      if (isAdminView) {
+        showUserLogin();
+      } else {
+        showAdminLogin();
+      }
+    }
+
+    // Check if admin query param is present
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('admin') === 'true') {
+      showAdminLogin();
+    }
+
+    // User Login submit
+    document.getElementById('userLoginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const mobile = document.getElementById('userMobile').value.trim();
+      const password = document.getElementById('userPassword').value.trim();
+
+      const btn = document.getElementById('userLoginBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Logging in...';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ mobile, password })
+        });
+        const data = await res.json();
+        btn.disabled = false;
+        btn.innerHTML = '<span>Login to Dashboard</span> <i class="fa-solid fa-arrow-right"></i>';
+
+        if (data.success) {
+          if (data.user && data.user.id) {
+            sessionStorage.removeItem('loginAdWatched_' + data.user.id);
+          }
+          window.location.href = '/dashboard.html';
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: data.message || 'Mobile number ya Password galat hai.'
+          });
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = '<span>Login to Dashboard</span> <i class="fa-solid fa-arrow-right"></i>';
+        Swal.fire({
+          icon: 'error',
+          title: 'Network Error',
+          text: 'Server connect nahi ho pa raha.'
+        });
+      }
+    });
+
+    // Admin Login submit
+    document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const adminId = document.getElementById('adminId').value.trim();
+      const password = document.getElementById('adminPassword').value.trim();
+
+      const btn = document.getElementById('adminLoginBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Verifying...';
+
+      try {
+        const res = await fetch('/api/auth/admin-login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ adminId, password })
+        });
+        const data = await res.json();
+        btn.disabled = false;
+        btn.innerHTML = '<span>Login as Admin</span> <i class="fa-solid fa-lock-open"></i>';
+
+        if (data.success) {
+          window.location.href = '/admin.html';
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Admin Access Denied',
+            text: data.message || 'Invalid Admin ID or Password.'
+          });
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = '<span>Login as Admin</span> <i class="fa-solid fa-lock-open"></i>';
+        Swal.fire({
+          icon: 'error',
+          title: 'Network Error',
+          text: 'Server connect nahi ho pa raha.'
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
