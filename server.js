@@ -54,9 +54,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
   secret: 'map_earning_portal_secret_key_2026',
-  resave: false,
+  resave: true,
   saveUninitialized: false,
-  cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 } // 7 days
+  rolling: true, // Automatically renews session cookie on every interaction
+  cookie: { 
+    maxAge: 365 * 24 * 60 * 60 * 1000, // 365 Days (1 Full Year)
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: false
+  }
 }));
 
 // Static files
@@ -331,6 +337,25 @@ app.get('/api/auth/check-session', (req, res) => {
     }
   }
   res.json({ success: false, role: 'guest' });
+});
+
+app.post('/api/auth/restore-session', (req, res) => {
+  const { userId, mobile } = req.body;
+  if (!userId || !mobile) {
+    return res.status(400).json({ success: false, message: 'User credentials required' });
+  }
+
+  const user = db.getUserById(userId);
+  if (user && user.mobile === mobile.trim()) {
+    if (user.status === 'deactivated') {
+      return res.status(403).json({ success: false, message: 'Account deactivated' });
+    }
+    req.session.isAdmin = false;
+    req.session.userId = user.id;
+    return res.json({ success: true, message: 'Session restored', user });
+  }
+
+  return res.status(401).json({ success: false, message: 'User not found or invalid' });
 });
 
 app.get('/api/auth/logout', (req, res) => {
