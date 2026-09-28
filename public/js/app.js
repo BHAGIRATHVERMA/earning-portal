@@ -795,12 +795,11 @@ function renderWatchTasks(task) {
   grid.innerHTML = '';
 
   let completedCount = 0;
-  let earnedCoins = 0;
-
   task.items.forEach(item => {
+    const rewardCoins = item.reward !== undefined ? item.reward : 5;
     if (item.completed) {
       completedCount++;
-      earnedCoins += (item.reward || 10);
+      earnedCoins += rewardCoins;
     }
 
     const card = document.createElement('div');
@@ -823,7 +822,7 @@ function renderWatchTasks(task) {
               <i class="fa-solid fa-clock mr-1"></i>${durationMins} Mins (${item.durationSeconds || 240}s)
             </span>
             <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-indigo-100 text-indigo-800 border border-indigo-200">
-              🪙 +${item.reward || 10} Coins
+              🪙 +${rewardCoins} Coins
             </span>
           </div>
         </div>
@@ -833,7 +832,7 @@ function renderWatchTasks(task) {
           <span>${escapeHtml(item.title || `Video Task #${item.taskIndex}`)}</span>
         </h4>
         <p class="text-xs text-slate-500 mb-4">
-          ${item.completed ? 'Aapne yeh video pura dekh liya hai aur 10 Coins aapke wallet me add ho chuke hain!' : `Hamari website ke andar hi pura ${durationMins} minute dekhein aur turant ₹10 Coins earn karein.`}
+          ${item.completed ? `Aapne yeh video pura dekh liya hai aur ₹${rewardCoins} Coins aapke wallet me add ho chuke hain!` : `Hamari website ke andar hi pura ${durationMins} minute dekhein aur turant ₹${rewardCoins} Coins earn karein.`}
         </p>
       </div>
 
@@ -843,13 +842,13 @@ function renderWatchTasks(task) {
             ? `
             <div class="w-full py-2.5 px-4 rounded-xl bg-emerald-100 text-emerald-800 font-extrabold text-xs flex items-center justify-center gap-2">
               <i class="fa-solid fa-circle-check text-emerald-600 text-sm"></i>
-              <span>Completed • ₹${item.reward || 10} Coins Credited ✓</span>
+              <span>Completed • ₹${rewardCoins} Coins Credited ✓</span>
             </div>
             `
             : `
-            <button onclick="openWatchPlayerModal('${task.id}', ${item.taskIndex}, '${encodeURIComponent(item.videoUrl)}', '${encodeURIComponent(item.title || '')}', ${item.durationSeconds || 240}, ${item.reward || 10})" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold text-xs shadow-md shadow-amber-500/20 transition-all flex items-center justify-center gap-2">
+            <button onclick="openWatchPlayerModal('${task.id}', ${item.taskIndex}, '${encodeURIComponent(item.videoUrl)}', '${encodeURIComponent(item.title || '')}', ${item.durationSeconds || 240}, ${rewardCoins})" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold text-xs shadow-md shadow-amber-500/20 transition-all flex items-center justify-center gap-2">
               <i class="fa-solid fa-play"></i>
-              <span>Watch Video (Pura ${durationMins} Min Dekhein • ₹${item.reward || 10})</span>
+              <span>Watch Video (Pura ${durationMins} Min Dekhein • ₹${rewardCoins})</span>
             </button>
             `
         }
