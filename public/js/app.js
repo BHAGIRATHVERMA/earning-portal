@@ -51,19 +51,26 @@ async function loadPortalSettings() {
 }
 
 function updateUserHeader(user) {
-  document.getElementById('loadingState').classList.add('hidden');
-  document.getElementById('headerWalletCoins').innerText = user.walletCoins || 0;
-  document.getElementById('headerWalletInr').innerText = user.walletCoins || 0;
-  document.getElementById('walletCoinsCard').innerText = user.walletCoins || 0;
-  document.getElementById('walletInrCard').innerText = user.walletCoins || 0;
-  document.getElementById('walletUpiCard').innerText = user.upiId || '--';
+  const loading = document.getElementById('loadingState');
+  if (loading) loading.classList.add('hidden');
 
-  document.getElementById('userName').innerText = user.fullName;
-  document.getElementById('userAvatarChar').innerText = user.fullName.charAt(0).toUpperCase();
-  document.getElementById('userMobile').innerText = user.mobile;
-  document.getElementById('userCity').innerText = user.city;
-  document.getElementById('userUpi').innerText = user.upiId;
-  document.getElementById('planBadge').innerText = user.planName || `Plan (₹${user.planPrice})`;
+  const setEl = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.innerText = val;
+  };
+
+  setEl('headerWalletCoins', user.walletCoins || 0);
+  setEl('headerWalletInr', user.walletCoins || 0);
+  setEl('walletCoinsCard', user.walletCoins || 0);
+  setEl('walletInrCard', user.walletCoins || 0);
+  setEl('walletUpiCard', user.upiId || '--');
+
+  setEl('userName', user.fullName || 'User');
+  setEl('userAvatarChar', (user.fullName ? user.fullName.charAt(0) : 'U').toUpperCase());
+  setEl('userMobile', user.mobile || '--');
+  setEl('userCity', user.city || '--');
+  setEl('userUpi', user.upiId || '--');
+  setEl('planBadge', user.planName || `Plan (₹${user.planPrice || 69})`);
 
   // Expiry date calculation
   if (user.planExpiresAt) {
@@ -71,9 +78,9 @@ function updateUserHeader(user) {
     const now = new Date();
     const diffDays = Math.ceil((expDate - now) / (1000 * 60 * 60 * 24));
     if (diffDays > 0) {
-      document.getElementById('planExpiryDate').innerText = `Expires in: ${diffDays} Days (${expDate.toLocaleDateString()})`;
+      setEl('planExpiryDate', `Expires in: ${diffDays} Days (${expDate.toLocaleDateString()})`);
     } else {
-      document.getElementById('planExpiryDate').innerText = `Expired on ${expDate.toLocaleDateString()}`;
+      setEl('planExpiryDate', `Expired on ${expDate.toLocaleDateString()}`);
     }
   }
 }
@@ -485,9 +492,6 @@ async function loadWithdrawalHistory() {
   }
 }
 
-let currentYoutubeTask = null;
-let currentWatchTask = null;
-
 function switchUserTaskTab(tab) {
   const mapTabBtn = document.getElementById('taskTab_map');
   const ytTabBtn = document.getElementById('taskTab_youtube');
@@ -764,7 +768,6 @@ async function submitDailyYoutubeTask() {
 // VIDEO WATCH & EARN (4 MIN WATCH = INSTANT 10 COINS)
 // -------------------------------------------------------------
 let watchTimerInterval = null;
-let currentActiveWatchTask = null;
 
 async function loadTodayWatchTasks() {
   try {
