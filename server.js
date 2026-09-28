@@ -289,6 +289,10 @@ app.post('/api/auth/login', (req, res) => {
   req.session.isAdmin = false;
   req.session.userId = user.id;
 
+  const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.ip;
+  const userAgent = req.headers['user-agent'] || '';
+  db.recordUserLogin(user.id, clientIp, userAgent);
+
   res.json({
     success: true,
     message: 'Login successful',
@@ -633,8 +637,31 @@ app.post('/api/public/chat/send', (req, res) => {
 });
 
 // -------------------------------------------------------------
+// VISITOR & USER TIME TRACKER API
+// -------------------------------------------------------------
+app.post('/api/track/visit', (req, res) => {
+  const { path: pagePath } = req.body || {};
+  const userId = (req.session && req.session.userId) ? req.session.userId : null;
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.ip;
+  const userAgent = req.headers['user-agent'] || '';
+  const entry = db.recordVisit(pagePath || '/', ip, userAgent, userId);
+  res.json({ success: true, visit: entry });
+});
+
+app.post('/api/track/heartbeat', requireUserAuth, (req, res) => {
+  const { path: pagePath, seconds = 30 } = req.body || {};
+  const tracking = db.recordUserHeartbeat(req.user.id, pagePath || '/dashboard.html', seconds);
+  res.json({ success: true, tracking });
+});
+
+// -------------------------------------------------------------
 // ADMIN API
 // -------------------------------------------------------------
+app.get('/api/admin/analytics', requireAdminAuth, (req, res) => {
+  const analytics = db.getAnalyticsOverview();
+  res.json({ success: true, analytics });
+});
+
 // Admin Live Chat API
 app.get('/api/admin/chat/threads', requireAdminAuth, (req, res) => {
   const threads = db.getAdminChatThreads();

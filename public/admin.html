@@ -136,6 +136,12 @@
         <span id="badgeChatCount" class="hidden bg-rose-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-black">0</span>
       </button>
 
+      <button onclick="switchAdminTab('tracker')" id="tabBtn_tracker" class="flex-shrink-0 px-3.5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-slate-600 hover:bg-slate-100 transition-all flex items-center gap-2">
+        <i class="fa-solid fa-chart-line text-emerald-600"></i>
+        <span>Traffic &amp; User Time Tracker</span>
+        <span id="badgeLiveOnlineUsers" class="bg-emerald-500 text-white text-[10px] px-2 py-0.5 rounded-full font-black flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> <span id="onlineUsersPillCount">0 Live</span></span>
+      </button>
+
       <button onclick="switchAdminTab('settings')" id="tabBtn_settings" class="flex-shrink-0 px-3.5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-slate-600 hover:bg-slate-100 transition-all flex items-center gap-2">
         <i class="fa-solid fa-sliders"></i>
         <span>Services &amp; Settings</span>
@@ -702,6 +708,132 @@
           </tbody>
         </table>
       </div>
+    </div>
+
+    <!-- TAB 8: WEBSITE TRAFFIC & USER TIME TRACKER -->
+    <div id="tabContent_tracker" class="hidden space-y-6">
+      
+      <!-- Top Tracker Header & Summary Cards -->
+      <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white p-6 rounded-3xl shadow-md border border-slate-800">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-black uppercase flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Live Real-Time Analytics
+              </span>
+              <h2 class="text-xl font-black text-white">Website Traffic &amp; User Session Time Tracker</h2>
+            </div>
+            <p class="text-xs text-slate-300 mt-1">
+              Yahan aap live dekh sakte hain ki kitne log website visit kar rahe hain, kaunsa user online hai aur kisne kitne der tak website par login karke samay bitaya hai.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="loadAdminTrackerAnalytics()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold shadow-sm transition-all flex items-center gap-1.5">
+              <i class="fa-solid fa-rotate-right"></i>
+              <span>Refresh Analytics</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 Live KPI Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-emerald-500/30">
+            <div class="flex items-center justify-between">
+              <div class="text-[11px] font-bold text-emerald-300 uppercase">Live Online Users</div>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            </div>
+            <div id="trackerLiveOnlineUsers" class="text-2xl sm:text-3xl font-black text-emerald-400 mt-1">0</div>
+            <div class="text-[10px] text-slate-300 mt-0.5">Active right now (in 3 mins)</div>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+            <div class="text-[11px] font-bold text-indigo-300 uppercase">Total Website Visits</div>
+            <div id="trackerTotalVisits" class="text-2xl sm:text-3xl font-black text-white mt-1">0</div>
+            <div class="text-[10px] text-slate-300 mt-0.5">All-time pageviews &amp; clicks</div>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+            <div class="text-[11px] font-bold text-amber-300 uppercase">Total Users Time Spent</div>
+            <div id="trackerTotalEngagement" class="text-2xl sm:text-3xl font-black text-amber-400 mt-1">0m</div>
+            <div class="text-[10px] text-slate-300 mt-0.5">Combined login duration</div>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+            <div class="text-[11px] font-bold text-cyan-300 uppercase">Today's Visits</div>
+            <div id="trackerTodayVisits" class="text-2xl sm:text-3xl font-black text-cyan-300 mt-1">0</div>
+            <div class="text-[10px] text-slate-300 mt-0.5">Unique page interactions today</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TABLE 1: User Login & Session Time Tracker -->
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6">
+        <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+          <div>
+            <h3 class="font-black text-slate-900 text-base flex items-center gap-2">
+              <i class="fa-solid fa-user-clock text-indigo-600"></i>
+              Registered Users Session Duration &amp; Login History
+            </h3>
+            <p class="text-xs text-slate-500">Kis user ne kitni baar login kiya, kitne samay tak website open rakhi aur abhi online hai ya offline.</p>
+          </div>
+          <span class="text-xs font-bold text-slate-400" id="trackerUsersCount">0 Users</span>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-slate-200">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="bg-slate-50 text-slate-500 font-bold border-b border-slate-200 uppercase text-[10px] tracking-wider">
+                <th class="p-3.5">User Details</th>
+                <th class="p-3.5">Live Status</th>
+                <th class="p-3.5">Total Time Logged In</th>
+                <th class="p-3.5">Total Logins</th>
+                <th class="p-3.5">Last Active / Page</th>
+                <th class="p-3.5">Plan &amp; Status</th>
+              </tr>
+            </thead>
+            <tbody id="trackerUsersTableBody" class="divide-y divide-slate-100">
+              <tr>
+                <td colspan="6" class="p-6 text-center text-slate-400">Loading user sessions...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TABLE 2: Live Website Visitor Activity Log -->
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6">
+        <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+          <div>
+            <h3 class="font-black text-slate-900 text-base flex items-center gap-2">
+              <i class="fa-solid fa-globe text-cyan-600"></i>
+              Live Website Visitors Activity Stream (Recent Hits)
+            </h3>
+            <p class="text-xs text-slate-500">Website par aane wale har visitor aur page visit ka live log.</p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-slate-200 max-h-96 overflow-y-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="bg-slate-50 text-slate-500 font-bold border-b border-slate-200 uppercase text-[10px] tracking-wider sticky top-0 bg-slate-50">
+                <th class="p-3">Time</th>
+                <th class="p-3">Page Visited</th>
+                <th class="p-3">Visitor Name / Type</th>
+                <th class="p-3">IP / Location</th>
+              </tr>
+            </thead>
+            <tbody id="trackerVisitsTableBody" class="divide-y divide-slate-100 font-mono text-[11px]">
+              <tr>
+                <td colspan="4" class="p-6 text-center text-slate-400 font-sans">Loading visitor logs...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
 
       </div>

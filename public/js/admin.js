@@ -31,9 +31,11 @@ async function initAdmin() {
     await loadAdminYoutubeLinks();
     await loadAdminWatchVideos();
     await loadAdminCoupons();
+    await loadAdminTrackerAnalytics();
     await loadAdminChatThreads();
     await loadAdminSettings();
     startAdminChatPolling();
+    startTrackerPolling();
   } catch (err) {
     console.error('Admin init error:', err);
     window.location.href = '/login.html?admin=true';
@@ -41,7 +43,7 @@ async function initAdmin() {
 }
 
 function switchAdminTab(tabName) {
-  const tabs = ['users', 'tasks', 'yttasks', 'withdrawals', 'links', 'ytlinks', 'watchvideos', 'coupons', 'chat', 'settings'];
+  const tabs = ['users', 'tasks', 'yttasks', 'withdrawals', 'links', 'ytlinks', 'watchvideos', 'coupons', 'chat', 'tracker', 'settings'];
   tabs.forEach(t => {
     const btn = document.getElementById(`tabBtn_${t}`);
     const content = document.getElementById(`tabContent_${t}`);
@@ -49,6 +51,9 @@ function switchAdminTab(tabName) {
       if (t === tabName) {
         btn.className = 'px-3.5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-indigo-600 text-white shadow-sm transition-all flex items-center gap-2';
         content.classList.remove('hidden');
+        if (t === 'tracker') {
+          loadAdminTrackerAnalytics();
+        }
       } else {
         btn.className = 'px-3.5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-slate-600 hover:bg-slate-100 transition-all flex items-center gap-2';
         content.classList.add('hidden');
@@ -1950,6 +1955,139 @@ function startAdminChatPolling() {
   adminChatPollingInterval = setInterval(() => {
     loadAdminChatThreads(true);
   }, 4000); // Check every 4 seconds for live user messages
+}
+
+// -------------------------------------------------------------
+// VISITOR & USER SESSION TIME TRACKER
+// -------------------------------------------------------------
+let adminTrackerPollingInterval = null;
+
+async function loadAdminTrackerAnalytics() {
+  try {
+    const res = await fetch('/api/admin/analytics');
+    const data = await res.json();
+    if (!data.success) return;
+
+    const a = data.analytics;
+    const liveOnline = a.onlineUsersCount || 0;
+
+    // Update KPI cards
+    const liveEl = document.getElementById('trackerLiveOnlineUsers');
+    if (liveEl) liveEl.innerText = liveOnline;
+
+    const livePill = document.getElementById('onlineUsersPillCount');
+    if (livePill) livePill.innerText = `${liveOnline} Live`;
+
+    const totalVisitsEl = document.getElementById('trackerTotalVisits');
+    if (totalVisitsEl) totalVisitsEl.innerText = (a.totalVisits || 0).toLocaleString();
+
+    const totalEngagementEl = document.getElementById('trackerTotalEngagement');
+    if (totalEngagementEl) totalEngagementEl.innerText = a.totalFormattedEngagement || '0m';
+
+    const todayVisitsEl = document.getElementById('trackerTodayVisits');
+    if (todayVisitsEl) todayVisitsEl.innerText = a.todayVisits || 0;
+
+    const countEl = document.getElementById('trackerUsersCount');
+    if (countEl) countEl.innerText = `${(a.usersTracking || []).length} Users Tracked`;
+
+    // Render Table 1: Users Session Duration & Login History
+    const usersBody = document.getElementById('trackerUsersTableBody');
+    if (usersBody) {
+      if (!a.usersTracking || a.usersTracking.length === 0) {
+        usersBody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">Abhi tak koi user session data nahi hai.</td></tr>`;
+      } else {
+        usersBody.innerHTML = '';
+        a.usersTracking.forEach((u) => {
+          const tr = document.createElement('tr');
+          tr.className = `hover:bg-slate-50 transition-colors ${u.isOnline ? 'bg-emerald-50/40 font-medium' : ''}`;
+
+          const statusBadge = u.isOnline
+            ? `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-black text-[10px] border border-emerald-300 shadow-sm"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> ONLINE NOW</span>`
+            : `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-100 text-slate-500 font-bold text-[10px]">⚪ Offline</span>`;
+
+          const lastActiveDate = u.lastActiveAt ? new Date(u.lastActiveAt).toLocaleString('en-IN', { dateStyle: 'short', timeStyle: 'short' }) : '--';
+
+          tr.innerHTML = `
+            <td class="p-3.5">
+              <div class="font-extrabold text-slate-900 text-xs sm:text-sm flex items-center gap-2">
+                <span>${escapeHtml(u.fullName)}</span>
+                ${u.isOnline ? '<span class="text-[10px] text-emerald-600 font-bold">🟢 Active</span>' : ''}
+              </div>
+              <div class="text-[11px] text-slate-500 mt-0.5">
+                <i class="fa-solid fa-phone text-[10px]"></i> ${u.mobile} • <i class="fa-solid fa-location-dot text-[10px]"></i> ${u.city || '--'}
+              </div>
+            </td>
+            <td class="p-3.5 whitespace-nowrap">${statusBadge}</td>
+            <td class="p-3.5 whitespace-nowrap">
+              <div class="font-black text-slate-900 text-xs sm:text-sm flex items-center gap-1.5">
+                <i class="fa-solid fa-stopwatch text-amber-500"></i>
+                <span>${u.formattedTimeSpent || '0s'}</span>
+              </div>
+              <div class="text-[10px] text-slate-400 font-mono">(${u.totalTimeSpentSeconds || 0} seconds)</div>
+            </td>
+            <td class="p-3.5 whitespace-nowrap">
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-700 font-black text-xs">
+                ${u.loginCount || 1} Logins
+              </span>
+            </td>
+            <td class="p-3.5 whitespace-nowrap">
+              <div class="font-bold text-slate-700 text-[11px]">${lastActiveDate}</div>
+              <div class="text-[10px] text-slate-400 font-mono mt-0.5"><i class="fa-solid fa-compass text-indigo-400"></i> ${u.lastPage || '/dashboard.html'}</div>
+            </td>
+            <td class="p-3.5 whitespace-nowrap">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${u.status === 'approved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                ${u.planName || 'Plan'} (${u.status})
+              </span>
+            </td>
+          `;
+          usersBody.appendChild(tr);
+        });
+      }
+    }
+
+    // Render Table 2: Recent Visits Stream
+    const visitsBody = document.getElementById('trackerVisitsTableBody');
+    if (visitsBody) {
+      if (!a.recentVisits || a.recentVisits.length === 0) {
+        visitsBody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-slate-400 font-sans">No recent visit logs yet.</td></tr>`;
+      } else {
+        visitsBody.innerHTML = '';
+        a.recentVisits.forEach(v => {
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-slate-50 transition-colors';
+
+          const timeStr = v.timestamp ? new Date(v.timestamp).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '--';
+          const isUser = !!v.userId;
+
+          tr.innerHTML = `
+            <td class="p-3 text-slate-500 whitespace-nowrap">${timeStr}</td>
+            <td class="p-3 font-bold text-indigo-600 whitespace-nowrap">${v.path || '/'}</td>
+            <td class="p-3 whitespace-nowrap">
+              ${isUser 
+                ? `<span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 font-bold text-[10px]">👤 ${escapeHtml(v.userName)} (${v.userMobile || ''})</span>` 
+                : `<span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-medium text-[10px]">🌐 Guest Visitor</span>`
+              }
+            </td>
+            <td class="p-3 text-slate-400 text-[10px] whitespace-nowrap truncate max-w-xs">${v.ip || '127.0.0.1'}</td>
+          `;
+          visitsBody.appendChild(tr);
+        });
+      }
+    }
+
+  } catch (err) {
+    console.error('Error loading tracker analytics:', err);
+  }
+}
+
+function startTrackerPolling() {
+  if (adminTrackerPollingInterval) clearInterval(adminTrackerPollingInterval);
+  adminTrackerPollingInterval = setInterval(() => {
+    const trackerPanel = document.getElementById('tabContent_tracker');
+    if (trackerPanel && !trackerPanel.classList.contains('hidden')) {
+      loadAdminTrackerAnalytics();
+    }
+  }, 10000); // Check every 10 seconds for live updates
 }
 
 function escapeHtml(string) {

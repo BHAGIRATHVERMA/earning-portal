@@ -528,6 +528,15 @@
     });
 
     loadSettings();
+
+    // Visitor Tracker Ping
+    try {
+      fetch('/api/track/visit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ path: window.location.pathname || '/register.html' })
+      }).catch(() => {});
+    } catch (e) {}
   </script>
 
 </body>

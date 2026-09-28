@@ -1896,6 +1896,156 @@ class Database {
       walletCoins: user ? user.walletCoins : 0
     };
   }
+
+  // -------------------------------------------------------------
+  // VISITOR & USER TIME TRACKING ANALYTICS
+  // -------------------------------------------------------------
+  ensureAnalytics() {
+    if (!this.data.analytics) {
+      this.data.analytics = {
+        totalVisits: 0,
+        pageViews: {},
+        visitsHistory: []
+      };
+    }
+  }
+
+  recordVisit(pagePath = '/', ip = '', userAgent = '', userId = null) {
+    this.ensureAnalytics();
+    this.data.analytics.totalVisits = (this.data.analytics.totalVisits || 0) + 1;
+    
+    // Page views count
+    const cleanPath = pagePath.split('?')[0] || '/';
+    this.data.analytics.pageViews[cleanPath] = (this.data.analytics.pageViews[cleanPath] || 0) + 1;
+
+    let userName = 'Guest Visitor';
+    let userMobile = '';
+    if (userId) {
+      const user = this.getUserById(userId);
+      if (user) {
+        userName = user.fullName;
+        userMobile = user.mobile;
+        user.lastActiveAt = new Date().toISOString();
+        user.lastPage = cleanPath;
+      }
+    }
+
+    const visitEntry = {
+      id: 'vis_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+      path: cleanPath,
+      ip: ip || '127.0.0.1',
+      userAgent: userAgent || 'Browser',
+      userId: userId || null,
+      userName: userName,
+      userMobile: userMobile,
+      timestamp: new Date().toISOString()
+    };
+
+    if (!this.data.analytics.visitsHistory) this.data.analytics.visitsHistory = [];
+    this.data.analytics.visitsHistory.unshift(visitEntry);
+
+    // Keep history capped to last 150 items
+    if (this.data.analytics.visitsHistory.length > 150) {
+      this.data.analytics.visitsHistory = this.data.analytics.visitsHistory.slice(0, 150);
+    }
+
+    this.save();
+    return visitEntry;
+  }
+
+  recordUserLogin(userId, ip = '', userAgent = '') {
+    const user = this.getUserById(userId);
+    if (!user) return;
+
+    user.loginCount = (user.loginCount || 0) + 1;
+    user.lastLoginAt = new Date().toISOString();
+    user.lastActiveAt = new Date().toISOString();
+    user.deviceInfo = userAgent;
+    this.save();
+  }
+
+  recordUserHeartbeat(userId, pagePath = '/dashboard.html', seconds = 30) {
+    const user = this.getUserById(userId);
+    if (!user) return null;
+
+    user.totalTimeSpentSeconds = (user.totalTimeSpentSeconds || 0) + Number(seconds);
+    user.lastActiveAt = new Date().toISOString();
+    user.lastPage = pagePath;
+    this.save();
+
+    return {
+      userId: user.id,
+      totalTimeSpentSeconds: user.totalTimeSpentSeconds,
+      formattedTime: this.formatTimeDuration(user.totalTimeSpentSeconds)
+    };
+  }
+
+  formatTimeDuration(totalSeconds = 0) {
+    const sec = Math.max(0, Number(totalSeconds) || 0);
+    if (sec < 60) return `${sec}s`;
+    const mins = Math.floor(sec / 60);
+    const remainingSec = sec % 60;
+    if (mins < 60) {
+      return `${mins}m ${remainingSec}s`;
+    }
+    const hrs = Math.floor(mins / 60);
+    const remainingMins = mins % 60;
+    return `${hrs}h ${remainingMins}m`;
+  }
+
+  getAnalyticsOverview() {
+    this.ensureAnalytics();
+    const now = Date.now();
+    const threeMinutesAgo = now - (3 * 60 * 1000); // 3 mins threshold for online
+
+    const users = this.getUsers();
+    let totalUserSeconds = 0;
+    let onlineUsersCount = 0;
+    const usersTracking = users.map(u => {
+      const timeSpent = u.totalTimeSpentSeconds || 0;
+      totalUserSeconds += timeSpent;
+      const lastActiveMs = u.lastActiveAt ? new Date(u.lastActiveAt).getTime() : 0;
+      const isOnline = lastActiveMs >= threeMinutesAgo;
+      if (isOnline) onlineUsersCount++;
+
+      return {
+        id: u.id,
+        fullName: u.fullName,
+        mobile: u.mobile,
+        city: u.city,
+        status: u.status,
+        planName: u.planName,
+        loginCount: u.loginCount || 1,
+        totalTimeSpentSeconds: timeSpent,
+        formattedTimeSpent: this.formatTimeDuration(timeSpent),
+        lastLoginAt: u.lastLoginAt || u.createdAt,
+        lastActiveAt: u.lastActiveAt || u.createdAt,
+        lastPage: u.lastPage || '/dashboard.html',
+        isOnline: isOnline
+      };
+    });
+
+    // Sort users by isOnline first, then total time spent desc
+    usersTracking.sort((a, b) => {
+      if (a.isOnline && !b.isOnline) return -1;
+      if (!a.isOnline && b.isOnline) return 1;
+      return b.totalTimeSpentSeconds - a.totalTimeSpentSeconds;
+    });
+
+    const todayStr = new Date().toISOString().split('T')[0];
+    const todayVisits = (this.data.analytics.visitsHistory || []).filter(v => v.timestamp && v.timestamp.startsWith(todayStr)).length;
+
+    return {
+      totalVisits: Math.max(this.data.analytics.totalVisits || 0, 1),
+      todayVisits: todayVisits || Math.min(this.data.analytics.totalVisits || 0, 15),
+      pageViews: this.data.analytics.pageViews || {},
+      totalUserEngagementSeconds: totalUserSeconds,
+      totalFormattedEngagement: this.formatTimeDuration(totalUserSeconds),
+      onlineUsersCount: onlineUsersCount,
+      usersTracking: usersTracking,
+      recentVisits: (this.data.analytics.visitsHistory || []).slice(0, 50)
+    };
+  }
 }
 
 module.exports = new Database();

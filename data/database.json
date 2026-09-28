@@ -1,6 +1,32 @@
 {
   "users": [
     {
+      "id": "usr_kajal_1790568924131",
+      "fullName": "kajal verma",
+      "mobile": "7566173052",
+      "city": "bhopal",
+      "password": "Password@123",
+      "utr": "COUPON_FREE_FREE15OCT",
+      "upiId": "74894163@ybl",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 0,
+      "referralCode": "KAJ5001",
+      "referredBy": null,
+      "referredByCode": null,
+      "referralRewardClaimed": false,
+      "referralsCount": 0,
+      "referralEarnings": 0,
+      "couponApplied": "FREE15OCT",
+      "createdAt": "2026-09-28T04:15:24.131Z",
+      "approvedAt": "2026-09-28T04:15:24.132Z",
+      "planExpiresAt": "2026-10-01T04:15:24.132Z"
+    },
+    {
       "id": "usr_1790556471580_988",
       "fullName": "Test Festive User",
       "mobile": "9876547777",
@@ -3345,5 +3371,34 @@
       "active": true,
       "createdAt": "2026-09-13T18:14:56.447Z"
     }
-  ]
+  ],
+  "analytics": {
+    "totalVisits": 2,
+    "pageViews": {
+      "/": 1,
+      "/register.html": 1
+    },
+    "visitsHistory": [
+      {
+        "id": "vis_1790568572021_261",
+        "path": "/register.html",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0",
+        "userId": null,
+        "userName": "Guest Visitor",
+        "userMobile": "",
+        "timestamp": "2026-09-28T04:09:32.021Z"
+      },
+      {
+        "id": "vis_1790568572020_761",
+        "path": "/",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0",
+        "userId": null,
+        "userName": "Guest Visitor",
+        "userMobile": "",
+        "timestamp": "2026-09-28T04:09:32.020Z"
+      }
+    ]
+  }
 }

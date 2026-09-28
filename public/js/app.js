@@ -19,6 +19,8 @@ async function initDashboard() {
 
     currentUser = sessionData.user;
     updateUserHeader(currentUser);
+    trackPageVisit();
+    startUserTimeTracker();
     await loadPortalSettings();
     await loadTodayTasks();
     await loadWithdrawalHistory();
@@ -36,6 +38,36 @@ async function initDashboard() {
       window.location.href = '/login.html';
     });
   }
+}
+
+function trackPageVisit() {
+  try {
+    fetch('/api/track/visit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path: window.location.pathname })
+    }).catch(() => {});
+  } catch (e) {}
+}
+
+let userTimeTrackerInterval = null;
+function startUserTimeTracker() {
+  if (userTimeTrackerInterval) clearInterval(userTimeTrackerInterval);
+  // Send first heartbeat immediately
+  fetch('/api/track/heartbeat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ path: window.location.pathname, seconds: 10 })
+  }).catch(() => {});
+
+  // Continuous heartbeat every 30 seconds
+  userTimeTrackerInterval = setInterval(() => {
+    fetch('/api/track/heartbeat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path: window.location.pathname, seconds: 30 })
+    }).catch(() => {});
+  }, 30000);
 }
 
 async function loadPortalSettings() {
