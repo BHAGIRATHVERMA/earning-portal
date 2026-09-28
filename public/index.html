@@ -92,6 +92,10 @@
         <a href="/register.html" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-bold shadow-lg shadow-amber-500/20 text-base transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
           <i class="fa-solid fa-bolt"></i> Join Now &amp; Start Earning
         </a>
+        <button onclick="openTrainingVideoModal()" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white font-black text-base shadow-lg shadow-rose-900/30 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+          <i class="fa-solid fa-circle-play text-amber-300 animate-pulse"></i>
+          <span>▶️ ट्रेनिंग वीडियो (काम कैसे करें)</span>
+        </button>
         <a href="#proofs" class="px-8 py-3.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-bold backdrop-blur-md border border-emerald-500/40 text-base transition-all flex items-center gap-2">
           <i class="fa-solid fa-receipt"></i> Live Income Proofs
         </a>
@@ -1480,14 +1484,166 @@ http://localhost:3000/register.html</textarea>
     </div>
   </div>
 
+  <!-- Training Video Popup Modal -->
+  <div id="trainingVideoModal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-gradient-to-b from-slate-900 via-slate-950 to-indigo-950 rounded-3xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl border border-rose-500/30 text-white relative overflow-hidden animate-bounce-short">
+      
+      <!-- Top Decorative Glow -->
+      <div class="absolute top-0 right-0 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Close Button -->
+      <button onclick="closeTrainingVideoModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition-colors z-20">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="mb-4 relative z-10 pr-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40 text-[11px] font-black uppercase tracking-wider mb-2">
+          <span class="w-2 h-2 rounded-full bg-rose-400 animate-ping"></span>
+          <span>Official Training &amp; Work Guide</span>
+        </div>
+        <h3 id="tvModalTitle" class="text-base sm:text-lg font-black text-white leading-tight">
+          🎓 Video Training: Website Par Kaam Kaise Karein &amp; Paise Kaise Kamayein
+        </h3>
+        <p id="tvModalDesc" class="text-xs text-slate-300 mt-1">
+          Naye users ke liye zaroori video: Account banana, login karna aur daily tasks se paise kamane ki poori jaankari dekhein.
+        </p>
+      </div>
+
+      <!-- Video Player Container (Responsive 16:9) -->
+      <div class="relative w-full rounded-2xl overflow-hidden shadow-2xl bg-black border border-slate-700/60 aspect-video mb-4 relative z-10">
+        <iframe id="tvModalIframe" src="" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+
+      <!-- 3 Step Quick Work Guide -->
+      <div class="grid grid-cols-3 gap-2 text-center text-xs mb-4 relative z-10">
+        <div class="bg-white/5 border border-white/10 rounded-xl p-2">
+          <div class="text-[10px] font-black text-amber-400 uppercase">Step 1</div>
+          <div class="text-[11px] font-bold text-white mt-0.5">📝 Account Banayein</div>
+          <div class="text-[9px] text-slate-400">Coupon lagakar ₹0 me</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-2">
+          <div class="text-[10px] font-black text-cyan-400 uppercase">Step 2</div>
+          <div class="text-[11px] font-bold text-white mt-0.5">🎥 Tasks &amp; Videos</div>
+          <div class="text-[9px] text-slate-400">Daily Coins kamayein</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-2">
+          <div class="text-[10px] font-black text-emerald-400 uppercase">Step 3</div>
+          <div class="text-[11px] font-bold text-white mt-0.5">💰 UPI Withdraw</div>
+          <div class="text-[9px] text-slate-400">Direct Bank / Paytm</div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-2 relative z-10">
+        <a href="/register.html?coupon=FREE15OCT" class="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-black text-xs shadow-lg text-center flex items-center justify-center gap-1.5 transition-all">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Free Account Banayein (Register)</span>
+        </a>
+        <a href="/login.html" class="sm:w-auto py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow text-center flex items-center justify-center gap-1.5 transition-all">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <span>Login Karein</span>
+        </a>
+        <button onclick="closeTrainingVideoModal()" class="sm:w-auto py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 font-bold text-xs transition-colors text-center">
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Floating Training Video Button (Always Available on Screen) -->
+  <button onclick="openTrainingVideoModal()" id="floatingTrainingBtn" class="fixed bottom-36 left-4 sm:left-6 z-40 px-4 py-2.5 rounded-full bg-gradient-to-r from-rose-600 via-red-600 to-pink-600 text-white font-black text-xs shadow-2xl flex items-center gap-2 border-2 border-white/40 transform hover:scale-105 transition-all group">
+    <span class="w-2.5 h-2.5 rounded-full bg-white animate-ping"></span>
+    <i class="fa-solid fa-play text-xs text-amber-300"></i>
+    <span>ट्रेनिंग वीडियो: <b>काम कैसे करें</b></span>
+  </button>
+
   <!-- Floating Festive Coupon Button (Always Available on Screen) -->
-  <button onclick="openFestiveModal()" id="floatingFestiveBtn" class="fixed bottom-24 left-4 sm:left-6 z-40 px-4 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black text-xs shadow-2xl flex items-center gap-2 border-2 border-white/40 transform hover:scale-105 transition-all group animate-bounce">
+  <button onclick="openFestiveModal()" id="floatingFestiveBtn" class="fixed bottom-20 left-4 sm:left-6 z-40 px-4 py-2 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black text-xs shadow-2xl flex items-center gap-2 border-2 border-white/40 transform hover:scale-105 transition-all group">
     <i class="fa-solid fa-gift text-sm text-slate-950"></i>
     <span>Free Coupon: <b>FREE15OCT</b></span>
-    <span class="bg-slate-950 text-amber-300 text-[9px] px-1.5 py-0.5 rounded-full uppercase">15 Oct</span>
   </button>
 
   <script>
+    // -------------------------------------------------------------
+    // TRAINING VIDEO POPUP CONTROLLER
+    // -------------------------------------------------------------
+    let currentTvUrl = 'https://www.youtube.com/watch?v=zxJEXCI7x94';
+    let tvConfig = null;
+
+    function getYouTubeEmbedUrl(url) {
+      if (!url) return '';
+      let videoId = '';
+      const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/);
+      if (match && match[1]) {
+        videoId = match[1];
+      } else if (url.trim().length === 11) {
+        videoId = url.trim();
+      }
+      return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0` : url;
+    }
+
+    function openTrainingVideoModal() {
+      const modal = document.getElementById('trainingVideoModal');
+      const iframe = document.getElementById('tvModalIframe');
+      if (modal && iframe) {
+        iframe.src = getYouTubeEmbedUrl(currentTvUrl);
+        modal.classList.remove('hidden');
+      }
+    }
+
+    function closeTrainingVideoModal() {
+      const modal = document.getElementById('trainingVideoModal');
+      const iframe = document.getElementById('tvModalIframe');
+      if (modal) modal.classList.add('hidden');
+      if (iframe) iframe.src = '';
+      sessionStorage.setItem('mrp_training_closed', 'true');
+    }
+
+    async function initTrainingVideoPopup() {
+      try {
+        const res = await fetch('/api/public/training-video');
+        const data = await res.json();
+        if (data.success && data.trainingVideo) {
+          tvConfig = data.trainingVideo;
+          if (tvConfig.videoUrl) currentTvUrl = tvConfig.videoUrl;
+          if (tvConfig.title) {
+            const titleEl = document.getElementById('tvModalTitle');
+            if (titleEl) titleEl.innerText = tvConfig.title;
+          }
+          if (tvConfig.description) {
+            const descEl = document.getElementById('tvModalDesc');
+            if (descEl) descEl.innerText = tvConfig.description;
+          }
+
+          const floatBtn = document.getElementById('floatingTrainingBtn');
+          if (floatBtn) {
+            if (tvConfig.enabled === false) {
+              floatBtn.classList.add('hidden');
+            } else {
+              floatBtn.classList.remove('hidden');
+            }
+          }
+
+          // Auto open if enabled and autoPopup is true
+          if (tvConfig.enabled !== false && tvConfig.autoPopup !== false) {
+            setTimeout(() => {
+              const hasClosed = sessionStorage.getItem('mrp_training_closed');
+              if (!hasClosed) {
+                openTrainingVideoModal();
+              }
+            }, 800);
+          }
+        }
+      } catch (err) {
+        console.warn('Could not load training video config:', err);
+      }
+    }
+
+    initTrainingVideoPopup();
+
     // -------------------------------------------------------------
     // FESTIVE PROMO POPUP CONTROLLER
     // -------------------------------------------------------------
@@ -1522,7 +1678,7 @@ http://localhost:3000/register.html</textarea>
       });
     }
 
-    // Auto-fetch active coupon details and popup after 1.2 seconds
+    // Auto-fetch active coupon details
     async function initActivePromoOffer() {
       try {
         const res = await fetch('/api/public/active-offer');
@@ -1533,14 +1689,6 @@ http://localhost:3000/register.html</textarea>
           if (codeEl) codeEl.innerText = data.offer.code;
         }
       } catch (e) {}
-
-      // Auto-open modal after 1.2s on first visit
-      setTimeout(() => {
-        const hasClosed = sessionStorage.getItem('mrp_festive_closed');
-        if (!hasClosed) {
-          openFestiveModal();
-        }
-      }, 1200);
     }
 
     initActivePromoOffer();

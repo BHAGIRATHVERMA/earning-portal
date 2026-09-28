@@ -941,10 +941,39 @@ app.get('/api/admin/settings', requireAdminAuth, (req, res) => {
   res.json({ success: true, settings });
 });
 
+// Public API for Homepage Training Video Popup
+app.get('/api/public/training-video', (req, res) => {
+  const settings = db.getSettings();
+  res.json({
+    success: true,
+    trainingVideo: {
+      enabled: settings.popupAdEnabled !== false,
+      videoUrl: settings.popupVideoUrl || 'https://www.youtube.com/watch?v=zxJEXCI7x94',
+      title: settings.popupVideoTitle || '🎓 Training Video: Kaam Kaise Karein & Paise Kaise Kamayein',
+      description: settings.popupVideoDescription || 'Naye users ke liye zaroori video: Account banana, login karna aur daily tasks complete karke paise kamane ki poori jaankari.',
+      autoPopup: settings.popupVideoAutoOpen !== false
+    }
+  });
+});
+
+// Admin Training Video Update Shortcut
+app.post('/api/admin/training-video', requireAdminAuth, (req, res) => {
+  const { videoUrl, title, description, enabled, autoPopup } = req.body;
+  const updates = {};
+  if (videoUrl !== undefined) updates.popupVideoUrl = videoUrl.trim();
+  if (title !== undefined) updates.popupVideoTitle = title.trim();
+  if (description !== undefined) updates.popupVideoDescription = description.trim();
+  if (enabled !== undefined) updates.popupAdEnabled = Boolean(enabled);
+  if (autoPopup !== undefined) updates.popupVideoAutoOpen = Boolean(autoPopup);
+
+  const updated = db.updateSettings(updates);
+  res.json({ success: true, message: 'Training Video Popup settings updated successfully', settings: updated });
+});
+
 app.post('/api/admin/settings/update', requireAdminAuth, (req, res) => {
   const { 
     upiId, upiName, adminPassword, minWithdrawal, dailyTaskReward, dailyYoutubeReward, 
-    popupVideoUrl, popupAdTimer, popupAdEnabled,
+    popupVideoUrl, popupVideoTitle, popupVideoDescription, popupVideoAutoOpen, popupAdTimer, popupAdEnabled,
     enableMapService, enableYoutubeService, enableVideoWatchService, videoLikeCommentBonusCoins
   } = req.body;
 
@@ -956,6 +985,9 @@ app.post('/api/admin/settings/update', requireAdminAuth, (req, res) => {
   if (dailyTaskReward !== undefined && dailyTaskReward !== '') updates.dailyTaskReward = Number(dailyTaskReward);
   if (dailyYoutubeReward !== undefined && dailyYoutubeReward !== '') updates.dailyYoutubeReward = Number(dailyYoutubeReward);
   if (popupVideoUrl !== undefined) updates.popupVideoUrl = popupVideoUrl.trim();
+  if (popupVideoTitle !== undefined) updates.popupVideoTitle = popupVideoTitle.trim();
+  if (popupVideoDescription !== undefined) updates.popupVideoDescription = popupVideoDescription.trim();
+  if (popupVideoAutoOpen !== undefined) updates.popupVideoAutoOpen = Boolean(popupVideoAutoOpen);
   if (popupAdTimer !== undefined && popupAdTimer !== '') updates.popupAdTimer = Math.max(5, Number(popupAdTimer));
   if (popupAdEnabled !== undefined) updates.popupAdEnabled = Boolean(popupAdEnabled);
 

@@ -43,7 +43,7 @@ async function initAdmin() {
 }
 
 function switchAdminTab(tabName) {
-  const tabs = ['users', 'tasks', 'yttasks', 'withdrawals', 'links', 'ytlinks', 'watchvideos', 'coupons', 'chat', 'tracker', 'settings'];
+  const tabs = ['users', 'tasks', 'yttasks', 'withdrawals', 'links', 'ytlinks', 'watchvideos', 'coupons', 'chat', 'tracker', 'trainingvideo', 'settings'];
   tabs.forEach(t => {
     const btn = document.getElementById(`tabBtn_${t}`);
     const content = document.getElementById(`tabContent_${t}`);
@@ -53,6 +53,8 @@ function switchAdminTab(tabName) {
         content.classList.remove('hidden');
         if (t === 'tracker') {
           loadAdminTrackerAnalytics();
+        } else if (t === 'trainingvideo') {
+          loadTrainingVideoSettings();
         }
       } else {
         btn.className = 'px-3.5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-slate-600 hover:bg-slate-100 transition-all flex items-center gap-2';
@@ -2105,6 +2107,118 @@ function escapeHtml(string) {
 async function adminLogout() {
   await fetch('/api/auth/logout');
   window.location.href = '/login.html?admin=true';
+}
+
+// -------------------------------------------------------------
+// HOMEPAGE TRAINING VIDEO POPUP MANAGEMENT
+// -------------------------------------------------------------
+async function loadTrainingVideoSettings() {
+  try {
+    const res = await fetch('/api/admin/settings');
+    const data = await res.json();
+    if (!data.success) return;
+
+    const s = data.settings;
+    const urlInput = document.getElementById('tvVideoUrl');
+    const titleInput = document.getElementById('tvTitle');
+    const descInput = document.getElementById('tvDescription');
+    const enabledInput = document.getElementById('tvEnabled');
+    const autoPopupInput = document.getElementById('tvAutoPopup');
+
+    if (urlInput) urlInput.value = s.popupVideoUrl || 'https://www.youtube.com/watch?v=zxJEXCI7x94';
+    if (titleInput) titleInput.value = s.popupVideoTitle || '🎓 Video Training: Kaam Kaise Karein & Paise Kaise Kamayein';
+    if (descInput) descInput.value = s.popupVideoDescription || 'Naye users ke liye zaroori video: Account banana, login karna aur daily tasks complete karke paise kamane ki poori jaankari dekhein.';
+    if (enabledInput) enabledInput.checked = s.popupAdEnabled !== false;
+    if (autoPopupInput) autoPopupInput.checked = s.popupVideoAutoOpen !== false;
+
+    updateTvPreview();
+  } catch (err) {
+    console.error('Error loading training video settings:', err);
+  }
+}
+
+function updateTvPreview() {
+  const url = document.getElementById('tvVideoUrl') ? document.getElementById('tvVideoUrl').value.trim() : '';
+  const title = document.getElementById('tvTitle') ? document.getElementById('tvTitle').value.trim() : '';
+  const desc = document.getElementById('tvDescription') ? document.getElementById('tvDescription').value.trim() : '';
+
+  const previewTitle = document.getElementById('previewTvTitle');
+  if (previewTitle) previewTitle.innerText = title || '🎓 Video Training: Kaam Kaise Karein & Paise Kaise Kamayein';
+
+  const previewDesc = document.getElementById('previewTvDesc');
+  if (previewDesc) previewDesc.innerText = desc || 'Naye users ke liye zaroori video: Account banana, login karna aur daily tasks complete karke paise kamane ki poori jaankari dekhein.';
+
+  const iframe = document.getElementById('tvPreviewIframe');
+  const placeholder = document.getElementById('tvPreviewPlaceholder');
+
+  if (url) {
+    let videoId = '';
+    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/);
+    if (match && match[1]) {
+      videoId = match[1];
+    } else if (url.length === 11) {
+      videoId = url;
+    }
+
+    if (videoId && iframe) {
+      iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+      iframe.classList.remove('hidden');
+      if (placeholder) placeholder.classList.add('hidden');
+      return;
+    }
+  }
+
+  if (iframe) {
+    iframe.src = '';
+    iframe.classList.add('hidden');
+  }
+  if (placeholder) placeholder.classList.remove('hidden');
+}
+
+async function handleTrainingVideoSave(e) {
+  e.preventDefault();
+  const url = document.getElementById('tvVideoUrl').value.trim();
+  const title = document.getElementById('tvTitle').value.trim();
+  const desc = document.getElementById('tvDescription').value.trim();
+  const enabled = document.getElementById('tvEnabled').checked;
+  const autoPopup = document.getElementById('tvAutoPopup').checked;
+
+  const btn = document.getElementById('saveTvBtn');
+  const oldText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving to Homepage...';
+
+  try {
+    const res = await fetch('/api/admin/training-video', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        videoUrl: url,
+        title: title,
+        description: desc,
+        enabled: enabled,
+        autoPopup: autoPopup
+      })
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      Swal.fire({
+        icon: 'success',
+        title: '✅ Training Video Published!',
+        text: 'Video popup configuration Homepage par turant live update ho gaya hai.',
+        confirmButtonText: 'Great!'
+      });
+      loadTrainingVideoSettings();
+    } else {
+      Swal.fire('Error', data.message || 'Settings update karne me samasya aayi', 'error');
+    }
+  } catch (err) {
+    Swal.fire('Error', 'Server connection error', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = oldText;
+  }
 }
 
 // Start Admin Controller
