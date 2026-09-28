@@ -24,7 +24,11 @@
       "couponApplied": "FREE15OCT",
       "createdAt": "2026-09-28T04:15:24.131Z",
       "approvedAt": "2026-09-28T04:15:24.132Z",
-      "planExpiresAt": "2026-10-01T04:15:24.132Z"
+      "planExpiresAt": "2026-10-01T04:15:24.132Z",
+      "loginCount": 1,
+      "lastLoginAt": "2026-09-28T08:16:51.113Z",
+      "lastActiveAt": "2026-09-28T08:16:51.113Z",
+      "deviceInfo": ""
     },
     {
       "id": "usr_1790556471580_988",
@@ -529,6 +533,101 @@
     }
   ],
   "tasks": [
+    {
+      "id": "tsk_1790583411126_375",
+      "userId": "usr_kajal_1790568924131",
+      "userName": "kajal verma",
+      "userMobile": "7566173052",
+      "date": "2026-09-28",
+      "reward": 100,
+      "status": "in_progress",
+      "rewardClaimed": false,
+      "submittedAt": null,
+      "reviewedAt": null,
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "lnk_1788823442079_867",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "lnk_3",
+          "businessName": "Apex Healthcare Hospital",
+          "mapUrl": "https://maps.google.com/?q=Apex+Hospital+Bangalore",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "lnk_15",
+          "businessName": "Blue Ocean Seafood Restaurant",
+          "mapUrl": "https://maps.google.com/?q=Blue+Ocean+Restaurant+Goa",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "lnk_14",
+          "businessName": "Infinity Tech Repair & Sales",
+          "mapUrl": "https://maps.google.com/?q=Infinity+Tech+Repair+Nagpur",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "lnk_1788820644463_668",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "lnk_4",
+          "businessName": "Silver Star Automobile Service",
+          "mapUrl": "https://maps.google.com/?q=Silver+Star+Auto+Pune",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "lnk_13",
+          "businessName": "Skyline Bakers & Confectionery",
+          "mapUrl": "https://maps.google.com/?q=Skyline+Bakers+Bhopal",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "lnk_12",
+          "businessName": "Greenwood International Preschool",
+          "mapUrl": "https://maps.google.com/?q=Greenwood+Preschool+Surat",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "lnk_1",
+          "businessName": "Taj Hotel & Suites",
+          "mapUrl": "https://maps.google.com/?q=Taj+Hotel+Mumbai",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "lnk_1788821572391_512",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "",
+          "status": "pending"
+        }
+      ]
+    },
     {
       "id": "tsk_1790556471597_317",
       "userId": "usr_1790556471580_988",
@@ -3327,7 +3426,218 @@
       "createdAt": "2026-09-28T02:23:36.205Z"
     }
   ],
-  "watchTasks": [],
+  "watchTasks": [
+    {
+      "id": "wvtsk_1790583411132_260",
+      "userId": "usr_kajal_1790568924131",
+      "userName": "kajal verma",
+      "userMobile": "7566173052",
+      "date": "2026-09-28",
+      "totalRewardEarned": 0,
+      "items": [
+        {
+          "taskIndex": 1,
+          "videoId": "wv_mbl_61",
+          "title": "Creative Classroom Games for Students #63",
+          "videoUrl": "https://www.youtube.com/watch?v=Gd5mGy7HH3s",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 2,
+          "videoId": "wv_mbl_47",
+          "title": "Group Learning Activities for Children #77",
+          "videoUrl": "https://www.youtube.com/watch?v=4VliJMQ2PGU",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 3,
+          "videoId": "wv_mbl_73",
+          "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+          "videoUrl": "https://www.youtube.com/watch?v=oWo9pxeZVcw",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 4,
+          "videoId": "wv_mbl_82",
+          "title": "Udan 2.0 Block Coordinator Job 2026 | ₹15,000 Salary | 12th Pass Jobs | Maya Bai Lodhi Foundation",
+          "videoUrl": "https://www.youtube.com/watch?v=TAyPfnlqvqs",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 5,
+          "videoId": "wv_mbl_92",
+          "title": "Maya Bai Lodhi Foundation Teacher Jobs: Everything You Need to Know",
+          "videoUrl": "https://www.youtube.com/watch?v=CwMJEMThXAw",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 6,
+          "videoId": "wv_mbl_91",
+          "title": "✅ Teacher Recruitment 2026 | Step-by-Step Guide to Becoming a Free Coaching Teacher",
+          "videoUrl": "https://www.youtube.com/watch?v=mYLjiHzf8-4",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 7,
+          "videoId": "wv_mbl_30",
+          "title": "Alphabet Series Model 4: Vowel-Consonant आधारित Questions की Fast Trick",
+          "videoUrl": "https://www.youtube.com/watch?v=_IA-Zp2zJ7A",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 8,
+          "videoId": "wv_mbl_62",
+          "title": "Fun Learning Activities at Free Coaching Centres #62",
+          "videoUrl": "https://www.youtube.com/watch?v=fPAPf6HYsz0",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 9,
+          "videoId": "wv_mbl_22",
+          "title": "सीखने के साथ मस्ती: बच्चों की खास Class Activity 📚",
+          "videoUrl": "https://www.youtube.com/watch?v=HGkF5Mey0lI",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 10,
+          "videoId": "wv_mbl_17",
+          "title": "सिर्फ 2 घंटे पढ़ाएं और ₹4,500 कमाएं | Teacher Joining Open",
+          "videoUrl": "https://www.youtube.com/watch?v=fIh0bxJlODk",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 11,
+          "videoId": "wv_mbl_9",
+          "title": "विश्वकर्मा पूजा एवं कन्या संक्रांति की हार्दिक शुभकामनाएँ 🙏 | Vishwakarma Puja Special | MBLF",
+          "videoUrl": "https://www.youtube.com/watch?v=7pcOI9hoLrk",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 12,
+          "videoId": "wv_mbl_1",
+          "title": "₹151 स्वैच्छिक सहयोग | जन सहायता मिशन | स्वास्थ्य • शिक्षा • कौशल • सामाजिक सहयोग",
+          "videoUrl": "https://www.youtube.com/watch?v=zxJEXCI7x94",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 13,
+          "videoId": "wv_mbl_27",
+          "title": "Blood Relation: Statement Based Questions को Solve करने का सबसे तेज़ तरीका",
+          "videoUrl": "https://www.youtube.com/watch?v=syN4nxbHQv4",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 14,
+          "videoId": "wv_mbl_87",
+          "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+          "videoUrl": "https://www.youtube.com/watch?v=b6pfGiaDcHs",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 15,
+          "videoId": "wv_mbl_14",
+          "title": "गांव के बच्चों की पढ़ाई की नई शुरुआत | शिक्षा की ओर बढ़ते कदम | Maya Bai Lodhi Foundation",
+          "videoUrl": "https://www.youtube.com/watch?v=cRzrrMUht3I",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 16,
+          "videoId": "wv_mbl_13",
+          "title": "एक पुरानी कॉपी और एक अधूरा सपना | Inspirational Hindi Movie",
+          "videoUrl": "https://www.youtube.com/watch?v=rDFSGaxlaaA",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 17,
+          "videoId": "wv_mbl_2",
+          "title": "Maya Bai Lodhi Foundation App का पूरा Review | Teacher Attendance कैसे लगाएं |",
+          "videoUrl": "https://www.youtube.com/watch?v=BA_3lOoH5ss",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 18,
+          "videoId": "wv_mbl_48",
+          "title": "Happy Classroom Moments with Students #76",
+          "videoUrl": "https://www.youtube.com/watch?v=ZLbEd6c3-F0",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 19,
+          "videoId": "wv_mbl_60",
+          "title": "Best Student Participation Activities #64",
+          "videoUrl": "https://www.youtube.com/watch?v=GxVJX1OlRHo",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        },
+        {
+          "taskIndex": 20,
+          "videoId": "wv_mbl_58",
+          "title": "Happy Classroom Moments with Students #66",
+          "videoUrl": "https://www.youtube.com/watch?v=jGconaqyaeo",
+          "durationSeconds": 240,
+          "reward": 5,
+          "completed": false,
+          "claimedAt": null
+        }
+      ]
+    }
+  ],
   "coupons": [
     {
       "id": "cpn_free15oct",
