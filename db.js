@@ -55,37 +55,835 @@ const defaultData = {
   tasks: [], // Map reviews
   youtubeTasks: [], // { id, userId, userName, userMobile, date, reward: 50, rewardClaimed: false, status: 'in_progress'|'submitted'|'approved'|'rejected', rejectionReason: '', items: [{ taskIndex, linkId, channelName, channelUrl, screenshot: '', status: 'pending'|'uploaded' }], submittedAt, reviewedAt }
   watchVideos: [
-    { id: 'wv_mbl_1', title: 'MBL Foundation Official - Rural Education & Free Coaching Initiative', videoUrl: 'https://www.youtube.com/watch?v=rDFSGaxlaaA', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_2', title: 'MBL Foundation - Women Empowerment & Skill Development Program', videoUrl: 'https://www.youtube.com/watch?v=cRzrrMUht3I', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_3', title: 'MBL Foundation - Free Health Card & Medical Camp Project', videoUrl: 'https://www.youtube.com/watch?v=IxcEFWnczuY', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_4', title: 'MBL Foundation - Rural Teacher Honor & Salary Disbursement', videoUrl: 'https://www.youtube.com/watch?v=076Q3PixVmE', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_5', title: 'MBL Foundation - Youth Employment & Digital Training Center', videoUrl: 'https://www.youtube.com/watch?v=fIh0bxJlODk', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_6', title: 'MBL Foundation - Village Social Welfare & Development Drive', videoUrl: 'https://www.youtube.com/watch?v=84xu--GN8Qc', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_7', title: 'MBL Foundation - Educational Kit & Book Distribution Camp', videoUrl: 'https://www.youtube.com/watch?v=G0UCxmhxoHQ', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_8', title: 'MBL Foundation - Self Help Groups & Financial Assistance Scheme', videoUrl: 'https://www.youtube.com/watch?v=Do6Tdkk4cco', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_9', title: 'MBL Foundation - Annual Social Impact & Community Services', videoUrl: 'https://www.youtube.com/watch?v=RpJF6fuxHV0', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_10', title: 'MBL Foundation - Tree Plantation & Clean Village Campaign', videoUrl: 'https://www.youtube.com/watch?v=HGkF5Mey0lI', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_11', title: 'MBL Foundation - Free Digital Literacy for Rural Students', videoUrl: 'https://www.youtube.com/watch?v=kz8_iEbXG6k', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_12', title: 'MBL Foundation - Blanket & Winter Relief Distribution', videoUrl: 'https://www.youtube.com/watch?v=oUk2Uwy7h9U', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_13', title: 'MBL Foundation - Blood Donation & Health Awareness Camp', videoUrl: 'https://www.youtube.com/watch?v=QUGEW7Lgxig', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_14', title: 'MBL Foundation - Girl Child Higher Education Scholarship', videoUrl: 'https://www.youtube.com/watch?v=CM_HF9GRt2s', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_15', title: 'MBL Foundation - Sustainable Farming & Farmer Support Workshop', videoUrl: 'https://www.youtube.com/watch?v=syN4nxbHQv4', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_16', title: 'MBL Foundation - Sewing Machine & Tailoring Training Center', videoUrl: 'https://www.youtube.com/watch?v=5YJtPLPFg2U', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_17', title: 'MBL Foundation - Clean Drinking Water Project in Rural Areas', videoUrl: 'https://www.youtube.com/watch?v=pm3B3kmud7E', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_18', title: 'MBL Foundation - Youth Sports Meet & Physical Fitness Drive', videoUrl: 'https://www.youtube.com/watch?v=_IA-Zp2zJ7A', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_19', title: 'MBL Foundation - Eye Checkup & Free Specs Distribution Camp', videoUrl: 'https://www.youtube.com/watch?v=s7xzTMruZZg', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_20', title: 'MBL Foundation - Rural Library & Reading Room Inauguration', videoUrl: 'https://www.youtube.com/watch?v=ZfDre3LOjGI', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_21', title: 'MBL Foundation - Smart Classroom Setup for Rural Schools', videoUrl: 'https://www.youtube.com/watch?v=I37bWbbikTE', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_22', title: 'MBL Foundation - Sanitation & Hygiene Workshop for Women', videoUrl: 'https://www.youtube.com/watch?v=mEpvgMEIVEU', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_23', title: 'MBL Foundation - Handicraft & Cottage Industry Workshop', videoUrl: 'https://www.youtube.com/watch?v=4uW6qszp9Qg', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_24', title: 'MBL Foundation - Rural Youth Leadership Training Program', videoUrl: 'https://www.youtube.com/watch?v=CaTidkJkses', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_25', title: 'MBL Foundation - Nutrition Food Kit Distribution for Children', videoUrl: 'https://www.youtube.com/watch?v=PtmqCFpaHNw', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_26', title: 'MBL Foundation - Solar Light Installation in Villages', videoUrl: 'https://www.youtube.com/watch?v=eNzsuj-gxPA', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_27', title: 'MBL Foundation - Cultural Heritage & National Fest Celebration', videoUrl: 'https://www.youtube.com/watch?v=uuw0c4SD4s8', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_28', title: 'MBL Foundation - Legal Awareness & Rights Consultation Camp', videoUrl: 'https://www.youtube.com/watch?v=_KCGeWblthM', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_29', title: 'MBL Foundation - Disaster Relief & Emergency Aid Mission', videoUrl: 'https://www.youtube.com/watch?v=Q8_7AfdrFgo', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() },
-    { id: 'wv_mbl_30', title: 'MBL Foundation - Journey of Social Change & Future Roadmap', videoUrl: 'https://www.youtube.com/watch?v=-1hIaCJ2g9o', durationSeconds: 240, rewardPerVideo: 10, active: true, createdAt: new Date().toISOString() }
-  ],
+    {
+        "id": "wv_mbl_1",
+        "title": "₹151 स्वैच्छिक सहयोग | जन सहायता मिशन | स्वास्थ्य • शिक्षा • कौशल • सामाजिक सहयोग",
+        "videoUrl": "https://www.youtube.com/watch?v=zxJEXCI7x94",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:30.680Z"
+    },
+    {
+        "id": "wv_mbl_2",
+        "title": "Maya Bai Lodhi Foundation App का पूरा Review | Teacher Attendance कैसे लगाएं |",
+        "videoUrl": "https://www.youtube.com/watch?v=BA_3lOoH5ss",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:30.559Z"
+    },
+    {
+        "id": "wv_mbl_3",
+        "title": "Block Coordinator बनें | ₹15,000 तक मानदेय | हर महीने 20 Teacher नियुक्त करवाएं | Field Job",
+        "videoUrl": "https://www.youtube.com/watch?v=kBxP7aLiOaA",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:30.589Z"
+    },
+    {
+        "id": "wv_mbl_4",
+        "title": "District Coordinator कैसे बनें? | ₹25,000 तक मानदेय + Travel Fund | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=rz4pWiAyMaA",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:30.796Z"
+    },
+    {
+        "id": "wv_mbl_5",
+        "title": "गांव में Tuition Teacher बनें | घर से 2 घंटे पढ़ाएं |  Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=G-P8zc_RlMI",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:30.575Z"
+    },
+    {
+        "id": "wv_mbl_6",
+        "title": "Maya Bai Lodhi Foundation Online Joining कैसे करें? | Complete Process",
+        "videoUrl": "https://www.youtube.com/watch?v=QIPwK264KpA",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:30.576Z"
+    },
+    {
+        "id": "wv_mbl_7",
+        "title": "एक छोटा सा दीपक | एक बच्ची का बड़ा सपना | दिल छू लेने वाली कहानी | Emotional Inspirational Story",
+        "videoUrl": "https://www.youtube.com/watch?v=GRjKhVDDwnE",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:30.681Z"
+    },
+    {
+        "id": "wv_mbl_8",
+        "title": "THE INDIA STORY (2026) Full Movie in Hindi",
+        "videoUrl": "https://www.youtube.com/watch?v=snTCv_sNdYU",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:30.683Z"
+    },
+    {
+        "id": "wv_mbl_9",
+        "title": "विश्वकर्मा पूजा एवं कन्या संक्रांति की हार्दिक शुभकामनाएँ 🙏 | Vishwakarma Puja Special | MBLF",
+        "videoUrl": "https://www.youtube.com/watch?v=7pcOI9hoLrk",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:30.682Z"
+    },
+    {
+        "id": "wv_mbl_10",
+        "title": "ऋषि पंचमी की हार्दिक शुभकामनाएँ 🙏 | Rishi Panchami Special | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=Udwu5gqFwqg",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:30.794Z"
+    },
+    {
+        "id": "wv_mbl_11",
+        "title": "गणेश चतुर्थी की हार्दिक शुभकामनाएँ 🙏 | गणेश उत्सव आरंभ | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=hl2a6XPPhFU",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:31.375Z"
+    },
+    {
+        "id": "wv_mbl_12",
+        "title": "Why This Teacher’s Mission Matters More Than Ever",
+        "videoUrl": "https://www.youtube.com/watch?v=-PNp_Yoc9OI",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:31.376Z"
+    },
+    {
+        "id": "wv_mbl_13",
+        "title": "एक पुरानी कॉपी और एक अधूरा सपना | Inspirational Hindi Movie",
+        "videoUrl": "https://www.youtube.com/watch?v=rDFSGaxlaaA",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:31.354Z"
+    },
+    {
+        "id": "wv_mbl_14",
+        "title": "गांव के बच्चों की पढ़ाई की नई शुरुआत | शिक्षा की ओर बढ़ते कदम | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=cRzrrMUht3I",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:31.414Z"
+    },
+    {
+        "id": "wv_mbl_15",
+        "title": "MBL Foundation की Free Coaching Classes में धूमधाम से मनाया गया शिक्षक दिवस 🎉 | Teachers Day Special",
+        "videoUrl": "https://www.youtube.com/watch?v=IxcEFWnczuY",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:31.351Z"
+    },
+    {
+        "id": "wv_mbl_16",
+        "title": "Teacher Job Alert: बच्चों के सपनों को दें नई दिशा 👨‍🏫",
+        "videoUrl": "https://www.youtube.com/watch?v=076Q3PixVmE",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:31.354Z"
+    },
+    {
+        "id": "wv_mbl_17",
+        "title": "सिर्फ 2 घंटे पढ़ाएं और ₹4,500 कमाएं | Teacher Joining Open",
+        "videoUrl": "https://www.youtube.com/watch?v=fIh0bxJlODk",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:31.355Z"
+    },
+    {
+        "id": "wv_mbl_18",
+        "title": "सिर्फ 2 घंटे देकर बदलें किसी का जीवन ❤️ | Teacher Recruitment Open",
+        "videoUrl": "https://www.youtube.com/watch?v=84xu--GN8Qc",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:31.353Z"
+    },
+    {
+        "id": "wv_mbl_19",
+        "title": "इनकी मुस्कान में ही है असली सुकून ❤️🥰",
+        "videoUrl": "https://www.youtube.com/watch?v=G0UCxmhxoHQ",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:31.350Z"
+    },
+    {
+        "id": "wv_mbl_20",
+        "title": "बच्चों को टॉफी और शिक्षा का उपहार ❤️ | Village Education Program",
+        "videoUrl": "https://www.youtube.com/watch?v=Do6Tdkk4cco",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:31.350Z"
+    },
+    {
+        "id": "wv_mbl_21",
+        "title": "Village Education Program: बच्चों की प्रतिभा और उनका जोश! 🔥",
+        "videoUrl": "https://www.youtube.com/watch?v=RpJF6fuxHV0",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.027Z"
+    },
+    {
+        "id": "wv_mbl_22",
+        "title": "सीखने के साथ मस्ती: बच्चों की खास Class Activity 📚",
+        "videoUrl": "https://www.youtube.com/watch?v=HGkF5Mey0lI",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.027Z"
+    },
+    {
+        "id": "wv_mbl_23",
+        "title": "Online Work के Genuine तरीके: शुरुआत कहाँ से करें?",
+        "videoUrl": "https://www.youtube.com/watch?v=kz8_iEbXG6k",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.023Z"
+    },
+    {
+        "id": "wv_mbl_24",
+        "title": "सिर्फ 2 मिनट में AI Video तैयार! | Google Gemini का कमाल",
+        "videoUrl": "https://www.youtube.com/watch?v=oUk2Uwy7h9U",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.023Z"
+    },
+    {
+        "id": "wv_mbl_25",
+        "title": "बच्चों की पढ़ाई के लिए एक छोटी सी मदद ❤️ | बुंदेली डोनेशन अपील गीत | माया बाई लोधी फाउंडेशन",
+        "videoUrl": "https://www.youtube.com/watch?v=QUGEW7Lgxig",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.021Z"
+    },
+    {
+        "id": "wv_mbl_26",
+        "title": "Blood Relation: Indirect Statement Questions Solve in Seconds!",
+        "videoUrl": "https://www.youtube.com/watch?v=CM_HF9GRt2s",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.026Z"
+    },
+    {
+        "id": "wv_mbl_27",
+        "title": "Blood Relation: Statement Based Questions को Solve करने का सबसे तेज़ तरीका",
+        "videoUrl": "https://www.youtube.com/watch?v=syN4nxbHQv4",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.024Z"
+    },
+    {
+        "id": "wv_mbl_28",
+        "title": "Blood Relation Reasoning in Hindi | Family Tree Method (Full Concepts)",
+        "videoUrl": "https://www.youtube.com/watch?v=5YJtPLPFg2U",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.017Z"
+    },
+    {
+        "id": "wv_mbl_29",
+        "title": "Reasoning Fast Trick: Alphabet Arrangement & Same Position Questions",
+        "videoUrl": "https://www.youtube.com/watch?v=pm3B3kmud7E",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.021Z"
+    },
+    {
+        "id": "wv_mbl_30",
+        "title": "Alphabet Series Model 4: Vowel-Consonant आधारित Questions की Fast Trick",
+        "videoUrl": "https://www.youtube.com/watch?v=_IA-Zp2zJ7A",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.024Z"
+    },
+    {
+        "id": "wv_mbl_31",
+        "title": "Vocabulary Based Reasoning | Alphabet Series Model 3 | Exam Tricks 🔥",
+        "videoUrl": "https://www.youtube.com/watch?v=s7xzTMruZZg",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.585Z"
+    },
+    {
+        "id": "wv_mbl_32",
+        "title": "Complete Reasoning Series | Alphabet Reasoning (Model 2) | Exam Special",
+        "videoUrl": "https://www.youtube.com/watch?v=ZfDre3LOjGI",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.584Z"
+    },
+    {
+        "id": "wv_mbl_33",
+        "title": "Reasoning Tricks: Alphabet टेस्ट के कठिन सवालों को ऐसे करें हल",
+        "videoUrl": "https://www.youtube.com/watch?v=I37bWbbikTE",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.585Z"
+    },
+    {
+        "id": "wv_mbl_34",
+        "title": "Teacher और कोऑर्डिनेटर के लिए Maya Foundation की गाइडलाइन",
+        "videoUrl": "https://www.youtube.com/watch?v=mEpvgMEIVEU",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.666Z"
+    },
+    {
+        "id": "wv_mbl_35",
+        "title": "Maya Bai Lodhi Foundation: चंडी के बच्चों के साथ एक यादगार दिन ❤️",
+        "videoUrl": "https://www.youtube.com/watch?v=4uW6qszp9Qg",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.584Z"
+    },
+    {
+        "id": "wv_mbl_36",
+        "title": "नालंदा के बच्चों के बीच टॉफी वितरण ❤️ | Maya Bai Lodhi Foundation | शिक्षा के साथ खुशियाँ",
+        "videoUrl": "https://www.youtube.com/watch?v=CaTidkJkses",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.584Z"
+    },
+    {
+        "id": "wv_mbl_37",
+        "title": "Step-by-Step Guide: Teacher, Student और Staff Attendance Process",
+        "videoUrl": "https://www.youtube.com/watch?v=PtmqCFpaHNw",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.664Z"
+    },
+    {
+        "id": "wv_mbl_38",
+        "title": "घर बैठे बच्चों को पढ़ाएं और हर महीने पाएं मानदेय",
+        "videoUrl": "https://www.youtube.com/watch?v=eNzsuj-gxPA",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.665Z"
+    },
+    {
+        "id": "wv_mbl_39",
+        "title": "Why Teacher Pay Matters: Our Latest Foundation Update",
+        "videoUrl": "https://www.youtube.com/watch?v=uuw0c4SD4s8",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.665Z"
+    },
+    {
+        "id": "wv_mbl_40",
+        "title": "Our Commitment to Rural Education: Teacher Salary Update #85",
+        "videoUrl": "https://www.youtube.com/watch?v=_KCGeWblthM",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:32.666Z"
+    },
+    {
+        "id": "wv_mbl_41",
+        "title": "How We Build Future Leaders: Fun Classroom Activities!",
+        "videoUrl": "https://www.youtube.com/watch?v=Q8_7AfdrFgo",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:33.211Z"
+    },
+    {
+        "id": "wv_mbl_42",
+        "title": "How We Make Learning Fun: Amazing Classroom Activities!",
+        "videoUrl": "https://www.youtube.com/watch?v=-1hIaCJ2g9o",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:33.203Z"
+    },
+    {
+        "id": "wv_mbl_43",
+        "title": "Best Educational Activities for Children | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=s3hPRgsR2GE",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:33.208Z"
+    },
+    {
+        "id": "wv_mbl_44",
+        "title": "Students Enjoy Creative Classroom Games in Village Education Program",
+        "videoUrl": "https://www.youtube.com/watch?v=niSwjQAEH-E",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:33.287Z"
+    },
+    {
+        "id": "wv_mbl_45",
+        "title": "माया बाई लोधी फाउंडेशन ज्वाइनिंग प्रोसेस 2026 | ऑनलाइन रजिस्ट्रेशन और आईडी कार्ड डाउनलोड",
+        "videoUrl": "https://www.youtube.com/watch?v=YKv03SjO2Ng",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:33.207Z"
+    },
+    {
+        "id": "wv_mbl_46",
+        "title": "Maya Bai Lodhi Foundation Health Card 2026: Complete Registration Video!",
+        "videoUrl": "https://www.youtube.com/watch?v=Jov614Cjl3M",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:33.213Z"
+    },
+    {
+        "id": "wv_mbl_47",
+        "title": "Group Learning Activities for Children #77",
+        "videoUrl": "https://www.youtube.com/watch?v=4VliJMQ2PGU",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:33.292Z"
+    },
+    {
+        "id": "wv_mbl_48",
+        "title": "Happy Classroom Moments with Students #76",
+        "videoUrl": "https://www.youtube.com/watch?v=ZLbEd6c3-F0",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:33.214Z"
+    },
+    {
+        "id": "wv_mbl_49",
+        "title": "Interactive Learning in Rural Classrooms #75",
+        "videoUrl": "https://www.youtube.com/watch?v=OAdyqhOOlH8",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:33.207Z"
+    },
+    {
+        "id": "wv_mbl_50",
+        "title": "Best Student Participation Activities #74",
+        "videoUrl": "https://www.youtube.com/watch?v=YXp8uM4gOQk",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:33.212Z"
+    },
+    {
+        "id": "wv_mbl_51",
+        "title": "Creative Classroom Games for Students #73",
+        "videoUrl": "https://www.youtube.com/watch?v=lJBkDeh6GoQ",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.197Z"
+    },
+    {
+        "id": "wv_mbl_52",
+        "title": "Fun Learning Activities at Free Coaching Centres #72",
+        "videoUrl": "https://www.youtube.com/watch?v=zdJc9iZyACs",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.164Z"
+    },
+    {
+        "id": "wv_mbl_53",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation #71",
+        "videoUrl": "https://www.youtube.com/watch?v=AIPcYOMEgGk",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.196Z"
+    },
+    {
+        "id": "wv_mbl_54",
+        "title": "Learning Through Creativity and Teamwork #70",
+        "videoUrl": "https://www.youtube.com/watch?v=eEXyXaW-P1M",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.168Z"
+    },
+    {
+        "id": "wv_mbl_55",
+        "title": "Confidence Building Activities for Students #69",
+        "videoUrl": "https://www.youtube.com/watch?v=6Inht1O82Bg",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.170Z"
+    },
+    {
+        "id": "wv_mbl_56",
+        "title": "Educational Games and Classroom Fun #68",
+        "videoUrl": "https://www.youtube.com/watch?v=i1Pdg-zDPQg",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.173Z"
+    },
+    {
+        "id": "wv_mbl_57",
+        "title": "Group Learning Activities for Children #67",
+        "videoUrl": "https://www.youtube.com/watch?v=G1n7OFlQ5PY",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.197Z"
+    },
+    {
+        "id": "wv_mbl_58",
+        "title": "Happy Classroom Moments with Students #66",
+        "videoUrl": "https://www.youtube.com/watch?v=jGconaqyaeo",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.196Z"
+    },
+    {
+        "id": "wv_mbl_59",
+        "title": "Interactive Learning in Rural Classrooms #65",
+        "videoUrl": "https://www.youtube.com/watch?v=M3LxQj80UnM",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.197Z"
+    },
+    {
+        "id": "wv_mbl_60",
+        "title": "Best Student Participation Activities #64",
+        "videoUrl": "https://www.youtube.com/watch?v=GxVJX1OlRHo",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.197Z"
+    },
+    {
+        "id": "wv_mbl_61",
+        "title": "Creative Classroom Games for Students #63",
+        "videoUrl": "https://www.youtube.com/watch?v=Gd5mGy7HH3s",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.954Z"
+    },
+    {
+        "id": "wv_mbl_62",
+        "title": "Fun Learning Activities at Free Coaching Centres #62",
+        "videoUrl": "https://www.youtube.com/watch?v=fPAPf6HYsz0",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.948Z"
+    },
+    {
+        "id": "wv_mbl_63",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation #61",
+        "videoUrl": "https://www.youtube.com/watch?v=H5uyyNb-KzA",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.949Z"
+    },
+    {
+        "id": "wv_mbl_64",
+        "title": "Learning Through Creativity and Teamwork #60",
+        "videoUrl": "https://www.youtube.com/watch?v=_P9earKpknc",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.947Z"
+    },
+    {
+        "id": "wv_mbl_65",
+        "title": "Confidence Building Activities for Students #59",
+        "videoUrl": "https://www.youtube.com/watch?v=tSJ2sSjlHMI",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.947Z"
+    },
+    {
+        "id": "wv_mbl_66",
+        "title": "Educational Games and Classroom Fun #58",
+        "videoUrl": "https://www.youtube.com/watch?v=7D62LpIbFCg",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.948Z"
+    },
+    {
+        "id": "wv_mbl_67",
+        "title": "Free Coaching Teachers Got Salary ✅ | Real Teacher Payment | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=MdUK_vL83lw",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.949Z"
+    },
+    {
+        "id": "wv_mbl_68",
+        "title": "Free Coaching Teachers Got Salary ✅ | Real Teacher Payment | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=hI6QejyBU-g",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.954Z"
+    },
+    {
+        "id": "wv_mbl_69",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=6zSIh8jFq3U",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.954Z"
+    },
+    {
+        "id": "wv_mbl_70",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=Qjt8Hrbwu54",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:34.954Z"
+    },
+    {
+        "id": "wv_mbl_71",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=Tys1-i3qX5I",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.403Z"
+    },
+    {
+        "id": "wv_mbl_72",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=D0JFeSmufkY",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.384Z"
+    },
+    {
+        "id": "wv_mbl_73",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=oWo9pxeZVcw",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.395Z"
+    },
+    {
+        "id": "wv_mbl_74",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=NyJOTHhEO4o",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.407Z"
+    },
+    {
+        "id": "wv_mbl_75",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=oY9jxqHm6NM",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.384Z"
+    },
+    {
+        "id": "wv_mbl_76",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=axU5V7rBkHk",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.384Z"
+    },
+    {
+        "id": "wv_mbl_77",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=9DNCaeiQ5Sg",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.384Z"
+    },
+    {
+        "id": "wv_mbl_78",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=yypJmcs-vrM",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.395Z"
+    },
+    {
+        "id": "wv_mbl_79",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=4SW86G6biZ4",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.395Z"
+    },
+    {
+        "id": "wv_mbl_80",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=TFlCZUGEgTU",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.385Z"
+    },
+    {
+        "id": "wv_mbl_81",
+        "title": "🚨 NGO में Udan 2.0 District Coordinator Job 2026 | ₹25,000 Salary | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=eAHoBr2lAQQ",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.823Z"
+    },
+    {
+        "id": "wv_mbl_82",
+        "title": "Udan 2.0 Block Coordinator Job 2026 | ₹15,000 Salary | 12th Pass Jobs | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=TAyPfnlqvqs",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.822Z"
+    },
+    {
+        "id": "wv_mbl_83",
+        "title": "Maya Bai Lodhi Foundation: क्या आप गांव के बच्चों को पढ़ाकर कमाना चाहते हैं?",
+        "videoUrl": "https://www.youtube.com/watch?v=IoqePIgUgcA",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.826Z"
+    },
+    {
+        "id": "wv_mbl_84",
+        "title": "0% Government Funding से कैसे चल रही है FREE Education? | Maya Bai Lodhi Foundation Explained",
+        "videoUrl": "https://www.youtube.com/watch?v=ajzedr-m9D0",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.817Z"
+    },
+    {
+        "id": "wv_mbl_85",
+        "title": "🚨 100% FREE Education Mission | Teacher Recruitment 2026 | ₹4500 Salary | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=TWbyzH7E9GY",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.831Z"
+    },
+    {
+        "id": "wv_mbl_86",
+        "title": "Parents Feedback | बच्चों में आया बड़ा बदलाव | Maya Bai Lodhi Foundation | Real Parent Review",
+        "videoUrl": "https://www.youtube.com/watch?v=_xf9BohFk0A",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.825Z"
+    },
+    {
+        "id": "wv_mbl_87",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=b6pfGiaDcHs",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.831Z"
+    },
+    {
+        "id": "wv_mbl_88",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=KMLMzw1B9CI",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.831Z"
+    },
+    {
+        "id": "wv_mbl_89",
+        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=Gd2ru0bGmA4",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.823Z"
+    },
+    {
+        "id": "wv_mbl_90",
+        "title": "How We Make Education Fun | Maya Bai Lodhi Foundation",
+        "videoUrl": "https://www.youtube.com/watch?v=Q9grp1hXfAw",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:35.832Z"
+    },
+    {
+        "id": "wv_mbl_91",
+        "title": "✅ Teacher Recruitment 2026 | Step-by-Step Guide to Becoming a Free Coaching Teacher",
+        "videoUrl": "https://www.youtube.com/watch?v=mYLjiHzf8-4",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:36.204Z"
+    },
+    {
+        "id": "wv_mbl_92",
+        "title": "Maya Bai Lodhi Foundation Teacher Jobs: Everything You Need to Know",
+        "videoUrl": "https://www.youtube.com/watch?v=CwMJEMThXAw",
+        "durationSeconds": 240,
+        "rewardPerVideo": 5,
+        "active": true,
+        "createdAt": "2026-09-28T02:23:36.205Z"
+    }
+],
   watchTasks: [], // { id, userId, userName, date, items: [{ taskIndex, videoId, title, videoUrl, durationSeconds: 240, reward: 10, watchSeconds: 0, completed: false, claimedAt: null }] }
   withdrawals: [],
   coupons: [
@@ -103,7 +901,7 @@ const defaultData = {
     dailyTaskReward: 100,
     dailyYoutubeReward: 50,
     watchVideoDurationSeconds: 240, // 4 minutes
-    watchVideoRewardCoins: 10, // 10 coins per video
+    watchVideoRewardCoins: 5, // 5 coins per video (20 videos * 5 = ₹100 daily)
     videoLikeCommentBonusCoins: 2, // 2 extra coins for like & comment
     enableMapService: true, // Master switch for Google Map Reviews
     enableYoutubeService: true, // Master switch for YouTube Subscribe
@@ -1009,17 +1807,17 @@ class Database {
       const activeVideos = this.getActiveWatchVideos();
       if (activeVideos.length === 0) return null;
 
-      // Randomly pick 10 videos (or duplicate if fewer)
+      // Randomly pick 20 videos daily (or duplicate if fewer)
       const shuffled = [...activeVideos].sort(() => 0.5 - Math.random());
-      let selectedVideos = shuffled.slice(0, 10);
-      if (selectedVideos.length < 10) {
-        while (selectedVideos.length < 10) {
+      let selectedVideos = shuffled.slice(0, 20);
+      if (selectedVideos.length < 20) {
+        while (selectedVideos.length < 20) {
           selectedVideos.push(shuffled[Math.floor(Math.random() * shuffled.length)]);
         }
       }
 
       const durationSec = this.data.settings.watchVideoDurationSeconds || 240; // 4 minutes = 240s
-      const rewardCoin = this.data.settings.watchVideoRewardCoins || 10; // 10 coins
+      const rewardCoin = this.data.settings.watchVideoRewardCoins || 5; // 10 coins
 
       task = {
         id: 'wvtsk_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
