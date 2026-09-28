@@ -409,8 +409,27 @@ app.get('/api/user/tasks/today', requireUserAuth, (req, res) => {
   }
 
   const task = db.getUserDailyTask(user.id);
-  if (!task) {
-    return res.status(500).json({ success: false, message: 'Unable to generate daily tasks. Please contact admin.' });
+  if (!task || task.isExpired) {
+    if (task && task.isExpired) {
+      return res.json({
+        success: true,
+        accountStatus: 'expired',
+        message: 'Aapka plan expire ho chuka hai. Kripya naya plan activate karein.'
+      });
+    }
+
+    return res.json({
+      success: true,
+      accountStatus: 'active',
+      task: null,
+      serviceDisabled: true,
+      message: 'Map reviews service is currently inactive.',
+      user: {
+        walletCoins: user.walletCoins || 0,
+        planExpiresAt: user.planExpiresAt,
+        planName: user.planName
+      }
+    });
   }
 
   res.json({

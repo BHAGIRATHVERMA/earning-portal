@@ -1396,8 +1396,15 @@ class Database {
         return { isExpired: true };
       }
 
-      const activeLinks = this.getActiveLinks();
-      if (activeLinks.length === 0) return null;
+      let activeLinks = this.getActiveLinks();
+      if (!activeLinks || activeLinks.length === 0) {
+        if (defaultData && defaultData.links && defaultData.links.length > 0) {
+          this.data.links = JSON.parse(JSON.stringify(defaultData.links));
+          this.save();
+          activeLinks = this.getActiveLinks();
+        }
+      }
+      if (!activeLinks || activeLinks.length === 0) return null;
 
       // Pick 10 random links (or all if fewer than 10, duplicated if necessary)
       const shuffled = [...activeLinks].sort(() => 0.5 - Math.random());
@@ -1634,8 +1641,15 @@ class Database {
         return { isExpired: true };
       }
 
-      const activeLinks = this.getActiveYoutubeLinks();
-      if (activeLinks.length === 0) return null;
+      let activeLinks = this.getActiveYoutubeLinks();
+      if (!activeLinks || activeLinks.length === 0) {
+        if (defaultData && defaultData.youtubeLinks && defaultData.youtubeLinks.length > 0) {
+          this.data.youtubeLinks = JSON.parse(JSON.stringify(defaultData.youtubeLinks));
+          this.save();
+          activeLinks = this.getActiveYoutubeLinks();
+        }
+      }
+      if (!activeLinks || activeLinks.length === 0) return null;
 
       const shuffled = [...activeLinks].sort(() => 0.5 - Math.random());
       let selectedLinks = shuffled.slice(0, 10);
@@ -1804,8 +1818,15 @@ class Database {
         return { isExpired: true };
       }
 
-      const activeVideos = this.getActiveWatchVideos();
-      if (activeVideos.length === 0) return null;
+      let activeVideos = this.getActiveWatchVideos();
+      if (!activeVideos || activeVideos.length === 0) {
+        if (defaultData && defaultData.watchVideos && defaultData.watchVideos.length > 0) {
+          this.data.watchVideos = JSON.parse(JSON.stringify(defaultData.watchVideos));
+          this.save();
+          activeVideos = this.getActiveWatchVideos();
+        }
+      }
+      if (!activeVideos || activeVideos.length === 0) return null;
 
       // Randomly pick 20 videos daily (or duplicate if fewer)
       const shuffled = [...activeVideos].sort(() => 0.5 - Math.random());
