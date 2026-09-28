@@ -1,0 +1,3404 @@
+{
+  "users": [
+    {
+      "id": "usr_kajal_1790568924131",
+      "fullName": "kajal verma",
+      "mobile": "7566173052",
+      "city": "bhopal",
+      "password": "Password@123",
+      "utr": "COUPON_FREE_FREE15OCT",
+      "upiId": "74894163@ybl",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 0,
+      "referralCode": "KAJ5001",
+      "referredBy": null,
+      "referredByCode": null,
+      "referralRewardClaimed": false,
+      "referralsCount": 0,
+      "referralEarnings": 0,
+      "couponApplied": "FREE15OCT",
+      "createdAt": "2026-09-28T04:15:24.131Z",
+      "approvedAt": "2026-09-28T04:15:24.132Z",
+      "planExpiresAt": "2026-10-01T04:15:24.132Z"
+    },
+    {
+      "id": "usr_1790556471580_988",
+      "fullName": "Test Festive User",
+      "mobile": "9876547777",
+      "city": "Indore",
+      "password": "festivepass",
+      "utr": "COUPON_FREE",
+      "upiId": "Not Applicable",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 0,
+      "referralCode": "TES7777",
+      "referredBy": null,
+      "referredByCode": null,
+      "referralRewardClaimed": false,
+      "referralsCount": 0,
+      "referralEarnings": 0,
+      "couponApplied": "FREE15OCT",
+      "createdAt": "2026-09-28T00:47:51.580Z",
+      "approvedAt": "2026-09-28T00:47:51.580Z",
+      "planExpiresAt": "2026-10-01T00:47:51.580Z"
+    },
+    {
+      "id": "usr_1789323397450_64",
+      "fullName": "Live Test Free User",
+      "mobile": "8888837259",
+      "city": "Jaipur",
+      "password": "pass",
+      "utr": "COUPON_FREE100",
+      "upiId": "Not Applicable",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 0,
+      "referralCode": "LIV7259",
+      "referredBy": null,
+      "referredByCode": null,
+      "referralRewardClaimed": false,
+      "referralsCount": 0,
+      "referralEarnings": 0,
+      "couponApplied": "FREE100",
+      "createdAt": "2026-09-13T18:16:37.450Z",
+      "approvedAt": "2026-09-13T18:16:37.450Z",
+      "planExpiresAt": "2026-09-16T18:16:37.450Z"
+    },
+    {
+      "id": "usr_1789323296467_758",
+      "fullName": "Free Test User",
+      "mobile": "9999955678",
+      "city": "Indore",
+      "password": "123",
+      "utr": "COUPON_FREE",
+      "upiId": "Not Applicable",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 12,
+      "referralCode": "FRE5678",
+      "referredBy": null,
+      "referredByCode": null,
+      "referralRewardClaimed": false,
+      "referralsCount": 0,
+      "referralEarnings": 0,
+      "couponApplied": "TESTFREE_1789323296463",
+      "createdAt": "2026-09-13T18:14:56.467Z",
+      "approvedAt": "2026-09-13T18:14:56.467Z",
+      "planExpiresAt": "2026-09-16T18:14:56.467Z"
+    },
+    {
+      "id": "usr_1789045196939_132",
+      "fullName": "Kamlesh Kahar",
+      "mobile": "9893774508",
+      "city": "Narsinghpur",
+      "password": "Kahar@13",
+      "utr": "45082",
+      "upiId": "Kfbjbdk",
+      "planId": "499",
+      "planPrice": 499,
+      "planName": "VIP Plan (₹499)",
+      "planValidityDays": 30,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 0,
+      "referralCode": "KAM4508",
+      "referredBy": null,
+      "referredByCode": null,
+      "referralRewardClaimed": false,
+      "referralsCount": 0,
+      "referralEarnings": 0,
+      "createdAt": "2026-09-10T12:59:56.939Z",
+      "approvedAt": "2026-09-10T13:00:17.813Z",
+      "planExpiresAt": "2026-10-10T13:00:17.813Z"
+    },
+    {
+      "id": "usr_1789041026553_724",
+      "fullName": "Suresh Verma",
+      "mobile": "9876500002",
+      "city": "Bhopal",
+      "password": "user123",
+      "utr": "UTR778899001122",
+      "upiId": "suresh@upi",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 0,
+      "referralCode": "SUR0002",
+      "referredBy": "usr_1789041026517_352",
+      "referredByCode": "RAM0001",
+      "referralRewardClaimed": true,
+      "referralsCount": 0,
+      "referralEarnings": 0,
+      "createdAt": "2026-09-10T11:50:26.553Z",
+      "approvedAt": "2026-09-10T11:50:26.554Z",
+      "planExpiresAt": "2026-09-13T11:50:26.554Z"
+    },
+    {
+      "id": "usr_1789041026517_352",
+      "fullName": "Ramesh Kumar",
+      "mobile": "9876500001",
+      "city": "Indore",
+      "password": "user123",
+      "utr": "UTR998877665544",
+      "upiId": "ramesh@upi",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 210,
+      "referralCode": "RAM0001",
+      "referredBy": null,
+      "referredByCode": null,
+      "referralRewardClaimed": false,
+      "referralsCount": 1,
+      "referralEarnings": 50,
+      "createdAt": "2026-09-10T11:50:26.517Z",
+      "approvedAt": "2026-09-10T11:50:26.519Z",
+      "planExpiresAt": "2026-09-13T11:50:26.519Z",
+      "deactivatedReason": "",
+      "deactivatedAt": "2026-09-10T11:50:26.550Z",
+      "reactivatedAt": "2026-09-10T11:50:26.551Z"
+    },
+    {
+      "id": "usr_1788823910605_7",
+      "fullName": "Suresh Verma",
+      "mobile": "9876500002",
+      "city": "Bhopal",
+      "password": "user123",
+      "utr": "UTR778899001122",
+      "upiId": "suresh@upi",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 0,
+      "referralCode": "SUR0002",
+      "referredBy": "usr_1788823910568_72",
+      "referredByCode": "RAM0001",
+      "referralRewardClaimed": true,
+      "referralsCount": 0,
+      "referralEarnings": 0,
+      "createdAt": "2026-09-07T23:31:50.605Z",
+      "approvedAt": "2026-09-07T23:31:50.607Z",
+      "planExpiresAt": "2026-09-10T23:31:50.607Z"
+    },
+    {
+      "id": "usr_1788823910568_72",
+      "fullName": "Ramesh Kumar",
+      "mobile": "9876500001",
+      "city": "Indore",
+      "password": "user123",
+      "utr": "UTR998877665544",
+      "upiId": "ramesh@upi",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 200,
+      "referralCode": "RAM0001",
+      "referredBy": null,
+      "referredByCode": null,
+      "referralRewardClaimed": false,
+      "referralsCount": 1,
+      "referralEarnings": 50,
+      "createdAt": "2026-09-07T23:31:50.568Z",
+      "approvedAt": "2026-09-07T23:31:50.570Z",
+      "planExpiresAt": "2026-09-10T23:31:50.570Z",
+      "deactivatedReason": "",
+      "deactivatedAt": "2026-09-07T23:31:50.603Z",
+      "reactivatedAt": "2026-09-07T23:31:50.604Z"
+    },
+    {
+      "id": "usr_1788823442082_980",
+      "fullName": "Suresh Verma",
+      "mobile": "9876500002",
+      "city": "Bhopal",
+      "password": "user123",
+      "utr": "UTR778899001122",
+      "upiId": "suresh@upi",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 0,
+      "referralCode": "SUR0002",
+      "referredBy": "usr_1788823442052_848",
+      "referredByCode": "RAM0001",
+      "referralRewardClaimed": true,
+      "referralsCount": 0,
+      "referralEarnings": 0,
+      "createdAt": "2026-09-07T23:24:02.082Z",
+      "approvedAt": "2026-09-07T23:24:02.083Z",
+      "planExpiresAt": "2026-09-10T23:24:02.083Z"
+    },
+    {
+      "id": "usr_1788823442052_848",
+      "fullName": "Ramesh Kumar",
+      "mobile": "9876500001",
+      "city": "Indore",
+      "password": "user123",
+      "utr": "UTR998877665544",
+      "upiId": "ramesh@upi",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 200,
+      "referralCode": "RAM0001",
+      "referredBy": null,
+      "referredByCode": null,
+      "referralRewardClaimed": false,
+      "referralsCount": 1,
+      "referralEarnings": 50,
+      "createdAt": "2026-09-07T23:24:02.052Z",
+      "approvedAt": "2026-09-07T23:24:02.054Z",
+      "planExpiresAt": "2026-09-10T23:24:02.054Z",
+      "deactivatedReason": "",
+      "deactivatedAt": "2026-09-07T23:24:02.080Z",
+      "reactivatedAt": "2026-09-07T23:24:02.081Z"
+    },
+    {
+      "id": "usr_1788821572368_704",
+      "fullName": "Ramesh Kumar",
+      "mobile": "9876500001",
+      "city": "Indore",
+      "password": "user123",
+      "utr": "UTR998877665544",
+      "upiId": "ramesh@upi",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 150,
+      "createdAt": "2026-09-07T22:52:52.368Z",
+      "approvedAt": "2026-09-07T22:52:52.369Z",
+      "planExpiresAt": "2026-09-10T22:52:52.369Z",
+      "deactivatedReason": "",
+      "deactivatedAt": "2026-09-07T22:52:52.392Z",
+      "reactivatedAt": "2026-09-07T22:52:52.393Z"
+    },
+    {
+      "id": "usr_1788820644438_967",
+      "fullName": "Ramesh Kumar",
+      "mobile": "9876500001",
+      "city": "Indore",
+      "password": "user123",
+      "utr": "UTR998877665544",
+      "upiId": "ramesh@upi",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 150,
+      "createdAt": "2026-09-07T22:37:24.438Z",
+      "approvedAt": "2026-09-07T22:37:24.439Z",
+      "planExpiresAt": "2026-09-10T22:37:24.439Z",
+      "deactivatedReason": "",
+      "deactivatedAt": "2026-09-07T22:37:24.464Z",
+      "reactivatedAt": "2026-09-07T22:37:24.465Z"
+    },
+    {
+      "id": "usr_1788816666987_80",
+      "fullName": "bhagirath verma",
+      "mobile": "8120353333",
+      "city": "jabalpur",
+      "password": "123456",
+      "utr": "7566179055222",
+      "upiId": "7489416325@ybl",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 120,
+      "createdAt": "2026-09-07T21:31:06.987Z",
+      "approvedAt": "2026-09-07T21:31:55.063Z",
+      "planExpiresAt": "2026-09-10T21:31:55.063Z",
+      "referralCode": "BHA3333"
+    },
+    {
+      "id": "usr_1788816528878_690",
+      "fullName": "Ramesh Kumar",
+      "mobile": "9876500001",
+      "city": "Indore",
+      "password": "user123",
+      "utr": "UTR998877665544",
+      "upiId": "ramesh@upi",
+      "planId": "69",
+      "planPrice": 69,
+      "planName": "Basic Plan (₹69)",
+      "planValidityDays": 3,
+      "status": "approved",
+      "rejectionReason": "",
+      "walletCoins": 100,
+      "createdAt": "2026-09-07T21:28:48.880Z",
+      "approvedAt": "2026-09-07T21:28:48.881Z",
+      "planExpiresAt": "2026-09-10T21:28:48.881Z"
+    }
+  ],
+  "links": [
+    {
+      "id": "lnk_1789041026548_52",
+      "businessName": "Taj Palace Delhi",
+      "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+      "active": true,
+      "createdAt": "2026-09-10T11:50:26.548Z"
+    },
+    {
+      "id": "lnk_1788823910602_16",
+      "businessName": "Taj Palace Delhi",
+      "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+      "active": true,
+      "createdAt": "2026-09-07T23:31:50.602Z"
+    },
+    {
+      "id": "lnk_1788823442079_867",
+      "businessName": "Taj Palace Delhi",
+      "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+      "active": true,
+      "createdAt": "2026-09-07T23:24:02.079Z"
+    },
+    {
+      "id": "lnk_1788821572391_512",
+      "businessName": "Taj Palace Delhi",
+      "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+      "active": true,
+      "createdAt": "2026-09-07T22:52:52.391Z"
+    },
+    {
+      "id": "lnk_1788820644463_668",
+      "businessName": "Taj Palace Delhi",
+      "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+      "active": true,
+      "createdAt": "2026-09-07T22:37:24.463Z"
+    },
+    {
+      "id": "lnk_1788816804196_968",
+      "businessName": "MAYA BAI LODHI FOUNDATION",
+      "mapUrl": "https://maps.app.goo.gl/RGGBhTn7gB6nQAx97",
+      "active": true,
+      "createdAt": "2026-09-07T21:33:24.196Z"
+    },
+    {
+      "id": "lnk_1788816528891_27",
+      "businessName": "Taj Palace Delhi",
+      "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.891Z"
+    },
+    {
+      "id": "lnk_1",
+      "businessName": "Taj Hotel & Suites",
+      "mapUrl": "https://maps.google.com/?q=Taj+Hotel+Mumbai",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.869Z"
+    },
+    {
+      "id": "lnk_2",
+      "businessName": "Royal Spice Restaurant",
+      "mapUrl": "https://maps.google.com/?q=Royal+Spice+Restaurant+Delhi",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.875Z"
+    },
+    {
+      "id": "lnk_3",
+      "businessName": "Apex Healthcare Hospital",
+      "mapUrl": "https://maps.google.com/?q=Apex+Hospital+Bangalore",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.875Z"
+    },
+    {
+      "id": "lnk_4",
+      "businessName": "Silver Star Automobile Service",
+      "mapUrl": "https://maps.google.com/?q=Silver+Star+Auto+Pune",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.875Z"
+    },
+    {
+      "id": "lnk_5",
+      "businessName": "Elite Salon & Spa Lounge",
+      "mapUrl": "https://maps.google.com/?q=Elite+Salon+Spa+Hyderabad",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.875Z"
+    },
+    {
+      "id": "lnk_6",
+      "businessName": "Crown Heights Resort & Club",
+      "mapUrl": "https://maps.google.com/?q=Crown+Heights+Resort+Jaipur",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.875Z"
+    },
+    {
+      "id": "lnk_7",
+      "businessName": "Metro Digital Electronics Store",
+      "mapUrl": "https://maps.google.com/?q=Metro+Electronics+Ahmedabad",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.875Z"
+    },
+    {
+      "id": "lnk_8",
+      "businessName": "The Grand Heritage Cafe",
+      "mapUrl": "https://maps.google.com/?q=Grand+Heritage+Cafe+Kolkata",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.875Z"
+    },
+    {
+      "id": "lnk_9",
+      "businessName": "FitPro Gym & Fitness Center",
+      "mapUrl": "https://maps.google.com/?q=FitPro+Gym+Chandigarh",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.875Z"
+    },
+    {
+      "id": "lnk_10",
+      "businessName": "Urban Trends Fashion Hub",
+      "mapUrl": "https://maps.google.com/?q=Urban+Trends+Fashion+Lucknow",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.875Z"
+    },
+    {
+      "id": "lnk_11",
+      "businessName": "City Dental & Orthodontic Clinic",
+      "mapUrl": "https://maps.google.com/?q=City+Dental+Clinic+Indore",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.875Z"
+    },
+    {
+      "id": "lnk_12",
+      "businessName": "Greenwood International Preschool",
+      "mapUrl": "https://maps.google.com/?q=Greenwood+Preschool+Surat",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.875Z"
+    },
+    {
+      "id": "lnk_13",
+      "businessName": "Skyline Bakers & Confectionery",
+      "mapUrl": "https://maps.google.com/?q=Skyline+Bakers+Bhopal",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.875Z"
+    },
+    {
+      "id": "lnk_14",
+      "businessName": "Infinity Tech Repair & Sales",
+      "mapUrl": "https://maps.google.com/?q=Infinity+Tech+Repair+Nagpur",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.875Z"
+    },
+    {
+      "id": "lnk_15",
+      "businessName": "Blue Ocean Seafood Restaurant",
+      "mapUrl": "https://maps.google.com/?q=Blue+Ocean+Restaurant+Goa",
+      "active": true,
+      "createdAt": "2026-09-07T21:28:48.875Z"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "tsk_1790556471597_317",
+      "userId": "usr_1790556471580_988",
+      "userName": "Test Festive User",
+      "userMobile": "9876547777",
+      "date": "2026-09-28",
+      "reward": 100,
+      "status": "in_progress",
+      "rewardClaimed": false,
+      "submittedAt": null,
+      "reviewedAt": null,
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "lnk_3",
+          "businessName": "Apex Healthcare Hospital",
+          "mapUrl": "https://maps.google.com/?q=Apex+Hospital+Bangalore",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "lnk_1788823910602_16",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "lnk_15",
+          "businessName": "Blue Ocean Seafood Restaurant",
+          "mapUrl": "https://maps.google.com/?q=Blue+Ocean+Restaurant+Goa",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "lnk_4",
+          "businessName": "Silver Star Automobile Service",
+          "mapUrl": "https://maps.google.com/?q=Silver+Star+Auto+Pune",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "lnk_6",
+          "businessName": "Crown Heights Resort & Club",
+          "mapUrl": "https://maps.google.com/?q=Crown+Heights+Resort+Jaipur",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "lnk_9",
+          "businessName": "FitPro Gym & Fitness Center",
+          "mapUrl": "https://maps.google.com/?q=FitPro+Gym+Chandigarh",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "lnk_1788821572391_512",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "lnk_14",
+          "businessName": "Infinity Tech Repair & Sales",
+          "mapUrl": "https://maps.google.com/?q=Infinity+Tech+Repair+Nagpur",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "lnk_1788816528891_27",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "lnk_13",
+          "businessName": "Skyline Bakers & Confectionery",
+          "mapUrl": "https://maps.google.com/?q=Skyline+Bakers+Bhopal",
+          "screenshot": "",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "tsk_1789045251195_22",
+      "userId": "usr_1789045196939_132",
+      "userName": "Kamlesh Kahar",
+      "userMobile": "9893774508",
+      "date": "2026-09-10",
+      "reward": 100,
+      "status": "in_progress",
+      "rewardClaimed": false,
+      "submittedAt": null,
+      "reviewedAt": null,
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "lnk_10",
+          "businessName": "Urban Trends Fashion Hub",
+          "mapUrl": "https://maps.google.com/?q=Urban+Trends+Fashion+Lucknow",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "lnk_4",
+          "businessName": "Silver Star Automobile Service",
+          "mapUrl": "https://maps.google.com/?q=Silver+Star+Auto+Pune",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "lnk_11",
+          "businessName": "City Dental & Orthodontic Clinic",
+          "mapUrl": "https://maps.google.com/?q=City+Dental+Clinic+Indore",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "lnk_15",
+          "businessName": "Blue Ocean Seafood Restaurant",
+          "mapUrl": "https://maps.google.com/?q=Blue+Ocean+Restaurant+Goa",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "lnk_1788821572391_512",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "lnk_1",
+          "businessName": "Taj Hotel & Suites",
+          "mapUrl": "https://maps.google.com/?q=Taj+Hotel+Mumbai",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "lnk_9",
+          "businessName": "FitPro Gym & Fitness Center",
+          "mapUrl": "https://maps.google.com/?q=FitPro+Gym+Chandigarh",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "lnk_1788823442079_867",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "lnk_5",
+          "businessName": "Elite Salon & Spa Lounge",
+          "mapUrl": "https://maps.google.com/?q=Elite+Salon+Spa+Hyderabad",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "lnk_2",
+          "businessName": "Royal Spice Restaurant",
+          "mapUrl": "https://maps.google.com/?q=Royal+Spice+Restaurant+Delhi",
+          "screenshot": "",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "tsk_1789041174174_877",
+      "userId": "usr_1788816666987_80",
+      "userName": "bhagirath verma",
+      "userMobile": "8120353333",
+      "date": "2026-09-10",
+      "reward": 100,
+      "status": "approved",
+      "rewardClaimed": true,
+      "submittedAt": null,
+      "reviewedAt": "2026-09-10T12:06:20.058Z",
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "lnk_1789041026548_52",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "/uploads/screenshots/shot_1789041924026_7093.jfif",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "lnk_7",
+          "businessName": "Metro Digital Electronics Store",
+          "mapUrl": "https://maps.google.com/?q=Metro+Electronics+Ahmedabad",
+          "screenshot": "/uploads/screenshots/shot_1789041942740_2423.jfif",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "lnk_11",
+          "businessName": "City Dental & Orthodontic Clinic",
+          "mapUrl": "https://maps.google.com/?q=City+Dental+Clinic+Indore",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "lnk_13",
+          "businessName": "Skyline Bakers & Confectionery",
+          "mapUrl": "https://maps.google.com/?q=Skyline+Bakers+Bhopal",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "lnk_8",
+          "businessName": "The Grand Heritage Cafe",
+          "mapUrl": "https://maps.google.com/?q=Grand+Heritage+Cafe+Kolkata",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "lnk_1788820644463_668",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "lnk_4",
+          "businessName": "Silver Star Automobile Service",
+          "mapUrl": "https://maps.google.com/?q=Silver+Star+Auto+Pune",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "lnk_1788823910602_16",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "lnk_15",
+          "businessName": "Blue Ocean Seafood Restaurant",
+          "mapUrl": "https://maps.google.com/?q=Blue+Ocean+Restaurant+Goa",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "lnk_1788823442079_867",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "tsk_1789041026521_786",
+      "userId": "usr_1789041026517_352",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "date": "2026-09-10",
+      "reward": 100,
+      "status": "approved",
+      "rewardClaimed": true,
+      "submittedAt": "2026-09-10T11:50:26.529Z",
+      "reviewedAt": "2026-09-10T11:50:26.530Z",
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "lnk_14",
+          "businessName": "Infinity Tech Repair & Sales",
+          "mapUrl": "https://maps.google.com/?q=Infinity+Tech+Repair+Nagpur",
+          "screenshot": "/uploads/screenshots/sample_proof_1.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "lnk_15",
+          "businessName": "Blue Ocean Seafood Restaurant",
+          "mapUrl": "https://maps.google.com/?q=Blue+Ocean+Restaurant+Goa",
+          "screenshot": "/uploads/screenshots/sample_proof_2.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "lnk_4",
+          "businessName": "Silver Star Automobile Service",
+          "mapUrl": "https://maps.google.com/?q=Silver+Star+Auto+Pune",
+          "screenshot": "/uploads/screenshots/sample_proof_3.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "lnk_1",
+          "businessName": "Taj Hotel & Suites",
+          "mapUrl": "https://maps.google.com/?q=Taj+Hotel+Mumbai",
+          "screenshot": "/uploads/screenshots/sample_proof_4.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "lnk_1788816528891_27",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "/uploads/screenshots/sample_proof_5.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "lnk_1788821572391_512",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "/uploads/screenshots/sample_proof_6.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "lnk_1788820644463_668",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "/uploads/screenshots/sample_proof_7.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "lnk_7",
+          "businessName": "Metro Digital Electronics Store",
+          "mapUrl": "https://maps.google.com/?q=Metro+Electronics+Ahmedabad",
+          "screenshot": "/uploads/screenshots/sample_proof_8.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "lnk_1788816804196_968",
+          "businessName": "MAYA BAI LODHI FOUNDATION",
+          "mapUrl": "https://maps.app.goo.gl/RGGBhTn7gB6nQAx97",
+          "screenshot": "/uploads/screenshots/sample_proof_9.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "lnk_12",
+          "businessName": "Greenwood International Preschool",
+          "mapUrl": "https://maps.google.com/?q=Greenwood+Preschool+Surat",
+          "screenshot": "/uploads/screenshots/sample_proof_10.png",
+          "status": "uploaded"
+        }
+      ]
+    },
+    {
+      "id": "tsk_1788823910572_714",
+      "userId": "usr_1788823910568_72",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "date": "2026-09-08",
+      "reward": 100,
+      "status": "approved",
+      "rewardClaimed": true,
+      "submittedAt": "2026-09-07T23:31:50.583Z",
+      "reviewedAt": "2026-09-07T23:31:50.585Z",
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "lnk_3",
+          "businessName": "Apex Healthcare Hospital",
+          "mapUrl": "https://maps.google.com/?q=Apex+Hospital+Bangalore",
+          "screenshot": "/uploads/screenshots/sample_proof_1.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "lnk_1788820644463_668",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "/uploads/screenshots/sample_proof_2.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "lnk_1",
+          "businessName": "Taj Hotel & Suites",
+          "mapUrl": "https://maps.google.com/?q=Taj+Hotel+Mumbai",
+          "screenshot": "/uploads/screenshots/sample_proof_3.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "lnk_13",
+          "businessName": "Skyline Bakers & Confectionery",
+          "mapUrl": "https://maps.google.com/?q=Skyline+Bakers+Bhopal",
+          "screenshot": "/uploads/screenshots/sample_proof_4.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "lnk_11",
+          "businessName": "City Dental & Orthodontic Clinic",
+          "mapUrl": "https://maps.google.com/?q=City+Dental+Clinic+Indore",
+          "screenshot": "/uploads/screenshots/sample_proof_5.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "lnk_8",
+          "businessName": "The Grand Heritage Cafe",
+          "mapUrl": "https://maps.google.com/?q=Grand+Heritage+Cafe+Kolkata",
+          "screenshot": "/uploads/screenshots/sample_proof_6.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "lnk_1788816804196_968",
+          "businessName": "MAYA BAI LODHI FOUNDATION",
+          "mapUrl": "https://maps.app.goo.gl/RGGBhTn7gB6nQAx97",
+          "screenshot": "/uploads/screenshots/sample_proof_7.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "lnk_1788823442079_867",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "/uploads/screenshots/sample_proof_8.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "lnk_15",
+          "businessName": "Blue Ocean Seafood Restaurant",
+          "mapUrl": "https://maps.google.com/?q=Blue+Ocean+Restaurant+Goa",
+          "screenshot": "/uploads/screenshots/sample_proof_9.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "lnk_2",
+          "businessName": "Royal Spice Restaurant",
+          "mapUrl": "https://maps.google.com/?q=Royal+Spice+Restaurant+Delhi",
+          "screenshot": "/uploads/screenshots/sample_proof_10.png",
+          "status": "uploaded"
+        }
+      ]
+    },
+    {
+      "id": "tsk_1788823442055_933",
+      "userId": "usr_1788823442052_848",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "date": "2026-09-08",
+      "reward": 100,
+      "status": "approved",
+      "rewardClaimed": true,
+      "submittedAt": "2026-09-07T23:24:02.064Z",
+      "reviewedAt": "2026-09-07T23:24:02.065Z",
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "lnk_1788816528891_27",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "/uploads/screenshots/sample_proof_1.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "lnk_3",
+          "businessName": "Apex Healthcare Hospital",
+          "mapUrl": "https://maps.google.com/?q=Apex+Hospital+Bangalore",
+          "screenshot": "/uploads/screenshots/sample_proof_2.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "lnk_1788821572391_512",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "/uploads/screenshots/sample_proof_3.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "lnk_14",
+          "businessName": "Infinity Tech Repair & Sales",
+          "mapUrl": "https://maps.google.com/?q=Infinity+Tech+Repair+Nagpur",
+          "screenshot": "/uploads/screenshots/sample_proof_4.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "lnk_10",
+          "businessName": "Urban Trends Fashion Hub",
+          "mapUrl": "https://maps.google.com/?q=Urban+Trends+Fashion+Lucknow",
+          "screenshot": "/uploads/screenshots/sample_proof_5.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "lnk_1",
+          "businessName": "Taj Hotel & Suites",
+          "mapUrl": "https://maps.google.com/?q=Taj+Hotel+Mumbai",
+          "screenshot": "/uploads/screenshots/sample_proof_6.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "lnk_1788820644463_668",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "/uploads/screenshots/sample_proof_7.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "lnk_2",
+          "businessName": "Royal Spice Restaurant",
+          "mapUrl": "https://maps.google.com/?q=Royal+Spice+Restaurant+Delhi",
+          "screenshot": "/uploads/screenshots/sample_proof_8.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "lnk_13",
+          "businessName": "Skyline Bakers & Confectionery",
+          "mapUrl": "https://maps.google.com/?q=Skyline+Bakers+Bhopal",
+          "screenshot": "/uploads/screenshots/sample_proof_9.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "lnk_11",
+          "businessName": "City Dental & Orthodontic Clinic",
+          "mapUrl": "https://maps.google.com/?q=City+Dental+Clinic+Indore",
+          "screenshot": "/uploads/screenshots/sample_proof_10.png",
+          "status": "uploaded"
+        }
+      ]
+    },
+    {
+      "id": "tsk_1788821572371_475",
+      "userId": "usr_1788821572368_704",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "date": "2026-09-08",
+      "reward": 100,
+      "status": "approved",
+      "rewardClaimed": true,
+      "submittedAt": "2026-09-07T22:52:52.377Z",
+      "reviewedAt": "2026-09-07T22:52:52.377Z",
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "lnk_3",
+          "businessName": "Apex Healthcare Hospital",
+          "mapUrl": "https://maps.google.com/?q=Apex+Hospital+Bangalore",
+          "screenshot": "/uploads/screenshots/sample_proof_1.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "lnk_5",
+          "businessName": "Elite Salon & Spa Lounge",
+          "mapUrl": "https://maps.google.com/?q=Elite+Salon+Spa+Hyderabad",
+          "screenshot": "/uploads/screenshots/sample_proof_2.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "lnk_9",
+          "businessName": "FitPro Gym & Fitness Center",
+          "mapUrl": "https://maps.google.com/?q=FitPro+Gym+Chandigarh",
+          "screenshot": "/uploads/screenshots/sample_proof_3.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "lnk_14",
+          "businessName": "Infinity Tech Repair & Sales",
+          "mapUrl": "https://maps.google.com/?q=Infinity+Tech+Repair+Nagpur",
+          "screenshot": "/uploads/screenshots/sample_proof_4.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "lnk_1788816528891_27",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "/uploads/screenshots/sample_proof_5.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "lnk_15",
+          "businessName": "Blue Ocean Seafood Restaurant",
+          "mapUrl": "https://maps.google.com/?q=Blue+Ocean+Restaurant+Goa",
+          "screenshot": "/uploads/screenshots/sample_proof_6.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "lnk_7",
+          "businessName": "Metro Digital Electronics Store",
+          "mapUrl": "https://maps.google.com/?q=Metro+Electronics+Ahmedabad",
+          "screenshot": "/uploads/screenshots/sample_proof_7.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "lnk_4",
+          "businessName": "Silver Star Automobile Service",
+          "mapUrl": "https://maps.google.com/?q=Silver+Star+Auto+Pune",
+          "screenshot": "/uploads/screenshots/sample_proof_8.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "lnk_8",
+          "businessName": "The Grand Heritage Cafe",
+          "mapUrl": "https://maps.google.com/?q=Grand+Heritage+Cafe+Kolkata",
+          "screenshot": "/uploads/screenshots/sample_proof_9.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "lnk_1788816804196_968",
+          "businessName": "MAYA BAI LODHI FOUNDATION",
+          "mapUrl": "https://maps.app.goo.gl/RGGBhTn7gB6nQAx97",
+          "screenshot": "/uploads/screenshots/sample_proof_10.png",
+          "status": "uploaded"
+        }
+      ]
+    },
+    {
+      "id": "tsk_1788820644440_258",
+      "userId": "usr_1788820644438_967",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "date": "2026-09-08",
+      "reward": 100,
+      "status": "approved",
+      "rewardClaimed": true,
+      "submittedAt": "2026-09-07T22:37:24.448Z",
+      "reviewedAt": "2026-09-07T22:37:24.448Z",
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "lnk_9",
+          "businessName": "FitPro Gym & Fitness Center",
+          "mapUrl": "https://maps.google.com/?q=FitPro+Gym+Chandigarh",
+          "screenshot": "/uploads/screenshots/sample_proof_1.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "lnk_1788816528891_27",
+          "businessName": "Taj Palace Delhi",
+          "mapUrl": "https://maps.google.com/?q=Taj+Palace+Delhi",
+          "screenshot": "/uploads/screenshots/sample_proof_2.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "lnk_14",
+          "businessName": "Infinity Tech Repair & Sales",
+          "mapUrl": "https://maps.google.com/?q=Infinity+Tech+Repair+Nagpur",
+          "screenshot": "/uploads/screenshots/sample_proof_3.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "lnk_6",
+          "businessName": "Crown Heights Resort & Club",
+          "mapUrl": "https://maps.google.com/?q=Crown+Heights+Resort+Jaipur",
+          "screenshot": "/uploads/screenshots/sample_proof_4.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "lnk_1788816804196_968",
+          "businessName": "MAYA BAI LODHI FOUNDATION",
+          "mapUrl": "https://maps.app.goo.gl/RGGBhTn7gB6nQAx97",
+          "screenshot": "/uploads/screenshots/sample_proof_5.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "lnk_12",
+          "businessName": "Greenwood International Preschool",
+          "mapUrl": "https://maps.google.com/?q=Greenwood+Preschool+Surat",
+          "screenshot": "/uploads/screenshots/sample_proof_6.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "lnk_11",
+          "businessName": "City Dental & Orthodontic Clinic",
+          "mapUrl": "https://maps.google.com/?q=City+Dental+Clinic+Indore",
+          "screenshot": "/uploads/screenshots/sample_proof_7.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "lnk_1",
+          "businessName": "Taj Hotel & Suites",
+          "mapUrl": "https://maps.google.com/?q=Taj+Hotel+Mumbai",
+          "screenshot": "/uploads/screenshots/sample_proof_8.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "lnk_4",
+          "businessName": "Silver Star Automobile Service",
+          "mapUrl": "https://maps.google.com/?q=Silver+Star+Auto+Pune",
+          "screenshot": "/uploads/screenshots/sample_proof_9.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "lnk_2",
+          "businessName": "Royal Spice Restaurant",
+          "mapUrl": "https://maps.google.com/?q=Royal+Spice+Restaurant+Delhi",
+          "screenshot": "/uploads/screenshots/sample_proof_10.png",
+          "status": "uploaded"
+        }
+      ]
+    },
+    {
+      "id": "tsk_1788816819773_377",
+      "userId": "usr_1788816666987_80",
+      "userName": "bhagirath verma",
+      "userMobile": "8120353333",
+      "date": "2026-09-08",
+      "reward": 400,
+      "status": "in_progress",
+      "rewardClaimed": false,
+      "submittedAt": null,
+      "reviewedAt": null,
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "lnk_10",
+          "businessName": "Urban Trends Fashion Hub",
+          "mapUrl": "https://maps.google.com/?q=Urban+Trends+Fashion+Lucknow",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "lnk_7",
+          "businessName": "Metro Digital Electronics Store",
+          "mapUrl": "https://maps.google.com/?q=Metro+Electronics+Ahmedabad",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "lnk_11",
+          "businessName": "City Dental & Orthodontic Clinic",
+          "mapUrl": "https://maps.google.com/?q=City+Dental+Clinic+Indore",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "lnk_6",
+          "businessName": "Crown Heights Resort & Club",
+          "mapUrl": "https://maps.google.com/?q=Crown+Heights+Resort+Jaipur",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "lnk_5",
+          "businessName": "Elite Salon & Spa Lounge",
+          "mapUrl": "https://maps.google.com/?q=Elite+Salon+Spa+Hyderabad",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "lnk_9",
+          "businessName": "FitPro Gym & Fitness Center",
+          "mapUrl": "https://maps.google.com/?q=FitPro+Gym+Chandigarh",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "lnk_8",
+          "businessName": "The Grand Heritage Cafe",
+          "mapUrl": "https://maps.google.com/?q=Grand+Heritage+Cafe+Kolkata",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "lnk_14",
+          "businessName": "Infinity Tech Repair & Sales",
+          "mapUrl": "https://maps.google.com/?q=Infinity+Tech+Repair+Nagpur",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "lnk_4",
+          "businessName": "Silver Star Automobile Service",
+          "mapUrl": "https://maps.google.com/?q=Silver+Star+Auto+Pune",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "lnk_3",
+          "businessName": "Apex Healthcare Hospital",
+          "mapUrl": "https://maps.google.com/?q=Apex+Hospital+Bangalore",
+          "screenshot": "",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "tsk_1788816528882_27",
+      "userId": "usr_1788816528878_690",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "date": "2026-09-08",
+      "reward": 400,
+      "status": "approved",
+      "rewardClaimed": true,
+      "submittedAt": "2026-09-07T21:28:48.887Z",
+      "reviewedAt": "2026-09-07T21:28:48.888Z",
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "lnk_12",
+          "businessName": "Greenwood International Preschool",
+          "mapUrl": "https://maps.google.com/?q=Greenwood+Preschool+Surat",
+          "screenshot": "/uploads/screenshots/sample_proof_1.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "lnk_8",
+          "businessName": "The Grand Heritage Cafe",
+          "mapUrl": "https://maps.google.com/?q=Grand+Heritage+Cafe+Kolkata",
+          "screenshot": "/uploads/screenshots/sample_proof_2.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "lnk_1",
+          "businessName": "Taj Hotel & Suites",
+          "mapUrl": "https://maps.google.com/?q=Taj+Hotel+Mumbai",
+          "screenshot": "/uploads/screenshots/sample_proof_3.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "lnk_2",
+          "businessName": "Royal Spice Restaurant",
+          "mapUrl": "https://maps.google.com/?q=Royal+Spice+Restaurant+Delhi",
+          "screenshot": "/uploads/screenshots/sample_proof_4.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "lnk_10",
+          "businessName": "Urban Trends Fashion Hub",
+          "mapUrl": "https://maps.google.com/?q=Urban+Trends+Fashion+Lucknow",
+          "screenshot": "/uploads/screenshots/sample_proof_5.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "lnk_3",
+          "businessName": "Apex Healthcare Hospital",
+          "mapUrl": "https://maps.google.com/?q=Apex+Hospital+Bangalore",
+          "screenshot": "/uploads/screenshots/sample_proof_6.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "lnk_11",
+          "businessName": "City Dental & Orthodontic Clinic",
+          "mapUrl": "https://maps.google.com/?q=City+Dental+Clinic+Indore",
+          "screenshot": "/uploads/screenshots/sample_proof_7.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "lnk_4",
+          "businessName": "Silver Star Automobile Service",
+          "mapUrl": "https://maps.google.com/?q=Silver+Star+Auto+Pune",
+          "screenshot": "/uploads/screenshots/sample_proof_8.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "lnk_14",
+          "businessName": "Infinity Tech Repair & Sales",
+          "mapUrl": "https://maps.google.com/?q=Infinity+Tech+Repair+Nagpur",
+          "screenshot": "/uploads/screenshots/sample_proof_9.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "lnk_5",
+          "businessName": "Elite Salon & Spa Lounge",
+          "mapUrl": "https://maps.google.com/?q=Elite+Salon+Spa+Hyderabad",
+          "screenshot": "/uploads/screenshots/sample_proof_10.png",
+          "status": "uploaded"
+        }
+      ]
+    }
+  ],
+  "withdrawals": [
+    {
+      "id": "wdr_1789041026545_999",
+      "userId": "usr_1789041026517_352",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "upiId": "ramesh@upi",
+      "amount": 500,
+      "inrAmount": 500,
+      "status": "approved",
+      "payoutUtr": "PAYOUT_UTR_11223344",
+      "note": "Transferred to UPI",
+      "requestedAt": "2026-09-10T11:50:26.546Z",
+      "processedAt": "2026-09-10T11:50:26.547Z"
+    },
+    {
+      "id": "wdr_1788823910599_927",
+      "userId": "usr_1788823910568_72",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "upiId": "ramesh@upi",
+      "amount": 500,
+      "inrAmount": 500,
+      "status": "approved",
+      "payoutUtr": "PAYOUT_UTR_11223344",
+      "note": "Transferred to UPI",
+      "requestedAt": "2026-09-07T23:31:50.599Z",
+      "processedAt": "2026-09-07T23:31:50.601Z"
+    },
+    {
+      "id": "wdr_1788823442077_750",
+      "userId": "usr_1788823442052_848",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "upiId": "ramesh@upi",
+      "amount": 500,
+      "inrAmount": 500,
+      "status": "approved",
+      "payoutUtr": "PAYOUT_UTR_11223344",
+      "note": "Transferred to UPI",
+      "requestedAt": "2026-09-07T23:24:02.077Z",
+      "processedAt": "2026-09-07T23:24:02.077Z"
+    },
+    {
+      "id": "wdr_1788821572389_245",
+      "userId": "usr_1788821572368_704",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "upiId": "ramesh@upi",
+      "amount": 500,
+      "inrAmount": 500,
+      "status": "approved",
+      "payoutUtr": "PAYOUT_UTR_11223344",
+      "note": "Transferred to UPI",
+      "requestedAt": "2026-09-07T22:52:52.389Z",
+      "processedAt": "2026-09-07T22:52:52.390Z"
+    },
+    {
+      "id": "wdr_1788820644461_764",
+      "userId": "usr_1788820644438_967",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "upiId": "ramesh@upi",
+      "amount": 1500,
+      "inrAmount": 1500,
+      "status": "approved",
+      "payoutUtr": "PAYOUT_UTR_11223344",
+      "note": "Transferred to UPI",
+      "requestedAt": "2026-09-07T22:37:24.461Z",
+      "processedAt": "2026-09-07T22:37:24.462Z"
+    },
+    {
+      "id": "wdr_1788816528889_908",
+      "userId": "usr_1788816528878_690",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "upiId": "ramesh@upi",
+      "amount": 1500,
+      "inrAmount": 1500,
+      "status": "approved",
+      "payoutUtr": "PAYOUT_UTR_11223344",
+      "note": "Transferred to UPI",
+      "requestedAt": "2026-09-07T21:28:48.889Z",
+      "processedAt": "2026-09-07T21:28:48.890Z"
+    }
+  ],
+  "settings": {
+    "adminId": "ADMIN",
+    "adminPassword": "Password",
+    "upiId": "dailyinc@nyes",
+    "upiName": "Google Review Rewards India",
+    "qrImage": "/uploads/qr/admin_qr_1788819486067.jpeg",
+    "minWithdrawal": 500,
+    "dailyTaskReward": 100,
+    "taskLinksCount": 10,
+    "plans": [
+      {
+        "id": "69",
+        "price": 69,
+        "validityDays": 3,
+        "dailyReward": 100,
+        "totalEarningPotential": 1200,
+        "name": "Basic Plan (₹69)"
+      },
+      {
+        "id": "149",
+        "price": 149,
+        "validityDays": 7,
+        "dailyReward": 100,
+        "totalEarningPotential": 2800,
+        "name": "Standard Plan (₹149)"
+      },
+      {
+        "id": "499",
+        "price": 499,
+        "validityDays": 30,
+        "dailyReward": 100,
+        "totalEarningPotential": 12000,
+        "name": "VIP Plan (₹499)"
+      }
+    ],
+    "dailyYoutubeReward": 50,
+    "popupVideoUrl": "https://youtu.be/mYLjiHzf8-4",
+    "popupAdTimer": 30,
+    "popupAdEnabled": true,
+    "enableMapService": true,
+    "enableYoutubeService": true,
+    "enableVideoWatchService": true,
+    "videoLikeCommentBonusCoins": 2,
+    "watchVideoRewardCoins": 5,
+    "watchVideoCountDaily": 20
+  },
+  "youtubeLinks": [
+    {
+      "id": "yt_1788820330353_735",
+      "channelName": "kajal verma",
+      "channelUrl": "https://www.youtube.com/@kajalverma6221",
+      "active": true,
+      "createdAt": "2026-09-07T22:32:10.353Z"
+    },
+    {
+      "id": "yt_1788820243119_469",
+      "channelName": "Hindi cartoon videos Verma",
+      "channelUrl": "https://www.youtube.com/@Hindicortoonvideos",
+      "active": true,
+      "createdAt": "2026-09-07T22:30:43.119Z"
+    },
+    {
+      "id": "yt_1788820178543_909",
+      "channelName": "Kajal Verma KV",
+      "channelUrl": "https://www.youtube.com/@kajalvermakv342",
+      "active": true,
+      "createdAt": "2026-09-07T22:29:38.543Z"
+    },
+    {
+      "id": "yt_1788820133416_458",
+      "channelName": "CSC MANDIDEEP",
+      "channelUrl": "https://www.youtube.com/@cscmandideep982",
+      "active": true,
+      "createdAt": "2026-09-07T22:28:53.416Z"
+    },
+    {
+      "id": "yt_1788820009230_961",
+      "channelName": "Maya Bai Lodhi Foundation Women Empowerment",
+      "channelUrl": "https://www.youtube.com/@MBLFoundationOfficial",
+      "active": true,
+      "createdAt": "2026-09-07T22:26:49.230Z"
+    },
+    {
+      "id": "yt_15",
+      "channelName": "Music Beats Official",
+      "channelUrl": "https://www.youtube.com/@MusicBeatsOfficial",
+      "active": true,
+      "createdAt": "2026-09-07T21:41:12.917Z"
+    }
+  ],
+  "youtubeTasks": [
+    {
+      "id": "yttsk_1789045278094_291",
+      "userId": "usr_1789045196939_132",
+      "userName": "Kamlesh Kahar",
+      "userMobile": "9893774508",
+      "date": "2026-09-10",
+      "reward": 50,
+      "status": "in_progress",
+      "rewardClaimed": false,
+      "submittedAt": null,
+      "reviewedAt": null,
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "yt_1788820243119_469",
+          "channelName": "Hindi cartoon videos Verma",
+          "channelUrl": "https://www.youtube.com/@Hindicortoonvideos",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "yt_1788820133416_458",
+          "channelName": "CSC MANDIDEEP",
+          "channelUrl": "https://www.youtube.com/@cscmandideep982",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "yt_15",
+          "channelName": "Music Beats Official",
+          "channelUrl": "https://www.youtube.com/@MusicBeatsOfficial",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "yt_1788820330353_735",
+          "channelName": "kajal verma",
+          "channelUrl": "https://www.youtube.com/@kajalverma6221",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "yt_1788820178543_909",
+          "channelName": "Kajal Verma KV",
+          "channelUrl": "https://www.youtube.com/@kajalvermakv342",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "yt_1788820009230_961",
+          "channelName": "Maya Bai Lodhi Foundation Women Empowerment",
+          "channelUrl": "https://www.youtube.com/@MBLFoundationOfficial",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "yt_1788820330353_735",
+          "channelName": "kajal verma",
+          "channelUrl": "https://www.youtube.com/@kajalverma6221",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "yt_1788820133416_458",
+          "channelName": "CSC MANDIDEEP",
+          "channelUrl": "https://www.youtube.com/@cscmandideep982",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "yt_1788820330353_735",
+          "channelName": "kajal verma",
+          "channelUrl": "https://www.youtube.com/@kajalverma6221",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "yt_1788820178543_909",
+          "channelName": "Kajal Verma KV",
+          "channelUrl": "https://www.youtube.com/@kajalvermakv342",
+          "screenshot": "",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "yttsk_1789041218362_919",
+      "userId": "usr_1788816666987_80",
+      "userName": "bhagirath verma",
+      "userMobile": "8120353333",
+      "date": "2026-09-10",
+      "reward": 50,
+      "status": "in_progress",
+      "rewardClaimed": false,
+      "submittedAt": null,
+      "reviewedAt": null,
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "yt_1788820133416_458",
+          "channelName": "CSC MANDIDEEP",
+          "channelUrl": "https://www.youtube.com/@cscmandideep982",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "yt_1788820330353_735",
+          "channelName": "kajal verma",
+          "channelUrl": "https://www.youtube.com/@kajalverma6221",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "yt_1788820243119_469",
+          "channelName": "Hindi cartoon videos Verma",
+          "channelUrl": "https://www.youtube.com/@Hindicortoonvideos",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "yt_1788820009230_961",
+          "channelName": "Maya Bai Lodhi Foundation Women Empowerment",
+          "channelUrl": "https://www.youtube.com/@MBLFoundationOfficial",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "yt_1788820178543_909",
+          "channelName": "Kajal Verma KV",
+          "channelUrl": "https://www.youtube.com/@kajalvermakv342",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "yt_15",
+          "channelName": "Music Beats Official",
+          "channelUrl": "https://www.youtube.com/@MusicBeatsOfficial",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "yt_1788820243119_469",
+          "channelName": "Hindi cartoon videos Verma",
+          "channelUrl": "https://www.youtube.com/@Hindicortoonvideos",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "yt_15",
+          "channelName": "Music Beats Official",
+          "channelUrl": "https://www.youtube.com/@MusicBeatsOfficial",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "yt_1788820178543_909",
+          "channelName": "Kajal Verma KV",
+          "channelUrl": "https://www.youtube.com/@kajalvermakv342",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "yt_1788820243119_469",
+          "channelName": "Hindi cartoon videos Verma",
+          "channelUrl": "https://www.youtube.com/@Hindicortoonvideos",
+          "screenshot": "",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "yttsk_1789041026533_501",
+      "userId": "usr_1789041026517_352",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "date": "2026-09-10",
+      "reward": 50,
+      "status": "approved",
+      "rewardClaimed": true,
+      "submittedAt": "2026-09-10T11:50:26.542Z",
+      "reviewedAt": "2026-09-10T11:50:26.543Z",
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "yt_1788820330353_735",
+          "channelName": "kajal verma",
+          "channelUrl": "https://www.youtube.com/@kajalverma6221",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_1.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "yt_1788820243119_469",
+          "channelName": "Hindi cartoon videos Verma",
+          "channelUrl": "https://www.youtube.com/@Hindicortoonvideos",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_2.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "yt_1788820178543_909",
+          "channelName": "Kajal Verma KV",
+          "channelUrl": "https://www.youtube.com/@kajalvermakv342",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_3.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "yt_1788820133416_458",
+          "channelName": "CSC MANDIDEEP",
+          "channelUrl": "https://www.youtube.com/@cscmandideep982",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_4.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "yt_1788820009230_961",
+          "channelName": "Maya Bai Lodhi Foundation Women Empowerment",
+          "channelUrl": "https://www.youtube.com/@MBLFoundationOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_5.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "yt_15",
+          "channelName": "Music Beats Official",
+          "channelUrl": "https://www.youtube.com/@MusicBeatsOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_6.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "yt_1788820009230_961",
+          "channelName": "Maya Bai Lodhi Foundation Women Empowerment",
+          "channelUrl": "https://www.youtube.com/@MBLFoundationOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_7.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "yt_1788820178543_909",
+          "channelName": "Kajal Verma KV",
+          "channelUrl": "https://www.youtube.com/@kajalvermakv342",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_8.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "yt_1788820133416_458",
+          "channelName": "CSC MANDIDEEP",
+          "channelUrl": "https://www.youtube.com/@cscmandideep982",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_9.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "yt_1788820009230_961",
+          "channelName": "Maya Bai Lodhi Foundation Women Empowerment",
+          "channelUrl": "https://www.youtube.com/@MBLFoundationOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_10.png",
+          "status": "uploaded"
+        }
+      ]
+    },
+    {
+      "id": "yttsk_1788823910588_562",
+      "userId": "usr_1788823910568_72",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "date": "2026-09-08",
+      "reward": 50,
+      "status": "approved",
+      "rewardClaimed": true,
+      "submittedAt": "2026-09-07T23:31:50.596Z",
+      "reviewedAt": "2026-09-07T23:31:50.596Z",
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "yt_15",
+          "channelName": "Music Beats Official",
+          "channelUrl": "https://www.youtube.com/@MusicBeatsOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_1.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "yt_1788820178543_909",
+          "channelName": "Kajal Verma KV",
+          "channelUrl": "https://www.youtube.com/@kajalvermakv342",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_2.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "yt_1788820133416_458",
+          "channelName": "CSC MANDIDEEP",
+          "channelUrl": "https://www.youtube.com/@cscmandideep982",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_3.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "yt_1788820009230_961",
+          "channelName": "Maya Bai Lodhi Foundation Women Empowerment",
+          "channelUrl": "https://www.youtube.com/@MBLFoundationOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_4.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "yt_1788820243119_469",
+          "channelName": "Hindi cartoon videos Verma",
+          "channelUrl": "https://www.youtube.com/@Hindicortoonvideos",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_5.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "yt_1788820330353_735",
+          "channelName": "kajal verma",
+          "channelUrl": "https://www.youtube.com/@kajalverma6221",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_6.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "yt_1788820243119_469",
+          "channelName": "Hindi cartoon videos Verma",
+          "channelUrl": "https://www.youtube.com/@Hindicortoonvideos",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_7.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "yt_1788820330353_735",
+          "channelName": "kajal verma",
+          "channelUrl": "https://www.youtube.com/@kajalverma6221",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_8.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "yt_1788820178543_909",
+          "channelName": "Kajal Verma KV",
+          "channelUrl": "https://www.youtube.com/@kajalvermakv342",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_9.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "yt_1788820178543_909",
+          "channelName": "Kajal Verma KV",
+          "channelUrl": "https://www.youtube.com/@kajalvermakv342",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_10.png",
+          "status": "uploaded"
+        }
+      ]
+    },
+    {
+      "id": "yttsk_1788823442066_885",
+      "userId": "usr_1788823442052_848",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "date": "2026-09-08",
+      "reward": 50,
+      "status": "approved",
+      "rewardClaimed": true,
+      "submittedAt": "2026-09-07T23:24:02.074Z",
+      "reviewedAt": "2026-09-07T23:24:02.075Z",
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "yt_1788820133416_458",
+          "channelName": "CSC MANDIDEEP",
+          "channelUrl": "https://www.youtube.com/@cscmandideep982",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_1.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "yt_1788820178543_909",
+          "channelName": "Kajal Verma KV",
+          "channelUrl": "https://www.youtube.com/@kajalvermakv342",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_2.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "yt_1788820243119_469",
+          "channelName": "Hindi cartoon videos Verma",
+          "channelUrl": "https://www.youtube.com/@Hindicortoonvideos",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_3.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "yt_1788820009230_961",
+          "channelName": "Maya Bai Lodhi Foundation Women Empowerment",
+          "channelUrl": "https://www.youtube.com/@MBLFoundationOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_4.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "yt_1788820330353_735",
+          "channelName": "kajal verma",
+          "channelUrl": "https://www.youtube.com/@kajalverma6221",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_5.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "yt_15",
+          "channelName": "Music Beats Official",
+          "channelUrl": "https://www.youtube.com/@MusicBeatsOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_6.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "yt_1788820330353_735",
+          "channelName": "kajal verma",
+          "channelUrl": "https://www.youtube.com/@kajalverma6221",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_7.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "yt_1788820133416_458",
+          "channelName": "CSC MANDIDEEP",
+          "channelUrl": "https://www.youtube.com/@cscmandideep982",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_8.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "yt_1788820009230_961",
+          "channelName": "Maya Bai Lodhi Foundation Women Empowerment",
+          "channelUrl": "https://www.youtube.com/@MBLFoundationOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_9.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "yt_1788820133416_458",
+          "channelName": "CSC MANDIDEEP",
+          "channelUrl": "https://www.youtube.com/@cscmandideep982",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_10.png",
+          "status": "uploaded"
+        }
+      ]
+    },
+    {
+      "id": "yttsk_1788821572380_852",
+      "userId": "usr_1788821572368_704",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "date": "2026-09-08",
+      "reward": 50,
+      "status": "approved",
+      "rewardClaimed": true,
+      "submittedAt": "2026-09-07T22:52:52.386Z",
+      "reviewedAt": "2026-09-07T22:52:52.387Z",
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "yt_1788820330353_735",
+          "channelName": "kajal verma",
+          "channelUrl": "https://www.youtube.com/@kajalverma6221",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_1.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "yt_1788820243119_469",
+          "channelName": "Hindi cartoon videos Verma",
+          "channelUrl": "https://www.youtube.com/@Hindicortoonvideos",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_2.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "yt_15",
+          "channelName": "Music Beats Official",
+          "channelUrl": "https://www.youtube.com/@MusicBeatsOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_3.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "yt_1788820178543_909",
+          "channelName": "Kajal Verma KV",
+          "channelUrl": "https://www.youtube.com/@kajalvermakv342",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_4.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "yt_1788820133416_458",
+          "channelName": "CSC MANDIDEEP",
+          "channelUrl": "https://www.youtube.com/@cscmandideep982",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_5.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "yt_1788820009230_961",
+          "channelName": "Maya Bai Lodhi Foundation Women Empowerment",
+          "channelUrl": "https://www.youtube.com/@MBLFoundationOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_6.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "yt_1788820330353_735",
+          "channelName": "kajal verma",
+          "channelUrl": "https://www.youtube.com/@kajalverma6221",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_7.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "yt_1788820243119_469",
+          "channelName": "Hindi cartoon videos Verma",
+          "channelUrl": "https://www.youtube.com/@Hindicortoonvideos",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_8.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "yt_1788820243119_469",
+          "channelName": "Hindi cartoon videos Verma",
+          "channelUrl": "https://www.youtube.com/@Hindicortoonvideos",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_9.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "yt_15",
+          "channelName": "Music Beats Official",
+          "channelUrl": "https://www.youtube.com/@MusicBeatsOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_10.png",
+          "status": "uploaded"
+        }
+      ]
+    },
+    {
+      "id": "yttsk_1788820644450_273",
+      "userId": "usr_1788820644438_967",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "date": "2026-09-08",
+      "reward": 50,
+      "status": "approved",
+      "rewardClaimed": true,
+      "submittedAt": "2026-09-07T22:37:24.457Z",
+      "reviewedAt": "2026-09-07T22:37:24.458Z",
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "yt_1788820330353_735",
+          "channelName": "kajal verma",
+          "channelUrl": "https://www.youtube.com/@kajalverma6221",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_1.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "yt_1788820243119_469",
+          "channelName": "Hindi cartoon videos Verma",
+          "channelUrl": "https://www.youtube.com/@Hindicortoonvideos",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_2.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "yt_1788820178543_909",
+          "channelName": "Kajal Verma KV",
+          "channelUrl": "https://www.youtube.com/@kajalvermakv342",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_3.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "yt_1788820133416_458",
+          "channelName": "CSC MANDIDEEP",
+          "channelUrl": "https://www.youtube.com/@cscmandideep982",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_4.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "yt_1788820009230_961",
+          "channelName": "Maya Bai Lodhi Foundation Women Empowerment",
+          "channelUrl": "https://www.youtube.com/@MBLFoundationOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_5.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "yt_15",
+          "channelName": "Music Beats Official",
+          "channelUrl": "https://www.youtube.com/@MusicBeatsOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_6.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "yt_1788820178543_909",
+          "channelName": "Kajal Verma KV",
+          "channelUrl": "https://www.youtube.com/@kajalvermakv342",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_7.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "yt_15",
+          "channelName": "Music Beats Official",
+          "channelUrl": "https://www.youtube.com/@MusicBeatsOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_8.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "yt_1788820009230_961",
+          "channelName": "Maya Bai Lodhi Foundation Women Empowerment",
+          "channelUrl": "https://www.youtube.com/@MBLFoundationOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_9.png",
+          "status": "uploaded"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "yt_15",
+          "channelName": "Music Beats Official",
+          "channelUrl": "https://www.youtube.com/@MusicBeatsOfficial",
+          "screenshot": "/uploads/screenshots/yt_sample_proof_10.png",
+          "status": "uploaded"
+        }
+      ]
+    },
+    {
+      "id": "yttsk_1788818608284_156",
+      "userId": "usr_1788816666987_80",
+      "userName": "bhagirath verma",
+      "userMobile": "8120353333",
+      "date": "2026-09-08",
+      "reward": 50,
+      "status": "in_progress",
+      "rewardClaimed": false,
+      "submittedAt": null,
+      "reviewedAt": null,
+      "rejectionReason": "",
+      "items": [
+        {
+          "taskIndex": 1,
+          "linkId": "yt_8",
+          "channelName": "Coding & Web Dev Hindi",
+          "channelUrl": "https://www.youtube.com/@CodingWebDevHindi",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 2,
+          "linkId": "yt_14",
+          "channelName": "Home Gardening & Plants",
+          "channelUrl": "https://www.youtube.com/@HomeGardeningHindi",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 3,
+          "linkId": "yt_1",
+          "channelName": "Tech Master India",
+          "channelUrl": "https://www.youtube.com/@TechMasterIndia",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 4,
+          "linkId": "yt_2",
+          "channelName": "Daily Indian Recipes",
+          "channelUrl": "https://www.youtube.com/@DailyIndianRecipes",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 5,
+          "linkId": "yt_10",
+          "channelName": "Comedy Club Hindi",
+          "channelUrl": "https://www.youtube.com/@ComedyClubHindi",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 6,
+          "linkId": "yt_9",
+          "channelName": "Trending News & Facts",
+          "channelUrl": "https://www.youtube.com/@TrendingNewsFacts",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 7,
+          "linkId": "yt_11",
+          "channelName": "Beauty & Lifestyle Tips",
+          "channelUrl": "https://www.youtube.com/@BeautyLifestyleTips",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 8,
+          "linkId": "yt_15",
+          "channelName": "Music Beats Official",
+          "channelUrl": "https://www.youtube.com/@MusicBeatsOfficial",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 9,
+          "linkId": "yt_3",
+          "channelName": "Fitness & Health Guru",
+          "channelUrl": "https://www.youtube.com/@FitnessHealthGuru",
+          "screenshot": "",
+          "status": "pending"
+        },
+        {
+          "taskIndex": 10,
+          "linkId": "yt_4",
+          "channelName": "Smart Money & Business Tips",
+          "channelUrl": "https://www.youtube.com/@SmartMoneyTips",
+          "screenshot": "",
+          "status": "pending"
+        }
+      ]
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg_1788823442084_35",
+      "userId": "usr_1788823442052_848",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "sender": "user",
+      "text": "Namaste Admin, mera task review kar dijiye.",
+      "createdAt": "2026-09-07T23:24:02.084Z",
+      "readByAdmin": false,
+      "readByUser": true
+    },
+    {
+      "id": "msg_1788823442085_267",
+      "userId": "usr_1788823442052_848",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "sender": "admin",
+      "text": "Haan Ramesh, aapka task check karke approve kar diya hai.",
+      "createdAt": "2026-09-07T23:24:02.085Z",
+      "readByAdmin": true,
+      "readByUser": false
+    },
+    {
+      "id": "msg_1788823910610_66",
+      "userId": "usr_1788823910568_72",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "sender": "user",
+      "text": "Namaste Admin, mera task review kar dijiye.",
+      "createdAt": "2026-09-07T23:31:50.610Z",
+      "readByAdmin": false,
+      "readByUser": true
+    },
+    {
+      "id": "msg_1788823910612_470",
+      "userId": "usr_1788823910568_72",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "sender": "admin",
+      "text": "Haan Ramesh, aapka task check karke approve kar diya hai.",
+      "createdAt": "2026-09-07T23:31:50.612Z",
+      "readByAdmin": true,
+      "readByUser": false
+    },
+    {
+      "id": "msg_1789041026555_428",
+      "userId": "usr_1789041026517_352",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "sender": "user",
+      "text": "Namaste Admin, mera task review kar dijiye.",
+      "createdAt": "2026-09-10T11:50:26.555Z",
+      "readByAdmin": false,
+      "readByUser": true
+    },
+    {
+      "id": "msg_1789041026557_617",
+      "userId": "usr_1789041026517_352",
+      "userName": "Ramesh Kumar",
+      "userMobile": "9876500001",
+      "sender": "admin",
+      "text": "Haan Ramesh, aapka task check karke approve kar diya hai.",
+      "createdAt": "2026-09-10T11:50:26.558Z",
+      "readByAdmin": true,
+      "readByUser": false
+    },
+    {
+      "id": "msg_1789324051651_166",
+      "userId": "vst_test_1789324051600",
+      "userName": "Rohit Sharma",
+      "userMobile": "9876543210",
+      "sender": "user",
+      "text": "Namaste! Website par payment kaise karna hai?",
+      "createdAt": "2026-09-13T18:27:31.651Z",
+      "readByAdmin": false,
+      "readByUser": true
+    }
+  ],
+  "watchVideos": [
+    {
+      "id": "wv_mbl_1",
+      "title": "₹151 स्वैच्छिक सहयोग | जन सहायता मिशन | स्वास्थ्य • शिक्षा • कौशल • सामाजिक सहयोग",
+      "videoUrl": "https://www.youtube.com/watch?v=zxJEXCI7x94",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:30.680Z"
+    },
+    {
+      "id": "wv_mbl_2",
+      "title": "Maya Bai Lodhi Foundation App का पूरा Review | Teacher Attendance कैसे लगाएं |",
+      "videoUrl": "https://www.youtube.com/watch?v=BA_3lOoH5ss",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:30.559Z"
+    },
+    {
+      "id": "wv_mbl_3",
+      "title": "Block Coordinator बनें | ₹15,000 तक मानदेय | हर महीने 20 Teacher नियुक्त करवाएं | Field Job",
+      "videoUrl": "https://www.youtube.com/watch?v=kBxP7aLiOaA",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:30.589Z"
+    },
+    {
+      "id": "wv_mbl_4",
+      "title": "District Coordinator कैसे बनें? | ₹25,000 तक मानदेय + Travel Fund | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=rz4pWiAyMaA",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:30.796Z"
+    },
+    {
+      "id": "wv_mbl_5",
+      "title": "गांव में Tuition Teacher बनें | घर से 2 घंटे पढ़ाएं |  Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=G-P8zc_RlMI",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:30.575Z"
+    },
+    {
+      "id": "wv_mbl_6",
+      "title": "Maya Bai Lodhi Foundation Online Joining कैसे करें? | Complete Process",
+      "videoUrl": "https://www.youtube.com/watch?v=QIPwK264KpA",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:30.576Z"
+    },
+    {
+      "id": "wv_mbl_7",
+      "title": "एक छोटा सा दीपक | एक बच्ची का बड़ा सपना | दिल छू लेने वाली कहानी | Emotional Inspirational Story",
+      "videoUrl": "https://www.youtube.com/watch?v=GRjKhVDDwnE",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:30.681Z"
+    },
+    {
+      "id": "wv_mbl_8",
+      "title": "THE INDIA STORY (2026) Full Movie in Hindi",
+      "videoUrl": "https://www.youtube.com/watch?v=snTCv_sNdYU",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:30.683Z"
+    },
+    {
+      "id": "wv_mbl_9",
+      "title": "विश्वकर्मा पूजा एवं कन्या संक्रांति की हार्दिक शुभकामनाएँ 🙏 | Vishwakarma Puja Special | MBLF",
+      "videoUrl": "https://www.youtube.com/watch?v=7pcOI9hoLrk",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:30.682Z"
+    },
+    {
+      "id": "wv_mbl_10",
+      "title": "ऋषि पंचमी की हार्दिक शुभकामनाएँ 🙏 | Rishi Panchami Special | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=Udwu5gqFwqg",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:30.794Z"
+    },
+    {
+      "id": "wv_mbl_11",
+      "title": "गणेश चतुर्थी की हार्दिक शुभकामनाएँ 🙏 | गणेश उत्सव आरंभ | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=hl2a6XPPhFU",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:31.375Z"
+    },
+    {
+      "id": "wv_mbl_12",
+      "title": "Why This Teacher’s Mission Matters More Than Ever",
+      "videoUrl": "https://www.youtube.com/watch?v=-PNp_Yoc9OI",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:31.376Z"
+    },
+    {
+      "id": "wv_mbl_13",
+      "title": "एक पुरानी कॉपी और एक अधूरा सपना | Inspirational Hindi Movie",
+      "videoUrl": "https://www.youtube.com/watch?v=rDFSGaxlaaA",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:31.354Z"
+    },
+    {
+      "id": "wv_mbl_14",
+      "title": "गांव के बच्चों की पढ़ाई की नई शुरुआत | शिक्षा की ओर बढ़ते कदम | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=cRzrrMUht3I",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:31.414Z"
+    },
+    {
+      "id": "wv_mbl_15",
+      "title": "MBL Foundation की Free Coaching Classes में धूमधाम से मनाया गया शिक्षक दिवस 🎉 | Teachers Day Special",
+      "videoUrl": "https://www.youtube.com/watch?v=IxcEFWnczuY",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:31.351Z"
+    },
+    {
+      "id": "wv_mbl_16",
+      "title": "Teacher Job Alert: बच्चों के सपनों को दें नई दिशा 👨‍🏫",
+      "videoUrl": "https://www.youtube.com/watch?v=076Q3PixVmE",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:31.354Z"
+    },
+    {
+      "id": "wv_mbl_17",
+      "title": "सिर्फ 2 घंटे पढ़ाएं और ₹4,500 कमाएं | Teacher Joining Open",
+      "videoUrl": "https://www.youtube.com/watch?v=fIh0bxJlODk",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:31.355Z"
+    },
+    {
+      "id": "wv_mbl_18",
+      "title": "सिर्फ 2 घंटे देकर बदलें किसी का जीवन ❤️ | Teacher Recruitment Open",
+      "videoUrl": "https://www.youtube.com/watch?v=84xu--GN8Qc",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:31.353Z"
+    },
+    {
+      "id": "wv_mbl_19",
+      "title": "इनकी मुस्कान में ही है असली सुकून ❤️🥰",
+      "videoUrl": "https://www.youtube.com/watch?v=G0UCxmhxoHQ",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:31.350Z"
+    },
+    {
+      "id": "wv_mbl_20",
+      "title": "बच्चों को टॉफी और शिक्षा का उपहार ❤️ | Village Education Program",
+      "videoUrl": "https://www.youtube.com/watch?v=Do6Tdkk4cco",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:31.350Z"
+    },
+    {
+      "id": "wv_mbl_21",
+      "title": "Village Education Program: बच्चों की प्रतिभा और उनका जोश! 🔥",
+      "videoUrl": "https://www.youtube.com/watch?v=RpJF6fuxHV0",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.027Z"
+    },
+    {
+      "id": "wv_mbl_22",
+      "title": "सीखने के साथ मस्ती: बच्चों की खास Class Activity 📚",
+      "videoUrl": "https://www.youtube.com/watch?v=HGkF5Mey0lI",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.027Z"
+    },
+    {
+      "id": "wv_mbl_23",
+      "title": "Online Work के Genuine तरीके: शुरुआत कहाँ से करें?",
+      "videoUrl": "https://www.youtube.com/watch?v=kz8_iEbXG6k",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.023Z"
+    },
+    {
+      "id": "wv_mbl_24",
+      "title": "सिर्फ 2 मिनट में AI Video तैयार! | Google Gemini का कमाल",
+      "videoUrl": "https://www.youtube.com/watch?v=oUk2Uwy7h9U",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.023Z"
+    },
+    {
+      "id": "wv_mbl_25",
+      "title": "बच्चों की पढ़ाई के लिए एक छोटी सी मदद ❤️ | बुंदेली डोनेशन अपील गीत | माया बाई लोधी फाउंडेशन",
+      "videoUrl": "https://www.youtube.com/watch?v=QUGEW7Lgxig",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.021Z"
+    },
+    {
+      "id": "wv_mbl_26",
+      "title": "Blood Relation: Indirect Statement Questions Solve in Seconds!",
+      "videoUrl": "https://www.youtube.com/watch?v=CM_HF9GRt2s",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.026Z"
+    },
+    {
+      "id": "wv_mbl_27",
+      "title": "Blood Relation: Statement Based Questions को Solve करने का सबसे तेज़ तरीका",
+      "videoUrl": "https://www.youtube.com/watch?v=syN4nxbHQv4",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.024Z"
+    },
+    {
+      "id": "wv_mbl_28",
+      "title": "Blood Relation Reasoning in Hindi | Family Tree Method (Full Concepts)",
+      "videoUrl": "https://www.youtube.com/watch?v=5YJtPLPFg2U",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.017Z"
+    },
+    {
+      "id": "wv_mbl_29",
+      "title": "Reasoning Fast Trick: Alphabet Arrangement & Same Position Questions",
+      "videoUrl": "https://www.youtube.com/watch?v=pm3B3kmud7E",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.021Z"
+    },
+    {
+      "id": "wv_mbl_30",
+      "title": "Alphabet Series Model 4: Vowel-Consonant आधारित Questions की Fast Trick",
+      "videoUrl": "https://www.youtube.com/watch?v=_IA-Zp2zJ7A",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.024Z"
+    },
+    {
+      "id": "wv_mbl_31",
+      "title": "Vocabulary Based Reasoning | Alphabet Series Model 3 | Exam Tricks 🔥",
+      "videoUrl": "https://www.youtube.com/watch?v=s7xzTMruZZg",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.585Z"
+    },
+    {
+      "id": "wv_mbl_32",
+      "title": "Complete Reasoning Series | Alphabet Reasoning (Model 2) | Exam Special",
+      "videoUrl": "https://www.youtube.com/watch?v=ZfDre3LOjGI",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.584Z"
+    },
+    {
+      "id": "wv_mbl_33",
+      "title": "Reasoning Tricks: Alphabet टेस्ट के कठिन सवालों को ऐसे करें हल",
+      "videoUrl": "https://www.youtube.com/watch?v=I37bWbbikTE",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.585Z"
+    },
+    {
+      "id": "wv_mbl_34",
+      "title": "Teacher और कोऑर्डिनेटर के लिए Maya Foundation की गाइडलाइन",
+      "videoUrl": "https://www.youtube.com/watch?v=mEpvgMEIVEU",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.666Z"
+    },
+    {
+      "id": "wv_mbl_35",
+      "title": "Maya Bai Lodhi Foundation: चंडी के बच्चों के साथ एक यादगार दिन ❤️",
+      "videoUrl": "https://www.youtube.com/watch?v=4uW6qszp9Qg",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.584Z"
+    },
+    {
+      "id": "wv_mbl_36",
+      "title": "नालंदा के बच्चों के बीच टॉफी वितरण ❤️ | Maya Bai Lodhi Foundation | शिक्षा के साथ खुशियाँ",
+      "videoUrl": "https://www.youtube.com/watch?v=CaTidkJkses",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.584Z"
+    },
+    {
+      "id": "wv_mbl_37",
+      "title": "Step-by-Step Guide: Teacher, Student और Staff Attendance Process",
+      "videoUrl": "https://www.youtube.com/watch?v=PtmqCFpaHNw",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.664Z"
+    },
+    {
+      "id": "wv_mbl_38",
+      "title": "घर बैठे बच्चों को पढ़ाएं और हर महीने पाएं मानदेय",
+      "videoUrl": "https://www.youtube.com/watch?v=eNzsuj-gxPA",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.665Z"
+    },
+    {
+      "id": "wv_mbl_39",
+      "title": "Why Teacher Pay Matters: Our Latest Foundation Update",
+      "videoUrl": "https://www.youtube.com/watch?v=uuw0c4SD4s8",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.665Z"
+    },
+    {
+      "id": "wv_mbl_40",
+      "title": "Our Commitment to Rural Education: Teacher Salary Update #85",
+      "videoUrl": "https://www.youtube.com/watch?v=_KCGeWblthM",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:32.666Z"
+    },
+    {
+      "id": "wv_mbl_41",
+      "title": "How We Build Future Leaders: Fun Classroom Activities!",
+      "videoUrl": "https://www.youtube.com/watch?v=Q8_7AfdrFgo",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:33.211Z"
+    },
+    {
+      "id": "wv_mbl_42",
+      "title": "How We Make Learning Fun: Amazing Classroom Activities!",
+      "videoUrl": "https://www.youtube.com/watch?v=-1hIaCJ2g9o",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:33.203Z"
+    },
+    {
+      "id": "wv_mbl_43",
+      "title": "Best Educational Activities for Children | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=s3hPRgsR2GE",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:33.208Z"
+    },
+    {
+      "id": "wv_mbl_44",
+      "title": "Students Enjoy Creative Classroom Games in Village Education Program",
+      "videoUrl": "https://www.youtube.com/watch?v=niSwjQAEH-E",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:33.287Z"
+    },
+    {
+      "id": "wv_mbl_45",
+      "title": "माया बाई लोधी फाउंडेशन ज्वाइनिंग प्रोसेस 2026 | ऑनलाइन रजिस्ट्रेशन और आईडी कार्ड डाउनलोड",
+      "videoUrl": "https://www.youtube.com/watch?v=YKv03SjO2Ng",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:33.207Z"
+    },
+    {
+      "id": "wv_mbl_46",
+      "title": "Maya Bai Lodhi Foundation Health Card 2026: Complete Registration Video!",
+      "videoUrl": "https://www.youtube.com/watch?v=Jov614Cjl3M",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:33.213Z"
+    },
+    {
+      "id": "wv_mbl_47",
+      "title": "Group Learning Activities for Children #77",
+      "videoUrl": "https://www.youtube.com/watch?v=4VliJMQ2PGU",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:33.292Z"
+    },
+    {
+      "id": "wv_mbl_48",
+      "title": "Happy Classroom Moments with Students #76",
+      "videoUrl": "https://www.youtube.com/watch?v=ZLbEd6c3-F0",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:33.214Z"
+    },
+    {
+      "id": "wv_mbl_49",
+      "title": "Interactive Learning in Rural Classrooms #75",
+      "videoUrl": "https://www.youtube.com/watch?v=OAdyqhOOlH8",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:33.207Z"
+    },
+    {
+      "id": "wv_mbl_50",
+      "title": "Best Student Participation Activities #74",
+      "videoUrl": "https://www.youtube.com/watch?v=YXp8uM4gOQk",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:33.212Z"
+    },
+    {
+      "id": "wv_mbl_51",
+      "title": "Creative Classroom Games for Students #73",
+      "videoUrl": "https://www.youtube.com/watch?v=lJBkDeh6GoQ",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.197Z"
+    },
+    {
+      "id": "wv_mbl_52",
+      "title": "Fun Learning Activities at Free Coaching Centres #72",
+      "videoUrl": "https://www.youtube.com/watch?v=zdJc9iZyACs",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.164Z"
+    },
+    {
+      "id": "wv_mbl_53",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation #71",
+      "videoUrl": "https://www.youtube.com/watch?v=AIPcYOMEgGk",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.196Z"
+    },
+    {
+      "id": "wv_mbl_54",
+      "title": "Learning Through Creativity and Teamwork #70",
+      "videoUrl": "https://www.youtube.com/watch?v=eEXyXaW-P1M",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.168Z"
+    },
+    {
+      "id": "wv_mbl_55",
+      "title": "Confidence Building Activities for Students #69",
+      "videoUrl": "https://www.youtube.com/watch?v=6Inht1O82Bg",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.170Z"
+    },
+    {
+      "id": "wv_mbl_56",
+      "title": "Educational Games and Classroom Fun #68",
+      "videoUrl": "https://www.youtube.com/watch?v=i1Pdg-zDPQg",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.173Z"
+    },
+    {
+      "id": "wv_mbl_57",
+      "title": "Group Learning Activities for Children #67",
+      "videoUrl": "https://www.youtube.com/watch?v=G1n7OFlQ5PY",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.197Z"
+    },
+    {
+      "id": "wv_mbl_58",
+      "title": "Happy Classroom Moments with Students #66",
+      "videoUrl": "https://www.youtube.com/watch?v=jGconaqyaeo",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.196Z"
+    },
+    {
+      "id": "wv_mbl_59",
+      "title": "Interactive Learning in Rural Classrooms #65",
+      "videoUrl": "https://www.youtube.com/watch?v=M3LxQj80UnM",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.197Z"
+    },
+    {
+      "id": "wv_mbl_60",
+      "title": "Best Student Participation Activities #64",
+      "videoUrl": "https://www.youtube.com/watch?v=GxVJX1OlRHo",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.197Z"
+    },
+    {
+      "id": "wv_mbl_61",
+      "title": "Creative Classroom Games for Students #63",
+      "videoUrl": "https://www.youtube.com/watch?v=Gd5mGy7HH3s",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.954Z"
+    },
+    {
+      "id": "wv_mbl_62",
+      "title": "Fun Learning Activities at Free Coaching Centres #62",
+      "videoUrl": "https://www.youtube.com/watch?v=fPAPf6HYsz0",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.948Z"
+    },
+    {
+      "id": "wv_mbl_63",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation #61",
+      "videoUrl": "https://www.youtube.com/watch?v=H5uyyNb-KzA",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.949Z"
+    },
+    {
+      "id": "wv_mbl_64",
+      "title": "Learning Through Creativity and Teamwork #60",
+      "videoUrl": "https://www.youtube.com/watch?v=_P9earKpknc",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.947Z"
+    },
+    {
+      "id": "wv_mbl_65",
+      "title": "Confidence Building Activities for Students #59",
+      "videoUrl": "https://www.youtube.com/watch?v=tSJ2sSjlHMI",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.947Z"
+    },
+    {
+      "id": "wv_mbl_66",
+      "title": "Educational Games and Classroom Fun #58",
+      "videoUrl": "https://www.youtube.com/watch?v=7D62LpIbFCg",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.948Z"
+    },
+    {
+      "id": "wv_mbl_67",
+      "title": "Free Coaching Teachers Got Salary ✅ | Real Teacher Payment | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=MdUK_vL83lw",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.949Z"
+    },
+    {
+      "id": "wv_mbl_68",
+      "title": "Free Coaching Teachers Got Salary ✅ | Real Teacher Payment | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=hI6QejyBU-g",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.954Z"
+    },
+    {
+      "id": "wv_mbl_69",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=6zSIh8jFq3U",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.954Z"
+    },
+    {
+      "id": "wv_mbl_70",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=Qjt8Hrbwu54",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:34.954Z"
+    },
+    {
+      "id": "wv_mbl_71",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=Tys1-i3qX5I",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.403Z"
+    },
+    {
+      "id": "wv_mbl_72",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=D0JFeSmufkY",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.384Z"
+    },
+    {
+      "id": "wv_mbl_73",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=oWo9pxeZVcw",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.395Z"
+    },
+    {
+      "id": "wv_mbl_74",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=NyJOTHhEO4o",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.407Z"
+    },
+    {
+      "id": "wv_mbl_75",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=oY9jxqHm6NM",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.384Z"
+    },
+    {
+      "id": "wv_mbl_76",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=axU5V7rBkHk",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.384Z"
+    },
+    {
+      "id": "wv_mbl_77",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=9DNCaeiQ5Sg",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.384Z"
+    },
+    {
+      "id": "wv_mbl_78",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=yypJmcs-vrM",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.395Z"
+    },
+    {
+      "id": "wv_mbl_79",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=4SW86G6biZ4",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.395Z"
+    },
+    {
+      "id": "wv_mbl_80",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=TFlCZUGEgTU",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.385Z"
+    },
+    {
+      "id": "wv_mbl_81",
+      "title": "🚨 NGO में Udan 2.0 District Coordinator Job 2026 | ₹25,000 Salary | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=eAHoBr2lAQQ",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.823Z"
+    },
+    {
+      "id": "wv_mbl_82",
+      "title": "Udan 2.0 Block Coordinator Job 2026 | ₹15,000 Salary | 12th Pass Jobs | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=TAyPfnlqvqs",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.822Z"
+    },
+    {
+      "id": "wv_mbl_83",
+      "title": "Maya Bai Lodhi Foundation: क्या आप गांव के बच्चों को पढ़ाकर कमाना चाहते हैं?",
+      "videoUrl": "https://www.youtube.com/watch?v=IoqePIgUgcA",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.826Z"
+    },
+    {
+      "id": "wv_mbl_84",
+      "title": "0% Government Funding से कैसे चल रही है FREE Education? | Maya Bai Lodhi Foundation Explained",
+      "videoUrl": "https://www.youtube.com/watch?v=ajzedr-m9D0",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.817Z"
+    },
+    {
+      "id": "wv_mbl_85",
+      "title": "🚨 100% FREE Education Mission | Teacher Recruitment 2026 | ₹4500 Salary | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=TWbyzH7E9GY",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.831Z"
+    },
+    {
+      "id": "wv_mbl_86",
+      "title": "Parents Feedback | बच्चों में आया बड़ा बदलाव | Maya Bai Lodhi Foundation | Real Parent Review",
+      "videoUrl": "https://www.youtube.com/watch?v=_xf9BohFk0A",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.825Z"
+    },
+    {
+      "id": "wv_mbl_87",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=b6pfGiaDcHs",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.831Z"
+    },
+    {
+      "id": "wv_mbl_88",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=KMLMzw1B9CI",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.831Z"
+    },
+    {
+      "id": "wv_mbl_89",
+      "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=Gd2ru0bGmA4",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.823Z"
+    },
+    {
+      "id": "wv_mbl_90",
+      "title": "How We Make Education Fun | Maya Bai Lodhi Foundation",
+      "videoUrl": "https://www.youtube.com/watch?v=Q9grp1hXfAw",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:35.832Z"
+    },
+    {
+      "id": "wv_mbl_91",
+      "title": "✅ Teacher Recruitment 2026 | Step-by-Step Guide to Becoming a Free Coaching Teacher",
+      "videoUrl": "https://www.youtube.com/watch?v=mYLjiHzf8-4",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:36.204Z"
+    },
+    {
+      "id": "wv_mbl_92",
+      "title": "Maya Bai Lodhi Foundation Teacher Jobs: Everything You Need to Know",
+      "videoUrl": "https://www.youtube.com/watch?v=CwMJEMThXAw",
+      "durationSeconds": 240,
+      "rewardPerVideo": 5,
+      "active": true,
+      "createdAt": "2026-09-28T02:23:36.205Z"
+    }
+  ],
+  "watchTasks": [],
+  "coupons": [
+    {
+      "id": "cpn_free15oct",
+      "code": "FREE15OCT",
+      "discountType": "free",
+      "discountValue": 100,
+      "maxUses": 10000,
+      "usedCount": 0,
+      "active": true,
+      "expiresAt": "2026-10-15T23:59:59.999Z",
+      "description": "Special 100% Free Registration Coupon (Valid till 15 Oct 2026) - Instant Auto Approval",
+      "createdAt": "2026-09-28T00:47:51.479Z"
+    },
+    {
+      "id": "cpn_1789323296464_220",
+      "code": "TESTFREE_1789323296463",
+      "discountType": "free",
+      "discountValue": 100,
+      "maxUses": 10,
+      "usedCount": 0,
+      "active": true,
+      "createdAt": "2026-09-13T18:14:56.464Z"
+    },
+    {
+      "id": "cpn_1",
+      "code": "FREE100",
+      "discountType": "free",
+      "discountValue": 100,
+      "maxUses": 1000,
+      "usedCount": 1,
+      "active": true,
+      "createdAt": "2026-09-13T18:14:56.447Z"
+    },
+    {
+      "id": "cpn_2",
+      "code": "OFFER50",
+      "discountType": "flat",
+      "discountValue": 50,
+      "maxUses": 1000,
+      "usedCount": 0,
+      "active": true,
+      "createdAt": "2026-09-13T18:14:56.447Z"
+    }
+  ],
+  "analytics": {
+    "totalVisits": 2,
+    "pageViews": {
+      "/": 1,
+      "/register.html": 1
+    },
+    "visitsHistory": [
+      {
+        "id": "vis_1790568572021_261",
+        "path": "/register.html",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0",
+        "userId": null,
+        "userName": "Guest Visitor",
+        "userMobile": "",
+        "timestamp": "2026-09-28T04:09:32.021Z"
+      },
+      {
+        "id": "vis_1790568572020_761",
+        "path": "/",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0",
+        "userId": null,
+        "userName": "Guest Visitor",
+        "userMobile": "",
+        "timestamp": "2026-09-28T04:09:32.020Z"
+      }
+    ]
+  }
+}
