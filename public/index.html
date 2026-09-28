@@ -10,6 +10,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/css/styles.css">
+  <!-- PWA Settings -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MapReview">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
 </head>
 <body class="bg-slate-50 min-h-screen flex flex-col justify-between">
 
@@ -45,6 +52,12 @@
         <button onclick="openFestiveModal()" class="hidden sm:flex text-xs font-bold text-amber-800 bg-amber-100 hover:bg-amber-200 px-3 py-1.5 rounded-xl border border-amber-300 transition-colors items-center gap-1.5">
           <i class="fa-solid fa-gift text-amber-600"></i> Free Coupon: FREE15OCT
         </button>
+        
+        <button onclick="triggerPWAInstall()" class="text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 px-3 py-2 rounded-xl transition-all flex items-center gap-1.5 shadow-sm">
+          <i class="fa-solid fa-mobile-screen-button text-emerald-600"></i>
+          <span>📲 Install App</span>
+        </button>
+
         <a href="/login.html" class="text-sm font-semibold text-slate-700 hover:text-indigo-600 px-3 py-2 rounded-lg transition-colors">
           <i class="fa-solid fa-arrow-right-to-bracket mr-1"></i> Login
         </a>
@@ -1542,6 +1555,7 @@ http://localhost:3000/register.html</textarea>
     } catch (e) {}
   </script>
 
+  <script src="/js/pwa-installer.js"></script>
 </body>
 </html>
 
