@@ -691,6 +691,7 @@
             <tr class="bg-slate-50 text-slate-500 font-bold border-b border-slate-200 uppercase text-[10px] tracking-wider">
               <th class="p-3.5">Coupon Code</th>
               <th class="p-3.5">Type &amp; Benefit</th>
+              <th class="p-3.5">Expiry Date</th>
               <th class="p-3.5">Uses Count</th>
               <th class="p-3.5">Status</th>
               <th class="p-3.5 text-right">Actions</th>
@@ -896,9 +897,20 @@
         </div>
 
         <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Coupon Expiry Date (Valid Till)</label>
+          <input type="date" id="couponExpiryNew" value="2026-10-15" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold bg-white focus:ring-2 focus:ring-amber-500 outline-none">
+          <p class="text-[10px] text-slate-400 mt-0.5">Yeh coupon code kis date tak valid rahega (Default: 15 Oct 2026).</p>
+        </div>
+
+        <div>
           <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Max Uses Limit (Total Number of Users)</label>
           <input type="number" id="couponMaxUsesNew" min="1" max="100000" value="1000" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold focus:ring-2 focus:ring-amber-500 outline-none">
           <p class="text-[10px] text-slate-400 mt-0.5">Kitne users is coupon code ko use kar sakte hain.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Coupon Note / Description (Optional)</label>
+          <input type="text" id="couponDescNew" placeholder="e.g. Special Festive Free Offer (Till 15 Oct 2026)" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:ring-2 focus:ring-amber-500 outline-none">
         </div>
 
         <div class="pt-2">

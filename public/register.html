@@ -142,19 +142,22 @@
       </div>
 
       <!-- Coupon Code Section -->
-      <div class="bg-amber-50/60 border-2 border-amber-200 rounded-3xl p-5 sm:p-6">
-        <label class="block text-xs font-bold text-amber-900 uppercase tracking-wider mb-2 flex items-center justify-between">
-          <span class="flex items-center gap-1.5"><i class="fa-solid fa-ticket text-amber-600"></i> Have a Promo / Coupon Code? (Discount ya Free Join)</span>
-          <span class="text-[11px] bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded-full">Special Offer</span>
+      <div class="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-300 rounded-3xl p-5 sm:p-6 shadow-sm">
+        <label class="block text-xs font-bold text-amber-950 uppercase tracking-wider mb-2 flex items-center justify-between">
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-gift text-amber-600"></i> Have a Promo / Coupon Code? (Free Join &amp; Instant Auto-Approval)</span>
+          <span class="text-[11px] bg-amber-200 text-amber-900 font-extrabold px-2.5 py-0.5 rounded-full border border-amber-300">Offer Valid Till 15 Oct 2026</span>
         </label>
         <div class="flex gap-2">
           <div class="relative flex-1">
             <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-500"><i class="fa-solid fa-tag"></i></span>
-            <input type="text" id="couponCodeInput" placeholder="e.g. FREE100 ya OFFER50" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-amber-300 bg-white font-mono font-bold uppercase text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+            <input type="text" id="couponCodeInput" placeholder="Enter Coupon Code (e.g. FREE15OCT)" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-amber-300 bg-white font-mono font-bold uppercase text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
           </div>
-          <button type="button" onclick="applyCoupon()" id="applyCouponBtn" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm rounded-xl transition-all shadow-sm flex items-center gap-1.5">
-            <i class="fa-solid fa-badge-percent"></i> Apply
+          <button type="button" onclick="applyCoupon()" id="applyCouponBtn" class="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-sm rounded-xl transition-all shadow-md flex items-center gap-1.5">
+            <i class="fa-solid fa-badge-percent"></i> Apply Code
           </button>
+        </div>
+        <div class="mt-2 flex items-center justify-between text-[11px] text-amber-800 font-medium">
+          <span>💡 Try Free Coupon: <button type="button" onclick="document.getElementById('couponCodeInput').value='FREE15OCT'; applyCoupon();" class="font-mono font-bold text-amber-900 underline hover:text-amber-700">FREE15OCT</button> (100% Free + Auto-Approve)</span>
         </div>
         <div id="couponStatusMsg" class="mt-2 hidden text-xs font-bold"></div>
       </div>

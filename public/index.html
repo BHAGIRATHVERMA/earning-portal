@@ -13,6 +13,21 @@
 </head>
 <body class="bg-slate-50 min-h-screen flex flex-col justify-between">
 
+  <!-- Top Festive Coupon Banner -->
+  <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-slate-950 font-extrabold text-xs py-2 px-4 shadow-sm">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
+        <span class="bg-slate-950 text-amber-400 text-[10px] uppercase font-black px-2 py-0.5 rounded-full animate-pulse flex-shrink-0">🎉 FESTIVE OFFER</span>
+        <span class="text-white text-xs">Use Coupon Code <b class="font-mono bg-white/20 text-yellow-100 px-1.5 py-0.5 rounded border border-white/30 tracking-wider">FREE15OCT</b> for 100% FREE Registration &amp; Instant Auto-Approval! <span class="hidden md:inline">(Valid till 15 Oct 2026)</span></span>
+      </div>
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <button onclick="openFestiveModal()" class="bg-slate-950 hover:bg-slate-900 text-amber-400 text-[11px] font-black px-3 py-1 rounded-lg shadow transition-all flex items-center gap-1">
+          <i class="fa-solid fa-gift"></i> Claim Free
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Header / Navbar -->
   <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -27,11 +42,14 @@
       </div>
 
       <div class="flex items-center gap-3">
+        <button onclick="openFestiveModal()" class="hidden sm:flex text-xs font-bold text-amber-800 bg-amber-100 hover:bg-amber-200 px-3 py-1.5 rounded-xl border border-amber-300 transition-colors items-center gap-1.5">
+          <i class="fa-solid fa-gift text-amber-600"></i> Free Coupon: FREE15OCT
+        </button>
         <a href="/login.html" class="text-sm font-semibold text-slate-700 hover:text-indigo-600 px-3 py-2 rounded-lg transition-colors">
           <i class="fa-solid fa-arrow-right-to-bracket mr-1"></i> Login
         </a>
-        <a href="/register.html" class="text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-xl shadow-md hover:shadow-indigo-200 transition-all">
-          <i class="fa-solid fa-user-plus mr-1"></i> Register Plan
+        <a href="/register.html?coupon=FREE15OCT" class="text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-xl shadow-md hover:shadow-indigo-200 transition-all">
+          <i class="fa-solid fa-user-plus mr-1"></i> Register Free
         </a>
         <a href="/login.html?admin=true" title="Admin Portal" class="text-xs text-slate-400 hover:text-slate-600 p-2">
           <i class="fa-solid fa-lock"></i>
@@ -1362,34 +1380,157 @@ http://localhost:3000/register.html</textarea>
       btn.disabled = true;
       input.value = '';
 
-      try {
-        const res = await fetch('/api/public/chat/send', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            visitorId: visitorChatId,
-            text,
-            name,
-            mobile
-          })
-        });
-        const data = await res.json();
-        btn.disabled = false;
-        if (data.success) {
-          loadHomeChatMessages();
-        }
-      } catch (err) {
-        btn.disabled = false;
-        console.error('Failed to send message:', err);
+  <!-- ======================================================== -->
+  <!-- SPECIAL FESTIVE LIMITED TIME COUPON POPUP MODAL -->
+  <!-- ======================================================== -->
+  <div id="festiveOfferModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4 transition-all duration-300">
+    <div class="relative bg-gradient-to-b from-slate-900 via-slate-900 to-indigo-950 text-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border-2 border-amber-400/60 overflow-hidden transform scale-95 transition-transform duration-300 animate-scaleIn">
+      
+      <!-- Decorative background lights -->
+      <div class="absolute -top-16 -right-16 w-48 h-48 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-indigo-500/30 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Close Button -->
+      <button onclick="closeFestiveModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition-colors z-20 border border-white/10">
+        <i class="fa-solid fa-xmark text-base"></i>
+      </button>
+
+      <!-- Modal Content Header -->
+      <div class="text-center relative z-10">
+        <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-400/20 to-orange-400/20 border border-amber-400/50 text-amber-300 text-[11px] font-black uppercase tracking-wider mb-3 shadow-inner">
+          <i class="fa-solid fa-gift text-amber-400 animate-bounce"></i> Limited Festive Free Registration Offer
+        </div>
+        
+        <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
+          Ghar Baithe Daily ₹250+ Kamayein <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-200">Bilkul FREE</span>!
+        </h2>
+        
+        <p class="text-xs sm:text-sm text-indigo-100/90 mt-2 max-w-md mx-auto">
+          Naye users ke liye Special Free Joining Coupon Code! Is code ke sath register karte hi aapka account <b class="text-emerald-400 font-bold">Instant Auto-Approve</b> ho jayega.
+        </p>
+      </div>
+
+      <!-- Big Coupon Card Box -->
+      <div class="my-5 bg-gradient-to-br from-slate-950/90 to-indigo-950/90 rounded-2xl p-4 sm:p-5 border-2 border-dashed border-amber-400/60 text-center relative z-10 shadow-xl">
+        <div class="text-[11px] uppercase font-bold text-amber-300 tracking-wider flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-sparkles text-amber-400"></i>
+          <span>Official 100% Free Coupon Code</span>
+          <i class="fa-solid fa-sparkles text-amber-400"></i>
+        </div>
+
+        <div class="my-3 flex items-center justify-center gap-3">
+          <div id="popupCouponCode" class="font-mono text-2xl sm:text-3xl font-black tracking-widest text-amber-400 bg-amber-400/10 px-4 py-2 rounded-xl border border-amber-400/30 select-all shadow-inner">
+            FREE15OCT
+          </div>
+          <button type="button" onclick="copyPopupCoupon()" id="popupCopyBtn" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs shadow-md transition-all flex items-center gap-1.5 flex-shrink-0">
+            <i class="fa-regular fa-copy"></i>
+            <span id="popupCopyBtnText">Copy Code</span>
+          </button>
+        </div>
+
+        <div class="flex items-center justify-center gap-1.5 text-[11px] text-slate-300 font-medium">
+          <i class="fa-regular fa-clock text-amber-400"></i>
+          <span>Offer Expiry Date: <b class="text-amber-300 font-bold">15 October 2026</b></span>
+        </div>
+      </div>
+
+      <!-- Benefits Bullets -->
+      <div class="space-y-2 text-xs relative z-10 bg-white/5 rounded-2xl p-3.5 border border-white/5">
+        <div class="flex items-center gap-2 text-emerald-300 font-bold">
+          <i class="fa-solid fa-circle-check text-emerald-400"></i>
+          <span>₹0 Joining Fee (Koi payment nahi karni)</span>
+        </div>
+        <div class="flex items-center gap-2 text-indigo-200">
+          <i class="fa-solid fa-bolt text-amber-400"></i>
+          <span>Instant Auto-Approval (Admin approval ka intezar nahi)</span>
+        </div>
+        <div class="flex items-center gap-2 text-indigo-200">
+          <i class="fa-solid fa-coins text-amber-400"></i>
+          <span>Daily 10 Map Reviews + 10 YouTube + 10 Videos Earning Unlocked</span>
+        </div>
+        <div class="flex items-center gap-2 text-indigo-200">
+          <i class="fa-solid fa-money-bill-transfer text-emerald-400"></i>
+          <span>Direct Daily UPI Withdrawal (Min ₹500)</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-6 flex flex-col sm:flex-row gap-3 relative z-10">
+        <a href="/register.html?coupon=FREE15OCT&plan=69" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-600 hover:to-teal-600 text-slate-950 font-black text-sm shadow-lg shadow-emerald-500/20 text-center transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-bolt"></i> Claim Free Offer &amp; Register Now
+        </a>
+        <button onclick="closeFestiveModal()" class="w-full sm:w-auto py-3.5 px-5 rounded-2xl bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white font-bold text-xs transition-colors text-center border border-white/10">
+          Remind Later
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Floating Festive Coupon Button (Always Available on Screen) -->
+  <button onclick="openFestiveModal()" id="floatingFestiveBtn" class="fixed bottom-24 left-4 sm:left-6 z-40 px-4 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black text-xs shadow-2xl flex items-center gap-2 border-2 border-white/40 transform hover:scale-105 transition-all group animate-bounce">
+    <i class="fa-solid fa-gift text-sm text-slate-950"></i>
+    <span>Free Coupon: <b>FREE15OCT</b></span>
+    <span class="bg-slate-950 text-amber-300 text-[9px] px-1.5 py-0.5 rounded-full uppercase">15 Oct</span>
+  </button>
+
+  <script>
+    // -------------------------------------------------------------
+    // FESTIVE PROMO POPUP CONTROLLER
+    // -------------------------------------------------------------
+    let festiveCouponCode = 'FREE15OCT';
+
+    function openFestiveModal() {
+      const modal = document.getElementById('festiveOfferModal');
+      if (modal) {
+        modal.classList.remove('hidden');
       }
     }
 
-    function escapeHtml(str) {
-      if (!str) return '';
-      const div = document.createElement('div');
-      div.innerText = str;
-      return div.innerHTML;
+    function closeFestiveModal() {
+      const modal = document.getElementById('festiveOfferModal');
+      if (modal) {
+        modal.classList.add('hidden');
+      }
     }
+
+    function copyPopupCoupon() {
+      const code = document.getElementById('popupCouponCode').innerText.trim() || festiveCouponCode;
+      navigator.clipboard.writeText(code).then(() => {
+        const btnText = document.getElementById('popupCopyBtnText');
+        const btn = document.getElementById('popupCopyBtn');
+        const orig = btnText.innerText;
+        btnText.innerText = 'Copied! ✓';
+        btn.className = 'px-4 py-2.5 rounded-xl bg-emerald-400 text-slate-950 font-black text-xs shadow-md transition-all flex items-center gap-1.5 flex-shrink-0';
+        setTimeout(() => {
+          btnText.innerText = orig;
+          btn.className = 'px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs shadow-md transition-all flex items-center gap-1.5 flex-shrink-0';
+        }, 2000);
+      });
+    }
+
+    // Auto-fetch active coupon details and popup after 1.2 seconds
+    async function initActivePromoOffer() {
+      try {
+        const res = await fetch('/api/public/active-offer');
+        const data = await res.json();
+        if (data.success && data.offer) {
+          festiveCouponCode = data.offer.code;
+          const codeEl = document.getElementById('popupCouponCode');
+          if (codeEl) codeEl.innerText = data.offer.code;
+        }
+      } catch (e) {}
+
+      // Auto-open modal after 1.2s on first visit
+      setTimeout(() => {
+        const hasClosed = sessionStorage.getItem('mrp_festive_closed');
+        if (!hasClosed) {
+          openFestiveModal();
+        }
+      }, 1200);
+    }
+
+    initActivePromoOffer();
   </script>
 
 </body>

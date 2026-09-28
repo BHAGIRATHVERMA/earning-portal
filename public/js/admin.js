@@ -1506,7 +1506,7 @@ function renderAdminCoupons() {
   tbody.innerHTML = '';
 
   if (allCoupons.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" class="py-8 text-center text-slate-400">No coupons created yet. Click "Create New Coupon" above.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-slate-400">No coupons created yet. Click "Create New Coupon" above.</td></tr>';
     return;
   }
 
@@ -1516,7 +1516,7 @@ function renderAdminCoupons() {
 
     let benefitText = '';
     if (c.discountType === 'free') {
-      benefitText = '<span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-black text-xs">🎉 100% Free Join</span>';
+      benefitText = '<span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-black text-xs">🎉 100% Free Join & Auto-Approve</span>';
     } else if (c.discountType === 'flat') {
       benefitText = `<span class="px-2.5 py-0.5 bg-indigo-100 text-indigo-800 rounded-full font-bold text-xs">₹${c.discountValue} Flat Discount</span>`;
     } else {
@@ -1525,18 +1525,29 @@ function renderAdminCoupons() {
 
     const usageRatio = `${c.usedCount || 0} / ${c.maxUses || 1000}`;
 
+    const isExpired = c.expiresAt && new Date(c.expiresAt).getTime() < Date.now();
+    let expiryDisplay = '<span class="text-slate-400 font-medium">No Expiry</span>';
+    if (c.expiresAt) {
+      const expDate = new Date(c.expiresAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+      expiryDisplay = isExpired 
+        ? `<span class="text-rose-600 font-bold bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">${expDate} (Expired)</span>`
+        : `<span class="text-amber-700 font-bold bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">${expDate}</span>`;
+    }
+
     tr.innerHTML = `
       <td class="p-3.5 font-mono font-black text-sm text-indigo-700">
         <div class="flex items-center gap-1.5">
           <i class="fa-solid fa-tag text-amber-500 text-xs"></i>
           <span>${c.code}</span>
         </div>
+        ${c.description ? `<div class="text-[10px] text-slate-400 font-sans font-normal mt-0.5">${c.description}</div>` : ''}
       </td>
       <td class="p-3.5">${benefitText}</td>
+      <td class="p-3.5">${expiryDisplay}</td>
       <td class="p-3.5 font-mono font-bold text-slate-700">${usageRatio}</td>
       <td class="p-3.5">
-        <span class="px-2 py-0.5 rounded-full font-bold text-[11px] ${c.active ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}">
-          ${c.active ? 'Active' : 'Disabled'}
+        <span class="px-2 py-0.5 rounded-full font-bold text-[11px] ${c.active && !isExpired ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}">
+          ${c.active && !isExpired ? 'Active' : (isExpired ? 'Expired' : 'Disabled')}
         </span>
       </td>
       <td class="p-3.5 text-right whitespace-nowrap">
@@ -1586,8 +1597,12 @@ async function handleCreateCoupon(e) {
   const discountType = document.getElementById('couponTypeNew').value;
   const discountValue = document.getElementById('couponValueNew').value;
   const maxUses = document.getElementById('couponMaxUsesNew').value;
+  const expiryDate = document.getElementById('couponExpiryNew')?.value || '2026-10-15';
+  const description = document.getElementById('couponDescNew')?.value.trim() || '';
 
   if (!code) return;
+
+  const expiresAt = expiryDate ? new Date(`${expiryDate}T23:59:59.999Z`).toISOString() : '2026-10-15T23:59:59.999Z';
 
   const btn = document.getElementById('createCouponBtn');
   btn.disabled = true;
@@ -1597,7 +1612,7 @@ async function handleCreateCoupon(e) {
     const res = await fetch('/api/admin/coupons/create', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code, discountType, discountValue, maxUses })
+      body: JSON.stringify({ code, discountType, discountValue, maxUses, expiresAt, description })
     });
     const data = await res.json();
     btn.disabled = false;
