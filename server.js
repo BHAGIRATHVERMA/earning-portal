@@ -286,6 +286,7 @@ app.post('/api/auth/login', (req, res) => {
     });
   }
 
+  req.session.isAdmin = false;
   req.session.userId = user.id;
 
   res.json({
@@ -307,6 +308,7 @@ app.post('/api/auth/admin-login', (req, res) => {
   const settings = db.getSettings();
 
   if (adminId === (settings.adminId || 'ADMIN') && password === (settings.adminPassword || 'Password')) {
+    req.session.userId = null;
     req.session.isAdmin = true;
     return res.json({ success: true, message: 'Admin login successful' });
   }
