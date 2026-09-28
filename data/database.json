@@ -3373,12 +3373,23 @@
     }
   ],
   "analytics": {
-    "totalVisits": 2,
+    "totalVisits": 3,
     "pageViews": {
       "/": 1,
-      "/register.html": 1
+      "/register.html": 1,
+      "/login.html": 1
     },
     "visitsHistory": [
+      {
+        "id": "vis_1790574962978_831",
+        "path": "/login.html",
+        "ip": "::1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0",
+        "userId": null,
+        "userName": "Guest Visitor",
+        "userMobile": "",
+        "timestamp": "2026-09-28T05:56:02.978Z"
+      },
       {
         "id": "vis_1790568572021_261",
         "path": "/register.html",

@@ -153,6 +153,36 @@
       showAdminLogin();
     }
 
+    // Auto-redirect if already logged in (Persistent Session)
+    async function checkExistingLogin() {
+      if (urlParams.get('admin') === 'true') return;
+      try {
+        const res = await fetch('/api/auth/check-session');
+        const data = await res.json();
+        if (data.success && data.role === 'user') {
+          window.location.href = '/dashboard.html';
+          return;
+        }
+
+        const savedStr = localStorage.getItem('mrp_logged_user');
+        if (savedStr) {
+          const u = JSON.parse(savedStr);
+          if (u && u.id && u.mobile) {
+            const restRes = await fetch('/api/auth/restore-session', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ userId: u.id, mobile: u.mobile })
+            });
+            const restData = await restRes.json();
+            if (restData.success) {
+              window.location.href = '/dashboard.html';
+            }
+          }
+        }
+      } catch (e) {}
+    }
+    checkExistingLogin();
+
     // User Login submit
     document.getElementById('userLoginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -175,7 +205,12 @@
 
         if (data.success) {
           if (data.user && data.user.id) {
-            sessionStorage.removeItem('loginAdWatched_' + data.user.id);
+            // Save persistent login info in localStorage
+            localStorage.setItem('mrp_logged_user', JSON.stringify({
+              id: data.user.id,
+              mobile: data.user.mobile,
+              fullName: data.user.fullName
+            }));
           }
           window.location.href = '/dashboard.html';
         } else {
