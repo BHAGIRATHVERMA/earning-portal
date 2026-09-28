@@ -827,6 +827,7 @@ function renderWatchTasks(task) {
   grid.innerHTML = '';
 
   let completedCount = 0;
+  let earnedCoins = 0;
   task.items.forEach(item => {
     const rewardCoins = item.reward !== undefined ? item.reward : 5;
     if (item.completed) {
