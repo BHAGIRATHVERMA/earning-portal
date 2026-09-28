@@ -9,8 +9,29 @@ let isChatOpen = false;
 
 async function initDashboard() {
   try {
-    const sessionRes = await fetch('/api/auth/check-session');
-    const sessionData = await sessionRes.json();
+    let sessionRes = await fetch('/api/auth/check-session');
+    let sessionData = await sessionRes.json();
+
+    // Auto-restore session from localStorage if session cookie was temporarily reset
+    if (!sessionData.success || sessionData.role !== 'user') {
+      const savedUserStr = localStorage.getItem('mrp_logged_user');
+      if (savedUserStr) {
+        try {
+          const savedUser = JSON.parse(savedUserStr);
+          if (savedUser && savedUser.id && savedUser.mobile) {
+            const restoreRes = await fetch('/api/auth/restore-session', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ userId: savedUser.id, mobile: savedUser.mobile })
+            });
+            const restoreData = await restoreRes.json();
+            if (restoreData.success && restoreData.user) {
+              sessionData = { success: true, role: 'user', user: restoreData.user };
+            }
+          }
+        } catch (e) {}
+      }
+    }
 
     if (!sessionData.success || sessionData.role !== 'user') {
       window.location.href = '/login.html';
@@ -18,6 +39,13 @@ async function initDashboard() {
     }
 
     currentUser = sessionData.user;
+    // Keep credentials cached for persistent login on mobile
+    localStorage.setItem('mrp_logged_user', JSON.stringify({
+      id: currentUser.id,
+      mobile: currentUser.mobile,
+      fullName: currentUser.fullName
+    }));
+
     updateUserHeader(currentUser);
     trackPageVisit();
     startUserTimeTracker();
@@ -38,6 +66,14 @@ async function initDashboard() {
       window.location.href = '/login.html';
     });
   }
+}
+
+async function logout() {
+  localStorage.removeItem('mrp_logged_user');
+  try {
+    await fetch('/api/auth/logout');
+  } catch (e) {}
+  window.location.href = '/login.html';
 }
 
 function trackPageVisit() {
@@ -1109,8 +1145,11 @@ function getYouTubeEmbedUrl(url) {
 }
 
 async function checkAndTriggerLoginAd() {
-  const sessionKey = 'loginAdWatched_' + (currentUser ? currentUser.id : 'user');
-  if (sessionStorage.getItem(sessionKey) === 'true') {
+  const todayDateStr = new Date().toISOString().split('T')[0]; // e.g. "2026-09-28"
+  const storageKey = 'loginAdWatched_date_' + (currentUser ? currentUser.id : 'user');
+  
+  // Show only ONCE PER DAY per user
+  if (localStorage.getItem(storageKey) === todayDateStr) {
     return;
   }
 
@@ -1122,7 +1161,7 @@ async function checkAndTriggerLoginAd() {
     const s = data.data;
     if (s.popupAdEnabled === false) return;
 
-    const videoUrl = s.popupVideoUrl || 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+    const videoUrl = s.popupVideoUrl || 'https://www.youtube.com/watch?v=zxJEXCI7x94';
     const embedUrl = getYouTubeEmbedUrl(videoUrl);
     const duration = s.popupAdTimer !== undefined ? Number(s.popupAdTimer) : 30;
 
@@ -1133,13 +1172,13 @@ async function checkAndTriggerLoginAd() {
     iframe.src = embedUrl;
     modal.classList.remove('hidden');
 
-    startAdCountdown(duration, sessionKey);
+    startAdCountdown(duration, storageKey, todayDateStr);
   } catch (err) {
     console.error('Error loading popup video ad:', err);
   }
 }
 
-function startAdCountdown(seconds, sessionKey) {
+function startAdCountdown(seconds, storageKey, todayDateStr) {
   let timeLeft = seconds;
   const badge = document.getElementById('adTimerBadge');
   const span = document.getElementById('adTimerSpan');
@@ -1166,7 +1205,7 @@ function startAdCountdown(seconds, sessionKey) {
       }
       if (actionContainer) {
         actionContainer.innerHTML = `
-          <button onclick="closeLoginAdModal('${sessionKey}')" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2 transition-all transform hover:scale-105 animate-pulse cursor-pointer">
+          <button onclick="closeLoginAdModal('${storageKey}', '${todayDateStr}')" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2 transition-all transform hover:scale-105 animate-pulse cursor-pointer">
             <span>Continue to Dashboard</span>
             <i class="fa-solid fa-arrow-right"></i>
           </button>
@@ -1176,14 +1215,15 @@ function startAdCountdown(seconds, sessionKey) {
   }, 1000);
 }
 
-function closeLoginAdModal(sessionKey) {
-  if (sessionKey) {
-    sessionStorage.setItem(sessionKey, 'true');
+function closeLoginAdModal(storageKey, todayDateStr) {
+  if (storageKey && todayDateStr) {
+    localStorage.setItem(storageKey, todayDateStr);
   }
   const modal = document.getElementById('loginAdModal');
   const iframe = document.getElementById('loginAdIframe');
   if (iframe) iframe.src = '';
   if (modal) modal.classList.add('hidden');
+  if (adTimerInterval) clearInterval(adTimerInterval);
 }
 
 // -------------------------------------------------------------
