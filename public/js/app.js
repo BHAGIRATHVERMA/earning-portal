@@ -165,7 +165,9 @@ async function loadTodayTasks() {
     const data = await res.json();
 
     if (!data.success) {
-      Swal.fire({ icon: 'error', title: 'Error', text: data.message });
+      console.warn('Task load notice:', data.message);
+      statusBanners.classList.add('hidden');
+      activeDashboard.classList.remove('hidden');
       return;
     }
 
@@ -207,6 +209,12 @@ async function loadTodayTasks() {
     statusBanners.classList.add('hidden');
     activeDashboard.classList.remove('hidden');
 
+    if (data.serviceDisabled || !data.task) {
+      const mapContainer = document.getElementById('mapTaskSection');
+      if (mapContainer) mapContainer.classList.add('hidden');
+      return;
+    }
+
     currentTask = data.task;
     renderTasks(currentTask);
   } catch (err) {
@@ -218,6 +226,12 @@ function renderTasks(task) {
   const grid = document.getElementById('taskGrid');
   const uploadedCount = document.getElementById('uploadedCount');
   const finalBtn = document.getElementById('finalSubmitTaskBtn');
+
+  if (!task || !task.items) {
+    const mapContainer = document.getElementById('mapTaskSection');
+    if (mapContainer) mapContainer.classList.add('hidden');
+    return;
+  }
   const alertBox = document.getElementById('taskStatusAlertBox');
 
   grid.innerHTML = '';
