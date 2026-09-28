@@ -143,13 +143,23 @@ async function loadAdminUsers() {
 }
 
 function filterUsers() {
-  const filter = document.getElementById('userFilterSelect').value;
+  const filter = document.getElementById('userFilterSelect') ? document.getElementById('userFilterSelect').value : 'all';
+  const query = document.getElementById('userSearchInput') ? document.getElementById('userSearchInput').value.trim().toLowerCase() : '';
   const tbody = document.getElementById('usersTableBody');
   tbody.innerHTML = '';
 
   let filtered = allUsers;
   if (filter !== 'all') {
-    filtered = allUsers.filter(u => u.status === filter);
+    filtered = filtered.filter(u => u.status === filter);
+  }
+
+  if (query) {
+    filtered = filtered.filter(u => 
+      (u.fullName && u.fullName.toLowerCase().includes(query)) ||
+      (u.mobile && u.mobile.includes(query)) ||
+      (u.city && u.city.toLowerCase().includes(query)) ||
+      (u.utr && u.utr.toLowerCase().includes(query))
+    );
   }
 
   if (filtered.length === 0) {
@@ -2219,6 +2229,62 @@ async function handleTrainingVideoSave(e) {
     btn.disabled = false;
     btn.innerHTML = oldText;
   }
+}
+
+// -------------------------------------------------------------
+// DATABASE RESTORE CONTROLLER
+// -------------------------------------------------------------
+function triggerRestoreDatabase() {
+  const fileInput = document.getElementById('dbRestoreFileInput');
+  if (fileInput) {
+    fileInput.value = '';
+    fileInput.click();
+  }
+}
+
+async function handleRestoreFileSelected(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    try {
+      const raw = e.target.result;
+      const parsed = JSON.parse(raw);
+      if (!parsed.users || !Array.isArray(parsed.users)) {
+        Swal.fire('Error', 'Invalid database JSON file', 'error');
+        return;
+      }
+
+      const confirm = await Swal.fire({
+        title: 'Database Restore Karein?',
+        text: `Is file me ${parsed.users.length} users hain. Kya aap inko live database me restore/merge karna chahte hain?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Haan, Restore Karein',
+        cancelButtonText: 'Cancel'
+      });
+
+      if (!confirm.isConfirmed) return;
+
+      const res = await fetch('/api/admin/database/restore', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ databaseJson: parsed })
+      });
+      const data = await res.json();
+      if (data.success) {
+        Swal.fire('Success!', data.message, 'success');
+        loadAdminUsers();
+        loadAdminStats();
+      } else {
+        Swal.fire('Error', data.message, 'error');
+      }
+    } catch (err) {
+      Swal.fire('Error', 'JSON parse error: ' + err.message, 'error');
+    }
+  };
+  reader.readAsText(file);
 }
 
 // Start Admin Controller

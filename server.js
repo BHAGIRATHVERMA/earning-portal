@@ -979,6 +979,49 @@ app.post('/api/admin/coupons/delete', requireAdminAuth, (req, res) => {
   res.json({ success: true, message: 'Coupon deleted successfully' });
 });
 
+// Database Backup & Restore API
+app.get('/api/admin/database/backup', requireAdminAuth, (req, res) => {
+  const dbPath = path.join(__dirname, 'data', 'database.json');
+  if (fs.existsSync(dbPath)) {
+    res.setHeader('Content-Disposition', `attachment; filename="database_backup_${new Date().toISOString().split('T')[0]}.json"`);
+    res.setHeader('Content-Type', 'application/json');
+    return res.sendFile(dbPath);
+  }
+  res.status(404).json({ success: false, message: 'Database file not found' });
+});
+
+app.post('/api/admin/database/restore', requireAdminAuth, (req, res) => {
+  const { databaseJson } = req.body;
+  if (!databaseJson) {
+    return res.status(400).json({ success: false, message: 'Database JSON data required' });
+  }
+  try {
+    const parsed = typeof databaseJson === 'string' ? JSON.parse(databaseJson) : databaseJson;
+    if (!parsed.users || !Array.isArray(parsed.users)) {
+      return res.status(400).json({ success: false, message: 'Invalid database format' });
+    }
+    // Merge users safely without losing existing users
+    const currentUsers = db.data.users || [];
+    parsed.users.forEach(newUser => {
+      const exists = currentUsers.some(u => u.id === newUser.id || (u.mobile && u.mobile === newUser.mobile));
+      if (!exists) {
+        currentUsers.unshift(newUser);
+      }
+    });
+    db.data.users = currentUsers;
+    if (parsed.watchVideos && parsed.watchVideos.length > 0) {
+      db.data.watchVideos = parsed.watchVideos;
+    }
+    if (parsed.coupons && parsed.coupons.length > 0) {
+      db.data.coupons = parsed.coupons;
+    }
+    db.save();
+    res.json({ success: true, message: `Database restored! Total users: ${db.data.users.length}` });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Restore failed: ' + err.message });
+  }
+});
+
 // Settings & QR Code Upload
 app.get('/api/admin/settings', requireAdminAuth, (req, res) => {
   const settings = db.getSettings();
