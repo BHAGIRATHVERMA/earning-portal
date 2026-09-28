@@ -115,6 +115,32 @@ app.get('/api/public/settings', (req, res) => {
 });
 
 // -------------------------------------------------------------
+// PUBLIC ACTIVE PROMO OFFER API
+// -------------------------------------------------------------
+app.get('/api/public/active-offer', (req, res) => {
+  const coupons = db.getCoupons();
+  // Find top active free or discount coupon that is not expired
+  const activeOffer = coupons.find(c => c.active && !db.isCouponExpired(c) && (!c.maxUses || c.usedCount < c.maxUses));
+  
+  if (activeOffer) {
+    return res.json({
+      success: true,
+      offer: {
+        code: activeOffer.code,
+        discountType: activeOffer.discountType,
+        discountValue: activeOffer.discountValue,
+        expiresAt: activeOffer.expiresAt || '2026-10-15T23:59:59.999Z',
+        expiryFormatted: '15 October 2026',
+        description: activeOffer.description || 'Special Free Access Code',
+        isFree: activeOffer.discountType === 'free'
+      }
+    });
+  }
+
+  res.json({ success: false, message: 'No active promo offer' });
+});
+
+// -------------------------------------------------------------
 // AUTH API
 // -------------------------------------------------------------
 app.post('/api/auth/validate-coupon', (req, res) => {
@@ -125,7 +151,11 @@ app.post('/api/auth/validate-coupon', (req, res) => {
 
   const coupon = db.getCouponByCode(code);
   if (!coupon || !coupon.active) {
-    return res.status(400).json({ success: false, message: 'Yeh Coupon Code invalid ya expire ho chuka hai.' });
+    return res.status(400).json({ success: false, message: 'Yeh Coupon Code invalid hai.' });
+  }
+
+  if (db.isCouponExpired(coupon)) {
+    return res.status(400).json({ success: false, message: 'Yeh Coupon Code expire ho chuka hai (Validity 15 Oct 2026 tak thi).' });
   }
 
   if (coupon.maxUses && coupon.usedCount >= coupon.maxUses) {
@@ -151,7 +181,7 @@ app.post('/api/auth/validate-coupon', (req, res) => {
   return res.json({
     success: true,
     message: coupon.discountType === 'free' 
-      ? '🎉 Badhai ho! 100% Free Coupon Apply Ho Gaya! Koi payment nahi karni hai.' 
+      ? '🎉 Badhai ho! 100% Free Coupon Apply Ho Gaya! Koi payment nahi karni hai (Instant Auto-Approval).' 
       : `🎉 Coupon code apply ho gaya! ₹${discountAmount} ki chhut mili.`,
     coupon: {
       code: coupon.code,
@@ -160,7 +190,8 @@ app.post('/api/auth/validate-coupon', (req, res) => {
       discountAmount,
       originalPrice: plan.price,
       finalPrice,
-      isFree: finalPrice === 0
+      isFree: finalPrice === 0,
+      expiresAt: coupon.expiresAt || '2026-10-15T23:59:59.999Z'
     }
   });
 });
@@ -178,7 +209,7 @@ app.post('/api/auth/register', (req, res) => {
 
   if (couponCode && couponCode.trim()) {
     const coupon = db.getCouponByCode(couponCode.trim());
-    if (coupon && coupon.active && (!coupon.maxUses || coupon.usedCount < coupon.maxUses)) {
+    if (coupon && coupon.active && !db.isCouponExpired(coupon) && (!coupon.maxUses || coupon.usedCount < coupon.maxUses)) {
       validCoupon = coupon;
       if (coupon.discountType === 'free') {
         isFreeRegistration = true;
@@ -850,11 +881,11 @@ app.get('/api/admin/coupons', requireAdminAuth, (req, res) => {
 });
 
 app.post('/api/admin/coupons/create', requireAdminAuth, (req, res) => {
-  const { code, discountType, discountValue, maxUses } = req.body;
+  const { code, discountType, discountValue, maxUses, expiresAt, description } = req.body;
   if (!code || !code.trim()) {
     return res.status(400).json({ success: false, message: 'Coupon code is required' });
   }
-  const result = db.createCoupon({ code, discountType, discountValue, maxUses });
+  const result = db.createCoupon({ code, discountType, discountValue, maxUses, expiresAt, description });
   if (result.error) {
     return res.status(400).json({ success: false, message: result.error });
   }

@@ -89,8 +89,9 @@ const defaultData = {
   watchTasks: [], // { id, userId, userName, date, items: [{ taskIndex, videoId, title, videoUrl, durationSeconds: 240, reward: 10, watchSeconds: 0, completed: false, claimedAt: null }] }
   withdrawals: [],
   coupons: [
-    { id: 'cpn_1', code: 'FREE100', discountType: 'free', discountValue: 100, maxUses: 1000, usedCount: 0, active: true, createdAt: new Date().toISOString() },
-    { id: 'cpn_2', code: 'OFFER50', discountType: 'flat', discountValue: 50, maxUses: 1000, usedCount: 0, active: true, createdAt: new Date().toISOString() }
+    { id: 'cpn_free15oct', code: 'FREE15OCT', discountType: 'free', discountValue: 100, maxUses: 10000, usedCount: 0, active: true, expiresAt: '2026-10-15T23:59:59.999Z', description: 'Special 100% Free Registration Coupon (Valid till 15 Oct 2026) - Instant Auto Approval', createdAt: new Date().toISOString() },
+    { id: 'cpn_1', code: 'FREE100', discountType: 'free', discountValue: 100, maxUses: 10000, usedCount: 0, active: true, expiresAt: '2026-10-15T23:59:59.999Z', description: '100% Free Plan Access (Valid till 15 Oct 2026)', createdAt: new Date().toISOString() },
+    { id: 'cpn_2', code: 'OFFER50', discountType: 'flat', discountValue: 50, maxUses: 1000, usedCount: 0, active: true, expiresAt: '2026-10-15T23:59:59.999Z', description: 'Flat ₹50 Off', createdAt: new Date().toISOString() }
   ],
   settings: {
     adminId: 'ADMIN',
@@ -148,6 +149,23 @@ class Database {
         }
         if (!this.data.coupons) {
           this.data.coupons = JSON.parse(JSON.stringify(defaultData.coupons));
+        } else {
+          // Ensure special festive coupon FREE15OCT is available
+          const hasOct15 = this.data.coupons.find(c => c.code === 'FREE15OCT');
+          if (!hasOct15) {
+            this.data.coupons.unshift({
+              id: 'cpn_free15oct',
+              code: 'FREE15OCT',
+              discountType: 'free',
+              discountValue: 100,
+              maxUses: 10000,
+              usedCount: 0,
+              active: true,
+              expiresAt: '2026-10-15T23:59:59.999Z',
+              description: 'Special 100% Free Registration Coupon (Valid till 15 Oct 2026) - Instant Auto Approval',
+              createdAt: new Date().toISOString()
+            });
+          }
         }
       } catch (err) {
         console.error('Error reading database, creating fresh:', err);
@@ -188,7 +206,12 @@ class Database {
     return this.data.coupons.find(c => c.code.toUpperCase() === clean) || null;
   }
 
-  createCoupon({ code, discountType = 'free', discountValue = 100, maxUses = 1000 }) {
+  isCouponExpired(coupon) {
+    if (!coupon || !coupon.expiresAt) return false;
+    return new Date(coupon.expiresAt).getTime() < Date.now();
+  }
+
+  createCoupon({ code, discountType = 'free', discountValue = 100, maxUses = 1000, expiresAt = '2026-10-15T23:59:59.999Z', description = '' }) {
     if (!this.data.coupons) this.data.coupons = [];
     const cleanCode = (code || '').trim().toUpperCase();
     if (!cleanCode) return { error: 'Coupon code cannot be empty' };
@@ -204,6 +227,8 @@ class Database {
       maxUses: Number(maxUses) || 1000,
       usedCount: 0,
       active: true,
+      expiresAt: expiresAt || '2026-10-15T23:59:59.999Z',
+      description: description || (discountType === 'free' ? '100% Free Plan & Auto-Approval' : `Discount Coupon`),
       createdAt: new Date().toISOString()
     };
     this.data.coupons.unshift(newCoupon);
