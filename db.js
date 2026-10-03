@@ -1,6 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 
+let MongoClient = null;
+try {
+  MongoClient = require('mongodb').MongoClient;
+} catch (e) {
+  // MongoDB driver will be auto-installed via package.json on Render
+}
+
+const DEFAULT_MONGODB_URI = 'mongodb+srv://bhagirathverma38_db_user:1OJDqIzogneAQWrj@cluster0.lhdjo0n.mongodb.net/map_earning?retryWrites=true&w=majority&appName=Cluster0';
+
 const DATA_DIR = path.join(__dirname, 'data');
 const UPLOADS_DIR = path.join(__dirname, 'uploads');
 const SCREENSHOTS_DIR = path.join(__dirname, 'uploads', 'screenshots');
@@ -55,836 +64,287 @@ const defaultData = {
   tasks: [], // Map reviews
   youtubeTasks: [], // { id, userId, userName, userMobile, date, reward: 50, rewardClaimed: false, status: 'in_progress'|'submitted'|'approved'|'rejected', rejectionReason: '', items: [{ taskIndex, linkId, channelName, channelUrl, screenshot: '', status: 'pending'|'uploaded' }], submittedAt, reviewedAt }
   watchVideos: [
-    {
-        "id": "wv_mbl_1",
-        "title": "₹151 स्वैच्छिक सहयोग | जन सहायता मिशन | स्वास्थ्य • शिक्षा • कौशल • सामाजिक सहयोग",
-        "videoUrl": "https://www.youtube.com/watch?v=zxJEXCI7x94",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:30.680Z"
-    },
-    {
-        "id": "wv_mbl_2",
-        "title": "Maya Bai Lodhi Foundation App का पूरा Review | Teacher Attendance कैसे लगाएं |",
-        "videoUrl": "https://www.youtube.com/watch?v=BA_3lOoH5ss",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:30.559Z"
-    },
-    {
-        "id": "wv_mbl_3",
-        "title": "Block Coordinator बनें | ₹15,000 तक मानदेय | हर महीने 20 Teacher नियुक्त करवाएं | Field Job",
-        "videoUrl": "https://www.youtube.com/watch?v=kBxP7aLiOaA",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:30.589Z"
-    },
-    {
-        "id": "wv_mbl_4",
-        "title": "District Coordinator कैसे बनें? | ₹25,000 तक मानदेय + Travel Fund | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=rz4pWiAyMaA",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:30.796Z"
-    },
-    {
-        "id": "wv_mbl_5",
-        "title": "गांव में Tuition Teacher बनें | घर से 2 घंटे पढ़ाएं |  Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=G-P8zc_RlMI",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:30.575Z"
-    },
-    {
-        "id": "wv_mbl_6",
-        "title": "Maya Bai Lodhi Foundation Online Joining कैसे करें? | Complete Process",
-        "videoUrl": "https://www.youtube.com/watch?v=QIPwK264KpA",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:30.576Z"
-    },
-    {
-        "id": "wv_mbl_7",
-        "title": "एक छोटा सा दीपक | एक बच्ची का बड़ा सपना | दिल छू लेने वाली कहानी | Emotional Inspirational Story",
-        "videoUrl": "https://www.youtube.com/watch?v=GRjKhVDDwnE",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:30.681Z"
-    },
-    {
-        "id": "wv_mbl_8",
-        "title": "THE INDIA STORY (2026) Full Movie in Hindi",
-        "videoUrl": "https://www.youtube.com/watch?v=snTCv_sNdYU",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:30.683Z"
-    },
-    {
-        "id": "wv_mbl_9",
-        "title": "विश्वकर्मा पूजा एवं कन्या संक्रांति की हार्दिक शुभकामनाएँ 🙏 | Vishwakarma Puja Special | MBLF",
-        "videoUrl": "https://www.youtube.com/watch?v=7pcOI9hoLrk",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:30.682Z"
-    },
-    {
-        "id": "wv_mbl_10",
-        "title": "ऋषि पंचमी की हार्दिक शुभकामनाएँ 🙏 | Rishi Panchami Special | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=Udwu5gqFwqg",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:30.794Z"
-    },
-    {
-        "id": "wv_mbl_11",
-        "title": "गणेश चतुर्थी की हार्दिक शुभकामनाएँ 🙏 | गणेश उत्सव आरंभ | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=hl2a6XPPhFU",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:31.375Z"
-    },
-    {
-        "id": "wv_mbl_12",
-        "title": "Why This Teacher’s Mission Matters More Than Ever",
-        "videoUrl": "https://www.youtube.com/watch?v=-PNp_Yoc9OI",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:31.376Z"
-    },
-    {
-        "id": "wv_mbl_13",
-        "title": "एक पुरानी कॉपी और एक अधूरा सपना | Inspirational Hindi Movie",
-        "videoUrl": "https://www.youtube.com/watch?v=rDFSGaxlaaA",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:31.354Z"
-    },
-    {
-        "id": "wv_mbl_14",
-        "title": "गांव के बच्चों की पढ़ाई की नई शुरुआत | शिक्षा की ओर बढ़ते कदम | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=cRzrrMUht3I",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:31.414Z"
-    },
-    {
-        "id": "wv_mbl_15",
-        "title": "MBL Foundation की Free Coaching Classes में धूमधाम से मनाया गया शिक्षक दिवस 🎉 | Teachers Day Special",
-        "videoUrl": "https://www.youtube.com/watch?v=IxcEFWnczuY",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:31.351Z"
-    },
-    {
-        "id": "wv_mbl_16",
-        "title": "Teacher Job Alert: बच्चों के सपनों को दें नई दिशा 👨‍🏫",
-        "videoUrl": "https://www.youtube.com/watch?v=076Q3PixVmE",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:31.354Z"
-    },
-    {
-        "id": "wv_mbl_17",
-        "title": "सिर्फ 2 घंटे पढ़ाएं और ₹4,500 कमाएं | Teacher Joining Open",
-        "videoUrl": "https://www.youtube.com/watch?v=fIh0bxJlODk",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:31.355Z"
-    },
-    {
-        "id": "wv_mbl_18",
-        "title": "सिर्फ 2 घंटे देकर बदलें किसी का जीवन ❤️ | Teacher Recruitment Open",
-        "videoUrl": "https://www.youtube.com/watch?v=84xu--GN8Qc",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:31.353Z"
-    },
-    {
-        "id": "wv_mbl_19",
-        "title": "इनकी मुस्कान में ही है असली सुकून ❤️🥰",
-        "videoUrl": "https://www.youtube.com/watch?v=G0UCxmhxoHQ",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:31.350Z"
-    },
-    {
-        "id": "wv_mbl_20",
-        "title": "बच्चों को टॉफी और शिक्षा का उपहार ❤️ | Village Education Program",
-        "videoUrl": "https://www.youtube.com/watch?v=Do6Tdkk4cco",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:31.350Z"
-    },
-    {
-        "id": "wv_mbl_21",
-        "title": "Village Education Program: बच्चों की प्रतिभा और उनका जोश! 🔥",
-        "videoUrl": "https://www.youtube.com/watch?v=RpJF6fuxHV0",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.027Z"
-    },
-    {
-        "id": "wv_mbl_22",
-        "title": "सीखने के साथ मस्ती: बच्चों की खास Class Activity 📚",
-        "videoUrl": "https://www.youtube.com/watch?v=HGkF5Mey0lI",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.027Z"
-    },
-    {
-        "id": "wv_mbl_23",
-        "title": "Online Work के Genuine तरीके: शुरुआत कहाँ से करें?",
-        "videoUrl": "https://www.youtube.com/watch?v=kz8_iEbXG6k",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.023Z"
-    },
-    {
-        "id": "wv_mbl_24",
-        "title": "सिर्फ 2 मिनट में AI Video तैयार! | Google Gemini का कमाल",
-        "videoUrl": "https://www.youtube.com/watch?v=oUk2Uwy7h9U",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.023Z"
-    },
-    {
-        "id": "wv_mbl_25",
-        "title": "बच्चों की पढ़ाई के लिए एक छोटी सी मदद ❤️ | बुंदेली डोनेशन अपील गीत | माया बाई लोधी फाउंडेशन",
-        "videoUrl": "https://www.youtube.com/watch?v=QUGEW7Lgxig",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.021Z"
-    },
-    {
-        "id": "wv_mbl_26",
-        "title": "Blood Relation: Indirect Statement Questions Solve in Seconds!",
-        "videoUrl": "https://www.youtube.com/watch?v=CM_HF9GRt2s",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.026Z"
-    },
-    {
-        "id": "wv_mbl_27",
-        "title": "Blood Relation: Statement Based Questions को Solve करने का सबसे तेज़ तरीका",
-        "videoUrl": "https://www.youtube.com/watch?v=syN4nxbHQv4",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.024Z"
-    },
-    {
-        "id": "wv_mbl_28",
-        "title": "Blood Relation Reasoning in Hindi | Family Tree Method (Full Concepts)",
-        "videoUrl": "https://www.youtube.com/watch?v=5YJtPLPFg2U",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.017Z"
-    },
-    {
-        "id": "wv_mbl_29",
-        "title": "Reasoning Fast Trick: Alphabet Arrangement & Same Position Questions",
-        "videoUrl": "https://www.youtube.com/watch?v=pm3B3kmud7E",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.021Z"
-    },
-    {
-        "id": "wv_mbl_30",
-        "title": "Alphabet Series Model 4: Vowel-Consonant आधारित Questions की Fast Trick",
-        "videoUrl": "https://www.youtube.com/watch?v=_IA-Zp2zJ7A",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.024Z"
-    },
-    {
-        "id": "wv_mbl_31",
-        "title": "Vocabulary Based Reasoning | Alphabet Series Model 3 | Exam Tricks 🔥",
-        "videoUrl": "https://www.youtube.com/watch?v=s7xzTMruZZg",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.585Z"
-    },
-    {
-        "id": "wv_mbl_32",
-        "title": "Complete Reasoning Series | Alphabet Reasoning (Model 2) | Exam Special",
-        "videoUrl": "https://www.youtube.com/watch?v=ZfDre3LOjGI",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.584Z"
-    },
-    {
-        "id": "wv_mbl_33",
-        "title": "Reasoning Tricks: Alphabet टेस्ट के कठिन सवालों को ऐसे करें हल",
-        "videoUrl": "https://www.youtube.com/watch?v=I37bWbbikTE",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.585Z"
-    },
-    {
-        "id": "wv_mbl_34",
-        "title": "Teacher और कोऑर्डिनेटर के लिए Maya Foundation की गाइडलाइन",
-        "videoUrl": "https://www.youtube.com/watch?v=mEpvgMEIVEU",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.666Z"
-    },
-    {
-        "id": "wv_mbl_35",
-        "title": "Maya Bai Lodhi Foundation: चंडी के बच्चों के साथ एक यादगार दिन ❤️",
-        "videoUrl": "https://www.youtube.com/watch?v=4uW6qszp9Qg",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.584Z"
-    },
-    {
-        "id": "wv_mbl_36",
-        "title": "नालंदा के बच्चों के बीच टॉफी वितरण ❤️ | Maya Bai Lodhi Foundation | शिक्षा के साथ खुशियाँ",
-        "videoUrl": "https://www.youtube.com/watch?v=CaTidkJkses",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.584Z"
-    },
-    {
-        "id": "wv_mbl_37",
-        "title": "Step-by-Step Guide: Teacher, Student और Staff Attendance Process",
-        "videoUrl": "https://www.youtube.com/watch?v=PtmqCFpaHNw",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.664Z"
-    },
-    {
-        "id": "wv_mbl_38",
-        "title": "घर बैठे बच्चों को पढ़ाएं और हर महीने पाएं मानदेय",
-        "videoUrl": "https://www.youtube.com/watch?v=eNzsuj-gxPA",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.665Z"
-    },
-    {
-        "id": "wv_mbl_39",
-        "title": "Why Teacher Pay Matters: Our Latest Foundation Update",
-        "videoUrl": "https://www.youtube.com/watch?v=uuw0c4SD4s8",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.665Z"
-    },
-    {
-        "id": "wv_mbl_40",
-        "title": "Our Commitment to Rural Education: Teacher Salary Update #85",
-        "videoUrl": "https://www.youtube.com/watch?v=_KCGeWblthM",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:32.666Z"
-    },
-    {
-        "id": "wv_mbl_41",
-        "title": "How We Build Future Leaders: Fun Classroom Activities!",
-        "videoUrl": "https://www.youtube.com/watch?v=Q8_7AfdrFgo",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:33.211Z"
-    },
-    {
-        "id": "wv_mbl_42",
-        "title": "How We Make Learning Fun: Amazing Classroom Activities!",
-        "videoUrl": "https://www.youtube.com/watch?v=-1hIaCJ2g9o",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:33.203Z"
-    },
-    {
-        "id": "wv_mbl_43",
-        "title": "Best Educational Activities for Children | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=s3hPRgsR2GE",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:33.208Z"
-    },
-    {
-        "id": "wv_mbl_44",
-        "title": "Students Enjoy Creative Classroom Games in Village Education Program",
-        "videoUrl": "https://www.youtube.com/watch?v=niSwjQAEH-E",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:33.287Z"
-    },
-    {
-        "id": "wv_mbl_45",
-        "title": "माया बाई लोधी फाउंडेशन ज्वाइनिंग प्रोसेस 2026 | ऑनलाइन रजिस्ट्रेशन और आईडी कार्ड डाउनलोड",
-        "videoUrl": "https://www.youtube.com/watch?v=YKv03SjO2Ng",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:33.207Z"
-    },
-    {
-        "id": "wv_mbl_46",
-        "title": "Maya Bai Lodhi Foundation Health Card 2026: Complete Registration Video!",
-        "videoUrl": "https://www.youtube.com/watch?v=Jov614Cjl3M",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:33.213Z"
-    },
-    {
-        "id": "wv_mbl_47",
-        "title": "Group Learning Activities for Children #77",
-        "videoUrl": "https://www.youtube.com/watch?v=4VliJMQ2PGU",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:33.292Z"
-    },
-    {
-        "id": "wv_mbl_48",
-        "title": "Happy Classroom Moments with Students #76",
-        "videoUrl": "https://www.youtube.com/watch?v=ZLbEd6c3-F0",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:33.214Z"
-    },
-    {
-        "id": "wv_mbl_49",
-        "title": "Interactive Learning in Rural Classrooms #75",
-        "videoUrl": "https://www.youtube.com/watch?v=OAdyqhOOlH8",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:33.207Z"
-    },
-    {
-        "id": "wv_mbl_50",
-        "title": "Best Student Participation Activities #74",
-        "videoUrl": "https://www.youtube.com/watch?v=YXp8uM4gOQk",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:33.212Z"
-    },
-    {
-        "id": "wv_mbl_51",
-        "title": "Creative Classroom Games for Students #73",
-        "videoUrl": "https://www.youtube.com/watch?v=lJBkDeh6GoQ",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.197Z"
-    },
-    {
-        "id": "wv_mbl_52",
-        "title": "Fun Learning Activities at Free Coaching Centres #72",
-        "videoUrl": "https://www.youtube.com/watch?v=zdJc9iZyACs",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.164Z"
-    },
-    {
-        "id": "wv_mbl_53",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation #71",
-        "videoUrl": "https://www.youtube.com/watch?v=AIPcYOMEgGk",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.196Z"
-    },
-    {
-        "id": "wv_mbl_54",
-        "title": "Learning Through Creativity and Teamwork #70",
-        "videoUrl": "https://www.youtube.com/watch?v=eEXyXaW-P1M",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.168Z"
-    },
-    {
-        "id": "wv_mbl_55",
-        "title": "Confidence Building Activities for Students #69",
-        "videoUrl": "https://www.youtube.com/watch?v=6Inht1O82Bg",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.170Z"
-    },
-    {
-        "id": "wv_mbl_56",
-        "title": "Educational Games and Classroom Fun #68",
-        "videoUrl": "https://www.youtube.com/watch?v=i1Pdg-zDPQg",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.173Z"
-    },
-    {
-        "id": "wv_mbl_57",
-        "title": "Group Learning Activities for Children #67",
-        "videoUrl": "https://www.youtube.com/watch?v=G1n7OFlQ5PY",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.197Z"
-    },
-    {
-        "id": "wv_mbl_58",
-        "title": "Happy Classroom Moments with Students #66",
-        "videoUrl": "https://www.youtube.com/watch?v=jGconaqyaeo",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.196Z"
-    },
-    {
-        "id": "wv_mbl_59",
-        "title": "Interactive Learning in Rural Classrooms #65",
-        "videoUrl": "https://www.youtube.com/watch?v=M3LxQj80UnM",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.197Z"
-    },
-    {
-        "id": "wv_mbl_60",
-        "title": "Best Student Participation Activities #64",
-        "videoUrl": "https://www.youtube.com/watch?v=GxVJX1OlRHo",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.197Z"
-    },
-    {
-        "id": "wv_mbl_61",
-        "title": "Creative Classroom Games for Students #63",
-        "videoUrl": "https://www.youtube.com/watch?v=Gd5mGy7HH3s",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.954Z"
-    },
-    {
-        "id": "wv_mbl_62",
-        "title": "Fun Learning Activities at Free Coaching Centres #62",
-        "videoUrl": "https://www.youtube.com/watch?v=fPAPf6HYsz0",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.948Z"
-    },
-    {
-        "id": "wv_mbl_63",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation #61",
-        "videoUrl": "https://www.youtube.com/watch?v=H5uyyNb-KzA",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.949Z"
-    },
-    {
-        "id": "wv_mbl_64",
-        "title": "Learning Through Creativity and Teamwork #60",
-        "videoUrl": "https://www.youtube.com/watch?v=_P9earKpknc",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.947Z"
-    },
-    {
-        "id": "wv_mbl_65",
-        "title": "Confidence Building Activities for Students #59",
-        "videoUrl": "https://www.youtube.com/watch?v=tSJ2sSjlHMI",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.947Z"
-    },
-    {
-        "id": "wv_mbl_66",
-        "title": "Educational Games and Classroom Fun #58",
-        "videoUrl": "https://www.youtube.com/watch?v=7D62LpIbFCg",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.948Z"
-    },
-    {
-        "id": "wv_mbl_67",
-        "title": "Free Coaching Teachers Got Salary ✅ | Real Teacher Payment | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=MdUK_vL83lw",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.949Z"
-    },
-    {
-        "id": "wv_mbl_68",
-        "title": "Free Coaching Teachers Got Salary ✅ | Real Teacher Payment | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=hI6QejyBU-g",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.954Z"
-    },
-    {
-        "id": "wv_mbl_69",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=6zSIh8jFq3U",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.954Z"
-    },
-    {
-        "id": "wv_mbl_70",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=Qjt8Hrbwu54",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:34.954Z"
-    },
-    {
-        "id": "wv_mbl_71",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=Tys1-i3qX5I",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.403Z"
-    },
-    {
-        "id": "wv_mbl_72",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=D0JFeSmufkY",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.384Z"
-    },
-    {
-        "id": "wv_mbl_73",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=oWo9pxeZVcw",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.395Z"
-    },
-    {
-        "id": "wv_mbl_74",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=NyJOTHhEO4o",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.407Z"
-    },
-    {
-        "id": "wv_mbl_75",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=oY9jxqHm6NM",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.384Z"
-    },
-    {
-        "id": "wv_mbl_76",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=axU5V7rBkHk",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.384Z"
-    },
-    {
-        "id": "wv_mbl_77",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=9DNCaeiQ5Sg",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.384Z"
-    },
-    {
-        "id": "wv_mbl_78",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=yypJmcs-vrM",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.395Z"
-    },
-    {
-        "id": "wv_mbl_79",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=4SW86G6biZ4",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.395Z"
-    },
-    {
-        "id": "wv_mbl_80",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=TFlCZUGEgTU",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.385Z"
-    },
-    {
-        "id": "wv_mbl_81",
-        "title": "🚨 NGO में Udan 2.0 District Coordinator Job 2026 | ₹25,000 Salary | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=eAHoBr2lAQQ",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.823Z"
-    },
-    {
-        "id": "wv_mbl_82",
-        "title": "Udan 2.0 Block Coordinator Job 2026 | ₹15,000 Salary | 12th Pass Jobs | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=TAyPfnlqvqs",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.822Z"
-    },
-    {
-        "id": "wv_mbl_83",
-        "title": "Maya Bai Lodhi Foundation: क्या आप गांव के बच्चों को पढ़ाकर कमाना चाहते हैं?",
-        "videoUrl": "https://www.youtube.com/watch?v=IoqePIgUgcA",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.826Z"
-    },
-    {
-        "id": "wv_mbl_84",
-        "title": "0% Government Funding से कैसे चल रही है FREE Education? | Maya Bai Lodhi Foundation Explained",
-        "videoUrl": "https://www.youtube.com/watch?v=ajzedr-m9D0",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.817Z"
-    },
-    {
-        "id": "wv_mbl_85",
-        "title": "🚨 100% FREE Education Mission | Teacher Recruitment 2026 | ₹4500 Salary | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=TWbyzH7E9GY",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.831Z"
-    },
-    {
-        "id": "wv_mbl_86",
-        "title": "Parents Feedback | बच्चों में आया बड़ा बदलाव | Maya Bai Lodhi Foundation | Real Parent Review",
-        "videoUrl": "https://www.youtube.com/watch?v=_xf9BohFk0A",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.825Z"
-    },
-    {
-        "id": "wv_mbl_87",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=b6pfGiaDcHs",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.831Z"
-    },
-    {
-        "id": "wv_mbl_88",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=KMLMzw1B9CI",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.831Z"
-    },
-    {
-        "id": "wv_mbl_89",
-        "title": "Amazing Classroom Activities with Students | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=Gd2ru0bGmA4",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.823Z"
-    },
-    {
-        "id": "wv_mbl_90",
-        "title": "How We Make Education Fun | Maya Bai Lodhi Foundation",
-        "videoUrl": "https://www.youtube.com/watch?v=Q9grp1hXfAw",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:35.832Z"
-    },
-    {
-        "id": "wv_mbl_91",
-        "title": "✅ Teacher Recruitment 2026 | Step-by-Step Guide to Becoming a Free Coaching Teacher",
-        "videoUrl": "https://www.youtube.com/watch?v=mYLjiHzf8-4",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:36.204Z"
-    },
-    {
-        "id": "wv_mbl_92",
-        "title": "Maya Bai Lodhi Foundation Teacher Jobs: Everything You Need to Know",
-        "videoUrl": "https://www.youtube.com/watch?v=CwMJEMThXAw",
-        "durationSeconds": 240,
-        "rewardPerVideo": 5,
-        "active": true,
-        "createdAt": "2026-09-28T02:23:36.205Z"
-    }
+  {
+    "id": "wv_mbl_1",
+    "title": "₹151 स्वैच्छिक सहयोग | जन सहायता मिशन | स्वास्थ्य • शिक्षा • कौशल • सामाजिक सहयोग",
+    "videoUrl": "https://www.youtube.com/watch?v=zxJEXCI7x94",
+    "durationSeconds": 186,
+    "rewardPerVideo": 2.48,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_2",
+    "title": "Maya Bai Lodhi Foundation App का पूरा Review | Teacher Attendance कैसे लगाएं |",
+    "videoUrl": "https://www.youtube.com/watch?v=BA_3lOoH5ss",
+    "durationSeconds": 428,
+    "rewardPerVideo": 5.71,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_3",
+    "title": "District Coordinator कैसे बनें? | ₹25,000 तक मानदेय + Travel Fund | Maya Bai Lodhi Foundation",
+    "videoUrl": "https://www.youtube.com/watch?v=rz4pWiAyMaA",
+    "durationSeconds": 303,
+    "rewardPerVideo": 4.04,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_4",
+    "title": "गांव में Tuition Teacher बनें | घर से 2 घंटे पढ़ाएं |  Maya Bai Lodhi Foundation",
+    "videoUrl": "https://www.youtube.com/watch?v=G-P8zc_RlMI",
+    "durationSeconds": 286,
+    "rewardPerVideo": 3.81,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_5",
+    "title": "Maya Bai Lodhi Foundation Online Joining कैसे करें? | Complete Process",
+    "videoUrl": "https://www.youtube.com/watch?v=QIPwK264KpA",
+    "durationSeconds": 335,
+    "rewardPerVideo": 4.47,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_6",
+    "title": "एक छोटा सा दीपक | एक बच्ची का बड़ा सपना | दिल छू लेने वाली कहानी | Emotional Inspirational Story",
+    "videoUrl": "https://www.youtube.com/watch?v=GRjKhVDDwnE",
+    "durationSeconds": 274,
+    "rewardPerVideo": 3.65,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_7",
+    "title": "एक पुरानी कॉपी और एक अधूरा सपना | Inspirational Hindi Movie",
+    "videoUrl": "https://www.youtube.com/watch?v=rDFSGaxlaaA",
+    "durationSeconds": 182,
+    "rewardPerVideo": 2.43,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_8",
+    "title": "Online Work के Genuine तरीके: शुरुआत कहाँ से करें?",
+    "videoUrl": "https://www.youtube.com/watch?v=kz8_iEbXG6k",
+    "durationSeconds": 196,
+    "rewardPerVideo": 2.61,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_9",
+    "title": "सिर्फ 2 मिनट में AI Video तैयार! | Google Gemini का कमाल",
+    "videoUrl": "https://www.youtube.com/watch?v=oUk2Uwy7h9U",
+    "durationSeconds": 536,
+    "rewardPerVideo": 7.15,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_10",
+    "title": "बच्चों की पढ़ाई के लिए एक छोटी सी मदद ❤️ | बुंदेली डोनेशन अपील गीत | माया बाई लोधी फाउंडेशन",
+    "videoUrl": "https://www.youtube.com/watch?v=QUGEW7Lgxig",
+    "durationSeconds": 271,
+    "rewardPerVideo": 3.61,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_11",
+    "title": "Blood Relation: Indirect Statement Questions Solve in Seconds!",
+    "videoUrl": "https://www.youtube.com/watch?v=CM_HF9GRt2s",
+    "durationSeconds": 498,
+    "rewardPerVideo": 6.64,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_12",
+    "title": "Blood Relation: Statement Based Questions को Solve करने का सबसे तेज़ तरीका",
+    "videoUrl": "https://www.youtube.com/watch?v=syN4nxbHQv4",
+    "durationSeconds": 403,
+    "rewardPerVideo": 5.37,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_13",
+    "title": "Blood Relation Reasoning in Hindi | Family Tree Method (Full Concepts)",
+    "videoUrl": "https://www.youtube.com/watch?v=5YJtPLPFg2U",
+    "durationSeconds": 678,
+    "rewardPerVideo": 9.04,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_14",
+    "title": "Alphabet Series Model 4: Vowel-Consonant आधारित Questions की Fast Trick",
+    "videoUrl": "https://www.youtube.com/watch?v=_IA-Zp2zJ7A",
+    "durationSeconds": 238,
+    "rewardPerVideo": 3.17,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_15",
+    "title": "Vocabulary Based Reasoning | Alphabet Series Model 3 | Exam Tricks 🔥",
+    "videoUrl": "https://www.youtube.com/watch?v=s7xzTMruZZg",
+    "durationSeconds": 183,
+    "rewardPerVideo": 2.44,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_16",
+    "title": "Complete Reasoning Series | Alphabet Reasoning (Model 2) | Exam Special",
+    "videoUrl": "https://www.youtube.com/watch?v=ZfDre3LOjGI",
+    "durationSeconds": 229,
+    "rewardPerVideo": 3.05,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_17",
+    "title": "Reasoning Tricks: Alphabet टेस्ट के कठिन सवालों को ऐसे करें हल",
+    "videoUrl": "https://www.youtube.com/watch?v=I37bWbbikTE",
+    "durationSeconds": 351,
+    "rewardPerVideo": 4.68,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_18",
+    "title": "Teacher और कोऑर्डिनेटर के लिए Maya Foundation की गाइडलाइन",
+    "videoUrl": "https://www.youtube.com/watch?v=mEpvgMEIVEU",
+    "durationSeconds": 1121,
+    "rewardPerVideo": 14.95,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_19",
+    "title": "Step-by-Step Guide: Teacher, Student और Staff Attendance Process",
+    "videoUrl": "https://www.youtube.com/watch?v=PtmqCFpaHNw",
+    "durationSeconds": 395,
+    "rewardPerVideo": 5.27,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_20",
+    "title": "Our Commitment to Rural Education: Teacher Salary Update #85",
+    "videoUrl": "https://www.youtube.com/watch?v=_KCGeWblthM",
+    "durationSeconds": 1500,
+    "rewardPerVideo": 20,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_21",
+    "title": "माया बाई लोधी फाउंडेशन ज्वाइनिंग प्रोसेस 2026 | ऑनलाइन रजिस्ट्रेशन और आईडी कार्ड डाउनलोड",
+    "videoUrl": "https://www.youtube.com/watch?v=YKv03SjO2Ng",
+    "durationSeconds": 295,
+    "rewardPerVideo": 3.93,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_22",
+    "title": "Maya Bai Lodhi Foundation Health Card 2026: Complete Registration Video!",
+    "videoUrl": "https://www.youtube.com/watch?v=Jov614Cjl3M",
+    "durationSeconds": 295,
+    "rewardPerVideo": 3.93,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_23",
+    "title": "Confidence Building Activities for Students #59",
+    "videoUrl": "https://www.youtube.com/watch?v=tSJ2sSjlHMI",
+    "durationSeconds": 224,
+    "rewardPerVideo": 2.99,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_24",
+    "title": "🚨 NGO में Udan 2.0 District Coordinator Job 2026 | ₹25,000 Salary | Maya Bai Lodhi Foundation",
+    "videoUrl": "https://www.youtube.com/watch?v=eAHoBr2lAQQ",
+    "durationSeconds": 1288,
+    "rewardPerVideo": 17.17,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_25",
+    "title": "Udan 2.0 Block Coordinator Job 2026 | ₹15,000 Salary | 12th Pass Jobs | Maya Bai Lodhi Foundation",
+    "videoUrl": "https://www.youtube.com/watch?v=TAyPfnlqvqs",
+    "durationSeconds": 1181,
+    "rewardPerVideo": 15.75,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_26",
+    "title": "Maya Bai Lodhi Foundation: क्या आप गांव के बच्चों को पढ़ाकर कमाना चाहते हैं?",
+    "videoUrl": "https://www.youtube.com/watch?v=IoqePIgUgcA",
+    "durationSeconds": 1312,
+    "rewardPerVideo": 17.49,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_27",
+    "title": "0% Government Funding से कैसे चल रही है FREE Education? | Maya Bai Lodhi Foundation Explained",
+    "videoUrl": "https://www.youtube.com/watch?v=ajzedr-m9D0",
+    "durationSeconds": 1122,
+    "rewardPerVideo": 14.96,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_28",
+    "title": "🚨 100% FREE Education Mission | Teacher Recruitment 2026 | ₹4500 Salary | Maya Bai Lodhi Foundation",
+    "videoUrl": "https://www.youtube.com/watch?v=TWbyzH7E9GY",
+    "durationSeconds": 429,
+    "rewardPerVideo": 5.72,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_29",
+    "title": "Parents Feedback | बच्चों में आया बड़ा बदलाव | Maya Bai Lodhi Foundation | Real Parent Review",
+    "videoUrl": "https://www.youtube.com/watch?v=_xf9BohFk0A",
+    "durationSeconds": 438,
+    "rewardPerVideo": 5.84,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_30",
+    "title": "✅ Teacher Recruitment 2026 | Step-by-Step Guide to Becoming a Free Coaching Teacher",
+    "videoUrl": "https://www.youtube.com/watch?v=mYLjiHzf8-4",
+    "durationSeconds": 1201,
+    "rewardPerVideo": 16.01,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  },
+  {
+    "id": "wv_mbl_31",
+    "title": "Maya Bai Lodhi Foundation Teacher Jobs: Everything You Need to Know",
+    "videoUrl": "https://www.youtube.com/watch?v=CwMJEMThXAw",
+    "durationSeconds": 1186,
+    "rewardPerVideo": 15.81,
+    "active": true,
+    "createdAt": "2026-10-02T19:30:00.000Z"
+  }
 ],
-  watchTasks: [], // { id, userId, userName, date, items: [{ taskIndex, videoId, title, videoUrl, durationSeconds: 240, reward: 10, watchSeconds: 0, completed: false, claimedAt: null }] }
+    watchTasks: [], // { id, userId, userName, date, items: [{ taskIndex, videoId, title, videoUrl, durationSeconds: 240, reward: 10, watchSeconds: 0, completed: false, claimedAt: null }] }
   withdrawals: [],
   coupons: [
     { id: 'cpn_free15oct', code: 'FREE15OCT', discountType: 'free', discountValue: 100, maxUses: 10000, usedCount: 0, active: true, expiresAt: '2026-10-15T23:59:59.999Z', description: 'Special 100% Free Registration Coupon (Valid till 15 Oct 2026) - Instant Auto Approval', createdAt: new Date().toISOString() },
@@ -903,9 +363,11 @@ const defaultData = {
     watchVideoDurationSeconds: 240, // 4 minutes
     watchVideoRewardCoins: 5, // 5 coins per video (20 videos * 5 = ₹100 daily)
     videoLikeCommentBonusCoins: 2, // 2 extra coins for like & comment
-    enableMapService: true, // Master switch for Google Map Reviews
+    enableMapService: false, // Master switch for Google Map Reviews (FULL DISABLED PER USER REQUEST)
     enableYoutubeService: true, // Master switch for YouTube Subscribe
     enableVideoWatchService: true, // Master switch for Video Watch & Earn
+    googleClientId: '', // Google OAuth 2.0 Client ID
+    enableGoogleLogin: true, // Master switch for Sign in with Google
     popupVideoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     popupAdTimer: 30,
     popupAdEnabled: true,
@@ -921,7 +383,50 @@ const defaultData = {
 
 class Database {
   constructor() {
+    this.mongoClient = null;
+    this.mongoDb = null;
+    this.mongoConnected = false;
     this.init();
+    this.initMongo();
+  }
+
+  async initMongo() {
+    const uri = process.env.MONGODB_URI || DEFAULT_MONGODB_URI;
+    if (!uri || !MongoClient) {
+      console.log('ℹ️ [Database] MongoDB driver or URI not ready yet, running in local JSON mode.');
+      return;
+    }
+
+    try {
+      console.log('🔄 [Database] Connecting to MongoDB Atlas Cloud...');
+      this.mongoClient = new MongoClient(uri, { serverSelectionTimeoutMS: 8000 });
+      await this.mongoClient.connect();
+      this.mongoDb = this.mongoClient.db('map_earning');
+      this.mongoConnected = true;
+      console.log('✅ [Database] SUCCESSFULLY CONNECTED TO MONGODB ATLAS CLOUD!');
+
+      const col = this.mongoDb.collection('app_state');
+      const doc = await col.findOne({ _id: 'main_db' });
+
+      if (doc && doc.data && Array.isArray(doc.data.users) && doc.data.users.length > 0) {
+        console.log(`📥 [Database] Successfully loaded ${doc.data.users.length} users and live state from MongoDB Cloud!`);
+        this.data = doc.data;
+        try {
+          fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf8');
+        } catch (e) {}
+      } else {
+        console.log(`📤 [Database] Seeding MongoDB Cloud with current ${this.data.users.length} users and initial state...`);
+        await col.updateOne(
+          { _id: 'main_db' },
+          { $set: { data: this.data, updatedAt: new Date().toISOString() } },
+          { upsert: true }
+        );
+        console.log('✅ [Database] MongoDB Cloud database seeded successfully!');
+      }
+    } catch (err) {
+      console.error('⚠️ [Database] MongoDB Cloud connection warning:', err.message);
+      this.mongoConnected = false;
+    }
   }
 
   init() {
@@ -944,6 +449,8 @@ class Database {
           if (this.data.settings.enableYoutubeService === undefined) this.data.settings.enableYoutubeService = true;
           if (this.data.settings.enableVideoWatchService === undefined) this.data.settings.enableVideoWatchService = true;
           if (this.data.settings.videoLikeCommentBonusCoins === undefined) this.data.settings.videoLikeCommentBonusCoins = 2;
+          if (this.data.settings.googleClientId === undefined) this.data.settings.googleClientId = '';
+          if (this.data.settings.enableGoogleLogin === undefined) this.data.settings.enableGoogleLogin = true;
         }
         if (!this.data.coupons) {
           this.data.coupons = JSON.parse(JSON.stringify(defaultData.coupons));
@@ -978,6 +485,22 @@ class Database {
       fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf8');
     } catch (err) {
       console.error('Database save failed:', err);
+    }
+
+    this.syncToMongo();
+  }
+
+  async syncToMongo() {
+    if (!this.mongoConnected || !this.mongoDb) return;
+    try {
+      const col = this.mongoDb.collection('app_state');
+      await col.updateOne(
+        { _id: 'main_db' },
+        { $set: { data: this.data, updatedAt: new Date().toISOString() } },
+        { upsert: true }
+      );
+    } catch (err) {
+      console.error('⚠️ [Database] Cloud sync failed:', err.message);
     }
   }
 
@@ -1066,6 +589,43 @@ class Database {
 
   // Users
   getUsers() {
+    let hasChanges = false;
+    const bonus = this.data.settings.referralBonusCoins !== undefined ? Number(this.data.settings.referralBonusCoins) : 50;
+    
+    this.data.users.forEach(u => {
+      if (u.walletCoins === undefined || isNaN(u.walletCoins)) {
+        u.walletCoins = 0;
+        hasChanges = true;
+      }
+      if (!u.referralCode) {
+        u.referralCode = this.generateReferralCode(u.fullName, u.mobile);
+        hasChanges = true;
+      }
+      const myRefs = this.data.users.filter(other => other.referredBy === u.id);
+      if (u.referralsCount === undefined || u.referralsCount < myRefs.length) {
+        u.referralsCount = myRefs.length;
+        hasChanges = true;
+      }
+      if (u.referralEarnings === undefined) {
+        u.referralEarnings = (u.referralsCount || 0) * bonus;
+        hasChanges = true;
+      }
+      if (u.referredBy && !u.referredByName) {
+        const ref = this.data.users.find(r => r.id === u.referredBy);
+        if (ref) {
+          u.referredByName = ref.fullName;
+          u.referredByCode = ref.referralCode;
+          hasChanges = true;
+        }
+      }
+      if (!u.lastPlatform) {
+        u.lastPlatform = (u.deviceInfo && u.deviceInfo.includes('MapReviewPay-Android-App')) ? 'apk' : 'web';
+      }
+    });
+
+    if (hasChanges) {
+      this.save();
+    }
     return this.data.users;
   }
 
@@ -1075,6 +635,122 @@ class Database {
 
   getUserByMobile(mobile) {
     return this.data.users.find(u => u.mobile === mobile);
+  }
+
+  getUserByEmail(email) {
+    if (!email) return null;
+    const clean = email.trim().toLowerCase();
+    return this.data.users.find(u => (u.email || '').toLowerCase() === clean);
+  }
+
+  getUserByGoogleId(googleId) {
+    if (!googleId) return null;
+    return this.data.users.find(u => u.googleId === googleId);
+  }
+
+  findOrCreateGoogleUser({ email, name, googleId, picture, referralCode }) {
+    if (!email && !googleId) return null;
+
+    const cleanEmail = (email || '').trim().toLowerCase();
+    let user = null;
+
+    if (googleId) {
+      user = this.getUserByGoogleId(googleId);
+    }
+    if (!user && cleanEmail) {
+      user = this.getUserByEmail(cleanEmail);
+    }
+
+    const now = new Date();
+
+    if (user) {
+      let modified = false;
+      if (googleId && !user.googleId) {
+        user.googleId = googleId;
+        modified = true;
+      }
+      if (picture && !user.avatar) {
+        user.avatar = picture;
+        modified = true;
+      }
+      if (cleanEmail && !user.email) {
+        user.email = cleanEmail;
+        modified = true;
+      }
+      if (user.status === 'deactivated') {
+        return { isBlocked: true, user };
+      }
+      if (!user.planExpiresAt || new Date(user.planExpiresAt) < now) {
+        const expiry = new Date();
+        expiry.setDate(expiry.getDate() + 30);
+        user.planExpiresAt = expiry.toISOString();
+        user.status = 'approved';
+        modified = true;
+      }
+      if (modified) {
+        this.save();
+      }
+      return { isNew: false, user };
+    }
+
+    const plan = this.data.settings.plans && this.data.settings.plans.length > 0 
+      ? this.data.settings.plans[0] 
+      : { id: '69', price: 69, name: 'Basic Plan (₹69)', validityDays: 30 };
+
+    let referredByUser = null;
+    if (referralCode) {
+      referredByUser = this.getUserByReferralCode(referralCode);
+    }
+
+    const displayName = (name || cleanEmail.split('@')[0] || 'Google User').trim();
+    const refCode = this.generateReferralCode(displayName, String(Date.now()).slice(-4));
+
+    const expiry = new Date();
+    expiry.setDate(expiry.getDate() + 30);
+
+    const referralBonus = this.data.settings.referralBonusCoins !== undefined ? Number(this.data.settings.referralBonusCoins) : 50;
+    let rewardGiven = false;
+    if (referredByUser) {
+      referredByUser.walletCoins = (referredByUser.walletCoins || 0) + referralBonus;
+      referredByUser.referralsCount = (referredByUser.referralsCount || 0) + 1;
+      referredByUser.referralEarnings = (referredByUser.referralEarnings || 0) + referralBonus;
+      rewardGiven = true;
+    }
+
+    const newUser = {
+      id: 'usr_g_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+      googleId: googleId || null,
+      email: cleanEmail,
+      avatar: picture || '',
+      fullName: displayName,
+      mobile: '',
+      city: 'India',
+      password: 'GOOGLE_AUTH_SECURE_' + Math.random().toString(36).slice(-8),
+      utr: 'GOOGLE_SIGNIN_VERIFIED',
+      upiId: cleanEmail,
+      planId: plan.id,
+      planPrice: 0,
+      planName: 'Google Verified Plan',
+      planValidityDays: 30,
+      status: 'approved',
+      rejectionReason: '',
+      walletCoins: 0,
+      referralCode: refCode,
+      referredBy: referredByUser ? referredByUser.id : null,
+      referredByName: referredByUser ? referredByUser.fullName : null,
+      referredByCode: referredByUser ? referredByUser.referralCode : null,
+      referralRewardClaimed: rewardGiven,
+      referralsCount: 0,
+      referralEarnings: 0,
+      couponApplied: 'GOOGLE_SIGNIN_FREE',
+      createdAt: now.toISOString(),
+      approvedAt: now.toISOString(),
+      planExpiresAt: expiry.toISOString()
+    };
+
+    this.data.users.unshift(newUser);
+    this.save();
+    return { isNew: true, user: newUser };
   }
 
   getUserByReferralCode(code) {
@@ -1109,6 +785,16 @@ class Database {
       planExpiry = expiry.toISOString();
     }
 
+    // Instantly credit referral reward to referrer
+    const referralBonus = this.data.settings.referralBonusCoins !== undefined ? Number(this.data.settings.referralBonusCoins) : 50;
+    let rewardGiven = false;
+    if (referredByUser) {
+      referredByUser.walletCoins = (referredByUser.walletCoins || 0) + referralBonus;
+      referredByUser.referralsCount = (referredByUser.referralsCount || 0) + 1;
+      referredByUser.referralEarnings = (referredByUser.referralEarnings || 0) + referralBonus;
+      rewardGiven = true;
+    }
+
     const newUser = {
       id: 'usr_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
       fullName: userData.fullName,
@@ -1126,8 +812,9 @@ class Database {
       walletCoins: 0,
       referralCode: refCode,
       referredBy: referredByUser ? referredByUser.id : null,
+      referredByName: referredByUser ? referredByUser.fullName : null,
       referredByCode: referredByUser ? referredByUser.referralCode : null,
-      referralRewardClaimed: false,
+      referralRewardClaimed: rewardGiven,
       referralsCount: 0,
       referralEarnings: 0,
       couponApplied: userData.couponApplied || null,
@@ -1156,7 +843,7 @@ class Database {
     if (user.referredBy && !user.referralRewardClaimed) {
       const referrer = this.getUserById(user.referredBy);
       if (referrer) {
-        const referralBonus = this.data.settings.referralBonusCoins !== undefined ? this.data.settings.referralBonusCoins : 50;
+        const referralBonus = this.data.settings.referralBonusCoins !== undefined ? Number(this.data.settings.referralBonusCoins) : 50;
         referrer.walletCoins = (referrer.walletCoins || 0) + referralBonus;
         referrer.referralsCount = (referrer.referralsCount || 0) + 1;
         referrer.referralEarnings = (referrer.referralEarnings || 0) + referralBonus;
@@ -1166,6 +853,65 @@ class Database {
     
     this.save();
     return user;
+  }
+
+  adjustUserCoins(userId, amount, action = 'add') {
+    const user = this.getUserById(userId);
+    if (!user) return null;
+    const num = Number(amount) || 0;
+    if (action === 'add') {
+      user.walletCoins = (user.walletCoins || 0) + num;
+    } else if (action === 'subtract') {
+      user.walletCoins = Math.max(0, (user.walletCoins || 0) - num);
+    } else if (action === 'set') {
+      user.walletCoins = Math.max(0, num);
+    }
+    this.save();
+    return user;
+  }
+
+  getAdminReferralsOverview() {
+    const users = this.getUsers();
+    const bonus = this.data.settings.referralBonusCoins !== undefined ? Number(this.data.settings.referralBonusCoins) : 50;
+
+    const referrersMap = [];
+    users.forEach(u => {
+      const myRefs = users.filter(other => other.referredBy === u.id);
+      if (myRefs.length > 0 || (u.referralsCount && u.referralsCount > 0)) {
+        referrersMap.push({
+          id: u.id,
+          fullName: u.fullName,
+          mobile: u.mobile,
+          city: u.city,
+          referralCode: u.referralCode,
+          walletCoins: u.walletCoins || 0,
+          totalReferred: myRefs.length || (u.referralsCount || 0),
+          totalEarned: u.referralEarnings || (myRefs.length * bonus),
+          referredUsers: myRefs.map(r => ({
+            id: r.id,
+            fullName: r.fullName,
+            mobile: r.mobile,
+            city: r.city,
+            status: r.status,
+            planName: r.planName,
+            createdAt: r.createdAt,
+            rewardClaimed: r.referralRewardClaimed || false
+          }))
+        });
+      }
+    });
+
+    referrersMap.sort((a, b) => b.totalReferred - a.totalReferred);
+
+    const totalReferrals = users.filter(u => Boolean(u.referredBy)).length;
+    const totalBonusDistributed = referrersMap.reduce((sum, r) => sum + (r.totalEarned || 0), 0);
+
+    return {
+      referralBonusCoins: bonus,
+      totalReferrals,
+      totalBonusDistributed,
+      referrers: referrersMap
+    };
   }
 
   rejectUser(userId, reason = '') {
@@ -1200,7 +946,7 @@ class Database {
   updateUserCoins(userId, amount) {
     const user = this.getUserById(userId);
     if (!user) return null;
-    user.walletCoins = Math.max(0, (user.walletCoins || 0) + amount);
+    user.walletCoins = Math.max(0, Math.round(((user.walletCoins || 0) + Number(amount)) * 100) / 100);
     this.save();
     return user;
   }
@@ -1894,9 +1640,9 @@ class Database {
       item.bonusCoins = bonusCoins;
     }
     
-    const totalCoins = baseReward + bonusCoins;
+    const totalCoins = Math.round((baseReward + bonusCoins) * 100) / 100;
     item.totalReward = totalCoins;
-    task.totalRewardEarned = (task.totalRewardEarned || 0) + totalCoins;
+    task.totalRewardEarned = Math.round(((task.totalRewardEarned || 0) + totalCoins) * 100) / 100;
 
     // Immediately credit coins to user's wallet
     this.updateUserCoins(userId, totalCoins);
@@ -1931,7 +1677,7 @@ class Database {
     }
   }
 
-  recordVisit(pagePath = '/', ip = '', userAgent = '', userId = null) {
+  recordVisit(pagePath = '/', ip = '', userAgent = '', userId = null, platform = 'web') {
     this.ensureAnalytics();
     this.data.analytics.totalVisits = (this.data.analytics.totalVisits || 0) + 1;
     
@@ -1948,6 +1694,7 @@ class Database {
         userMobile = user.mobile;
         user.lastActiveAt = new Date().toISOString();
         user.lastPage = cleanPath;
+        if (platform) user.lastPlatform = platform;
       }
     }
 
@@ -1959,6 +1706,7 @@ class Database {
       userId: userId || null,
       userName: userName,
       userMobile: userMobile,
+      platform: platform || 'web',
       timestamp: new Date().toISOString()
     };
 
@@ -1974,7 +1722,7 @@ class Database {
     return visitEntry;
   }
 
-  recordUserLogin(userId, ip = '', userAgent = '') {
+  recordUserLogin(userId, ip = '', userAgent = '', platform = 'web') {
     const user = this.getUserById(userId);
     if (!user) return;
 
@@ -1982,22 +1730,27 @@ class Database {
     user.lastLoginAt = new Date().toISOString();
     user.lastActiveAt = new Date().toISOString();
     user.deviceInfo = userAgent;
+    user.lastPlatform = platform || 'web';
     this.save();
   }
 
-  recordUserHeartbeat(userId, pagePath = '/dashboard.html', seconds = 30) {
+  recordUserHeartbeat(userId, pagePath = '/dashboard.html', seconds = 30, platform = null) {
     const user = this.getUserById(userId);
     if (!user) return null;
 
     user.totalTimeSpentSeconds = (user.totalTimeSpentSeconds || 0) + Number(seconds);
     user.lastActiveAt = new Date().toISOString();
     user.lastPage = pagePath;
+    if (platform) {
+      user.lastPlatform = platform;
+    }
     this.save();
 
     return {
       userId: user.id,
       totalTimeSpentSeconds: user.totalTimeSpentSeconds,
-      formattedTime: this.formatTimeDuration(user.totalTimeSpentSeconds)
+      formattedTime: this.formatTimeDuration(user.totalTimeSpentSeconds),
+      platform: user.lastPlatform || 'web'
     };
   }
 
@@ -2022,12 +1775,24 @@ class Database {
     const users = this.getUsers();
     let totalUserSeconds = 0;
     let onlineUsersCount = 0;
+    let onlineAppUsersCount = 0;
+    let onlineWebUsersCount = 0;
+
     const usersTracking = users.map(u => {
       const timeSpent = u.totalTimeSpentSeconds || 0;
       totalUserSeconds += timeSpent;
       const lastActiveMs = u.lastActiveAt ? new Date(u.lastActiveAt).getTime() : 0;
       const isOnline = lastActiveMs >= threeMinutesAgo;
-      if (isOnline) onlineUsersCount++;
+      const platform = (u.lastPlatform === 'apk' || (u.deviceInfo && u.deviceInfo.includes('MapReviewPay-Android-App'))) ? 'apk' : 'web';
+
+      if (isOnline) {
+        onlineUsersCount++;
+        if (platform === 'apk') {
+          onlineAppUsersCount++;
+        } else {
+          onlineWebUsersCount++;
+        }
+      }
 
       return {
         id: u.id,
@@ -2036,6 +1801,9 @@ class Database {
         city: u.city,
         status: u.status,
         planName: u.planName,
+        platform: platform,
+        lastPlatform: platform,
+        deviceInfo: u.deviceInfo || '',
         loginCount: u.loginCount || 1,
         totalTimeSpentSeconds: timeSpent,
         formattedTimeSpent: this.formatTimeDuration(timeSpent),
@@ -2063,6 +1831,8 @@ class Database {
       totalUserEngagementSeconds: totalUserSeconds,
       totalFormattedEngagement: this.formatTimeDuration(totalUserSeconds),
       onlineUsersCount: onlineUsersCount,
+      onlineAppUsersCount: onlineAppUsersCount,
+      onlineWebUsersCount: onlineWebUsersCount,
       usersTracking: usersTracking,
       recentVisits: (this.data.analytics.visitsHistory || []).slice(0, 50)
     };

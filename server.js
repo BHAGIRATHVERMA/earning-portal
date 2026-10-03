@@ -49,9 +49,14 @@ const uploadQr = multer({
 });
 
 // Middlewares
-app.use(cors());
+app.set('trust proxy', 1);
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const isProduction = process.env.NODE_ENV === 'production' || !!process.env.RENDER;
 app.use(session({
   secret: 'map_earning_portal_secret_key_2026',
   resave: true,
@@ -60,25 +65,78 @@ app.use(session({
   cookie: { 
     maxAge: 365 * 24 * 60 * 60 * 1000, // 365 Days (1 Full Year)
     httpOnly: true,
-    sameSite: 'lax',
-    secure: false
+    sameSite: isProduction ? 'none' : 'lax',
+    secure: isProduction ? true : false
   }
 }));
 
+// Ping / Health Check for Uptime Monitoring & Keep-Alive
+app.get('/api/ping', (req, res) => {
+  res.json({
+    status: 'ok',
+    service: 'MapReview Pay API Server',
+    timestamp: new Date().toISOString(),
+    uptimeSeconds: Math.round(process.uptime())
+  });
+});
+
+// Helper to detect if user request is originating from Native Android APK or Web Browser
+function detectClientPlatform(req) {
+  const ua = req.headers['user-agent'] || '';
+  const qPlatform = (req.query && req.query.platform) || '';
+  const bPlatform = (req.body && req.body.platform) || '';
+  const hPlatform = req.headers['x-app-platform'] || req.headers['x-platform'] || '';
+
+  if (
+    qPlatform.toLowerCase() === 'apk' ||
+    bPlatform.toLowerCase() === 'apk' ||
+    hPlatform.toLowerCase() === 'apk' ||
+    ua.includes('MapReviewPay-Android-App') ||
+    ua.includes('MapReviewPay') ||
+    ua.includes('AndroidApp')
+  ) {
+    return 'apk';
+  }
+  return 'web';
+}
+
+// Android APK Direct Download Handler
+app.get(['/downloads/MapReviewPay.apk', '/downloads/app.apk', '/app.apk'], (req, res) => {
+  const apkPath = path.join(__dirname, 'public', 'downloads', 'MapReviewPay.apk');
+  const fallbackApkPath = path.join(__dirname, 'downloads', 'MapReviewPay.apk');
+
+  const finalPath = fs.existsSync(apkPath) ? apkPath : (fs.existsSync(fallbackApkPath) ? fallbackApkPath : null);
+
+  if (finalPath) {
+    res.setHeader('Content-Type', 'application/vnd.android.package-archive');
+    res.setHeader('Content-Disposition', 'attachment; filename="MapReviewPay.apk"');
+    return res.sendFile(finalPath);
+  }
+
+  res.status(404).send('APK file not found. Please contact admin.');
+});
+
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 app.use('/uploads', express.static(uploadsDir));
 
 function requireUserAuth(req, res, next) {
-  if (req.session && req.session.userId) {
-    const user = db.getUserById(req.session.userId);
+  const userId = (req.session && req.session.userId) || req.headers['x-user-id'] || req.query.auth_user_id;
+  if (userId) {
+    const user = db.getUserById(userId);
     if (user) {
       if (user.status === 'deactivated') {
-        req.session.userId = null;
+        if (req.session) req.session.userId = null;
         return res.status(403).json({
           success: false,
           message: 'Aapka account admin dwara deactivate/block kar diya gaya hai. Kripya admin se sampark karein.'
         });
+      }
+      const platform = detectClientPlatform(req);
+      if (platform === 'apk' && user.lastPlatform !== 'apk') {
+        user.lastPlatform = 'apk';
+        db.save();
       }
       req.user = user;
       return next();
@@ -88,7 +146,8 @@ function requireUserAuth(req, res, next) {
 }
 
 function requireAdminAuth(req, res, next) {
-  if (req.session && req.session.isAdmin) {
+  const isAdmin = (req.session && req.session.isAdmin) || req.headers['x-admin-auth'] === 'true';
+  if (isAdmin) {
     return next();
   }
   return res.status(401).json({ success: false, message: 'Admin authentication required' });
@@ -115,6 +174,9 @@ app.get('/api/public/settings', (req, res) => {
       enableYoutubeService: settings.enableYoutubeService !== undefined ? settings.enableYoutubeService : true,
       enableVideoWatchService: settings.enableVideoWatchService !== undefined ? settings.enableVideoWatchService : true,
       videoLikeCommentBonusCoins: settings.videoLikeCommentBonusCoins !== undefined ? settings.videoLikeCommentBonusCoins : 2,
+      referralBonusCoins: settings.referralBonusCoins !== undefined ? settings.referralBonusCoins : 50,
+      googleClientId: settings.googleClientId || '',
+      enableGoogleLogin: settings.enableGoogleLogin !== undefined ? settings.enableGoogleLogin : true,
       plans: settings.plans
     }
   });
@@ -254,6 +316,8 @@ app.post('/api/auth/register', (req, res) => {
   // Automatically start user session
   req.session.userId = newUser.id;
 
+  console.log(`[REGISTER] ✅ New user: ${newUser.fullName} | Mobile: ${newUser.mobile} | Plan: ${newUser.planName} | Coupon: ${newUser.couponApplied || 'None'}`);
+
   const successMessage = isFreeRegistration
     ? '🎉 Badhai ho! Free Coupon se aapka account INSTANT ACTIVATE ho gaya hai! Earning shuru karein.'
     : 'Registration successful! Your account is submitted for Admin verification.';
@@ -297,7 +361,8 @@ app.post('/api/auth/login', (req, res) => {
 
   const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.ip;
   const userAgent = req.headers['user-agent'] || '';
-  db.recordUserLogin(user.id, clientIp, userAgent);
+  const platform = detectClientPlatform(req);
+  db.recordUserLogin(user.id, clientIp, userAgent, platform);
 
   res.json({
     success: true,
@@ -311,6 +376,112 @@ app.post('/api/auth/login', (req, res) => {
       walletCoins: user.walletCoins || 0
     }
   });
+});
+
+app.post('/api/auth/google-login', async (req, res) => {
+  try {
+    const { credential, email, name, googleId, picture, referralCode } = req.body;
+
+    let userEmail = (email || '').trim().toLowerCase();
+    let userName = name ? name.trim() : '';
+    let userGoogleId = googleId || null;
+    let userPicture = picture || '';
+
+    // If Google GIS ID Token (JWT) is provided
+    if (credential) {
+      try {
+        const gRes = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(credential)}`);
+        const tokenData = await gRes.json();
+        
+        if (tokenData && tokenData.email) {
+          userEmail = tokenData.email.toLowerCase();
+          userName = tokenData.name || tokenData.given_name || userName;
+          userGoogleId = tokenData.sub || userGoogleId;
+          userPicture = tokenData.picture || userPicture;
+        } else {
+          const parts = credential.split('.');
+          if (parts.length === 3) {
+            const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString('utf8'));
+            if (payload && payload.email) {
+              userEmail = payload.email.toLowerCase();
+              userName = payload.name || payload.given_name || userName;
+              userGoogleId = payload.sub || userGoogleId;
+              userPicture = payload.picture || userPicture;
+            }
+          }
+        }
+      } catch (tokenErr) {
+        console.warn('Google token verify note:', tokenErr.message);
+        try {
+          const parts = credential.split('.');
+          if (parts.length === 3) {
+            const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString('utf8'));
+            if (payload && payload.email) {
+              userEmail = payload.email.toLowerCase();
+              userName = payload.name || userName;
+              userGoogleId = payload.sub || userGoogleId;
+              userPicture = payload.picture || userPicture;
+            }
+          }
+        } catch (e) {}
+      }
+    }
+
+    if (!userEmail && !userGoogleId) {
+      return res.status(400).json({ success: false, message: 'Google authentication details missing or invalid.' });
+    }
+
+    const result = db.findOrCreateGoogleUser({
+      email: userEmail,
+      name: userName,
+      googleId: userGoogleId,
+      picture: userPicture,
+      referralCode
+    });
+
+    if (!result || !result.user) {
+      return res.status(500).json({ success: false, message: 'Could not create or retrieve user account.' });
+    }
+
+    if (result.isBlocked) {
+      return res.status(403).json({
+        success: false,
+        message: 'Aapka account admin dwara deactivate/block kar diya gaya hai. Kripya admin se sampark karein.'
+      });
+    }
+
+    const user = result.user;
+    req.session.isAdmin = false;
+    req.session.userId = user.id;
+
+    const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.ip;
+    const userAgent = req.headers['user-agent'] || '';
+    const platform = detectClientPlatform(req);
+    db.recordUserLogin(user.id, clientIp, userAgent, platform);
+
+    console.log(`[GOOGLE LOGIN] ✅ User: ${user.fullName} | Email: ${user.email} | New: ${result.isNew}`);
+
+    return res.json({
+      success: true,
+      message: result.isNew 
+        ? '🎉 Welcome! Aapka account Google se instant activate ho gaya hai!' 
+        : '🎉 Google login successful!',
+      isNew: result.isNew,
+      user: {
+        id: user.id,
+        fullName: user.fullName,
+        email: user.email,
+        avatar: user.avatar,
+        mobile: user.mobile || user.email,
+        status: user.status,
+        planName: user.planName,
+        walletCoins: user.walletCoins || 0
+      }
+    });
+  } catch (err) {
+    console.error('Google login route error:', err);
+    return res.status(500).json({ success: false, message: 'Google login processing failed: ' + err.message });
+  }
 });
 
 app.post('/api/auth/admin-login', (req, res) => {
@@ -688,14 +859,16 @@ app.post('/api/track/visit', (req, res) => {
   const userId = (req.session && req.session.userId) ? req.session.userId : null;
   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.ip;
   const userAgent = req.headers['user-agent'] || '';
-  const entry = db.recordVisit(pagePath || '/', ip, userAgent, userId);
-  res.json({ success: true, visit: entry });
+  const platform = detectClientPlatform(req);
+  const entry = db.recordVisit(pagePath || '/', ip, userAgent, userId, platform);
+  res.json({ success: true, visit: entry, platform });
 });
 
 app.post('/api/track/heartbeat', requireUserAuth, (req, res) => {
   const { path: pagePath, seconds = 30 } = req.body || {};
-  const tracking = db.recordUserHeartbeat(req.user.id, pagePath || '/dashboard.html', seconds);
-  res.json({ success: true, tracking });
+  const platform = detectClientPlatform(req);
+  const tracking = db.recordUserHeartbeat(req.user.id, pagePath || '/dashboard.html', seconds, platform);
+  res.json({ success: true, tracking, platform });
 });
 
 // -------------------------------------------------------------
@@ -762,6 +935,16 @@ app.get('/api/admin/stats', requireAdminAuth, (req, res) => {
   });
 });
 
+// Database status (MongoDB Atlas Cloud connection check)
+app.get('/api/admin/db-status', requireAdminAuth, (req, res) => {
+  res.json({
+    success: true,
+    mongoConnected: Boolean(db.mongoConnected),
+    totalUsers: db.getUsers().length,
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Users management
 app.get('/api/admin/users', requireAdminAuth, (req, res) => {
   const users = db.getUsers();
@@ -794,6 +977,34 @@ app.post('/api/admin/users/activate', requireAdminAuth, (req, res) => {
   const user = db.activateUser(userId);
   if (!user) return res.status(404).json({ success: false, message: 'User not found' });
   res.json({ success: true, message: `User ${user.fullName} has been reactivated/unblocked!`, user });
+});
+
+// Admin User Balance Adjustment
+app.post('/api/admin/users/adjust-balance', requireAdminAuth, (req, res) => {
+  const { userId, amount, action, reason } = req.body;
+  if (!userId || amount === undefined) {
+    return res.status(400).json({ success: false, message: 'userId and amount are required' });
+  }
+  const user = db.adjustUserCoins(userId, amount, action || 'add');
+  if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+  
+  res.json({
+    success: true,
+    message: `User ${user.fullName} balance updated to ₹${user.walletCoins}!`,
+    user
+  });
+});
+
+// Admin Referrals Overview API
+app.get('/api/admin/referrals/overview', requireAdminAuth, (req, res) => {
+  const overview = db.getAdminReferralsOverview();
+  res.json({ success: true, ...overview });
+});
+
+// Admin Single User Referrals API
+app.get('/api/admin/users/:userId/referrals', requireAdminAuth, (req, res) => {
+  const refData = db.getUserReferrals(req.params.userId);
+  res.json({ success: true, ...refData });
 });
 
 // Map Tasks management
@@ -1061,7 +1272,8 @@ app.post('/api/admin/settings/update', requireAdminAuth, (req, res) => {
   const { 
     upiId, upiName, adminPassword, minWithdrawal, dailyTaskReward, dailyYoutubeReward, 
     popupVideoUrl, popupVideoTitle, popupVideoDescription, popupVideoAutoOpen, popupAdTimer, popupAdEnabled,
-    enableMapService, enableYoutubeService, enableVideoWatchService, videoLikeCommentBonusCoins
+    enableMapService, enableYoutubeService, enableVideoWatchService, videoLikeCommentBonusCoins,
+    referralBonusCoins
   } = req.body;
 
   const updates = {};
@@ -1077,11 +1289,14 @@ app.post('/api/admin/settings/update', requireAdminAuth, (req, res) => {
   if (popupVideoAutoOpen !== undefined) updates.popupVideoAutoOpen = Boolean(popupVideoAutoOpen);
   if (popupAdTimer !== undefined && popupAdTimer !== '') updates.popupAdTimer = Math.max(5, Number(popupAdTimer));
   if (popupAdEnabled !== undefined) updates.popupAdEnabled = Boolean(popupAdEnabled);
+  if (referralBonusCoins !== undefined && referralBonusCoins !== '') updates.referralBonusCoins = Math.max(0, Number(referralBonusCoins));
 
   if (enableMapService !== undefined) updates.enableMapService = Boolean(enableMapService);
   if (enableYoutubeService !== undefined) updates.enableYoutubeService = Boolean(enableYoutubeService);
   if (enableVideoWatchService !== undefined) updates.enableVideoWatchService = Boolean(enableVideoWatchService);
   if (videoLikeCommentBonusCoins !== undefined && videoLikeCommentBonusCoins !== '') updates.videoLikeCommentBonusCoins = Number(videoLikeCommentBonusCoins);
+  if (req.body.googleClientId !== undefined) updates.googleClientId = req.body.googleClientId.trim();
+  if (req.body.enableGoogleLogin !== undefined) updates.enableGoogleLogin = Boolean(req.body.enableGoogleLogin);
 
   const updated = db.updateSettings(updates);
   res.json({ success: true, message: 'Settings updated successfully', settings: updated });

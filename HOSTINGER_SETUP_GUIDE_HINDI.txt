@@ -1,0 +1,51 @@
+========================================================================
+     MAPREVIEW & VIDEO EARNING PORTAL - HOSTINGER DEPLOYMENT GUIDE (HINDI)
+========================================================================
+
+Aap is portal ko Hostinger par 2 aasan tareeko se chala sakte hain:
+
+------------------------------------------------------------------------
+TAREEKA 1: HOSTINGER hPanel me Built-in "Node.js" Selector (SABSE SARAL)
+------------------------------------------------------------------------
+Agar aapke paas Hostinger Business Web Hosting, Cloud Hosting, ya VPS hai:
+
+1. Hostinger hPanel me Login karein.
+2. File Manager open karein aur `public_html` me jaayein.
+3. Is zip file ko upload karke wahan "Extract" (Unzip) kar dein.
+4. hPanel search bar me type karein: "Node.js" aur use open karein.
+5. "Create Application" par click karein:
+   - Node.js Version: 18.x ya 20.x select karein.
+   - Application Root: public_html (ya jahan file extract ki hai).
+   - Application Startup File: server.js
+   - Application Mode: Production
+6. "Create" par click karein.
+7. Ab "Run NPM Install" button par click karein (yeh express, multer, etc. install kar dega).
+8. "Start Application" par click karein.
+9. Bas! Aapki website live ho gayi!
+   - User Portal: https://yourdomain.com
+   - Admin Portal: https://yourdomain.com/admin.html
+
+------------------------------------------------------------------------
+TAREEKA 2: HOSTINGER VPS (UBUNTU / PM2)
+------------------------------------------------------------------------
+Agar aap Hostinger VPS use kar rahe hain:
+1. Files ko VPS me `/var/www/earning-portal` me upload karein.
+2. Terminal me command chalayein:
+   cd /var/www/earning-portal
+   npm install
+   pm2 start server.js --name "earning-portal"
+   pm2 save
+   pm2 startup
+3. Nginx / Apache reverse proxy ko port 4000 par point karein.
+
+------------------------------------------------------------------------
+ADMIN PANEL SE CONTROL:
+------------------------------------------------------------------------
+Aapka Admin Panel:
+URL: https://yourdomain.com/admin.html
+- Default Admin ID / Password se login karein.
+- Yahan se Training Video popup set karein, YouTube tasks dalein, 
+  Google Map review link dalein, withdrawals approve karein.
+- Jo bhi aap Admin panel me change karenge, woh Website aur Android App dono me 
+  turant (real-time) update ho jayega!
+========================================================================
